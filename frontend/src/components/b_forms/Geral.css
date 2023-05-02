@@ -1,0 +1,29 @@
+
+.gPanel{
+    background-color: #f1f1f1;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: row;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+    max-height: 72vh;
+}
+
+.gPanel label {
+    font-size: 1em;
+}
+
+.gPanel > *> label {
+    margin: .2em;
+}
+
+.gPanel > *{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 1em auto;
+
+}
+
+.lPanel{
+    max-width: 50%;
+}

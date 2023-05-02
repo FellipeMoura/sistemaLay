@@ -1,0 +1,33 @@
+.tableContainer{
+    background-color: #f7f7f7;
+    position: relative; 
+    flex-wrap: wrap;
+    overflow-y: scroll;
+    padding: 0;
+    max-height: 73vh;
+    
+}
+
+.tbody td{
+    padding-left: 5px;
+}
+
+.tbody td:hover{
+    transition:0.4s;
+    padding-left: 5px;
+    background-color: #daa4a4;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.firstTd{
+    width: 100vh;
+}
+.secTd{
+    border-left: 1px solid #cecece;
+    width: 30vh;
+    text-align: center;
+}
+
+
+

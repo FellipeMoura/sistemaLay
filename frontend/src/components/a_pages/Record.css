@@ -1,0 +1,73 @@
+.painel{
+    width: 100%;
+    height: 100%;
+    
+    padding: 4px;    
+}
+
+.topContainer{
+    justify-content:space-between;
+    display: flex;
+    text-align: flex-end;
+    flex-direction: row;
+     
+}
+
+.header{   
+    display: flex;
+}
+
+.header > label {
+    padding: 0 3vh;
+    color: #585050;
+    font-size: 1.2em;
+    margin: 1vh 1vh -1vh 1vh;
+    font-weight: normal;
+}
+
+.nav{
+    justify-content: flex-end;
+    align-items: flex-end;
+    width: 90vh;
+    display: flex;
+    margin: 0 5px;
+}
+
+
+
+
+.nav > div{
+    text-align: center;
+    font-size: 1.3rem;
+    margin: -1px .4em;
+    padding: .1em .6em;
+    border-radius: 10px 10px 0 0;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+
+  
+}
+
+.nav > .on{
+    border: .1px  solid rgb(100, 100, 100);
+    background-color: #ece6e6;
+    border-bottom: 0;
+    
+    
+}
+
+.sessionContainer{
+    border: .1px solid rgb(100, 100, 100);
+    background-color: #ece6e6;
+    width: 99%;
+    margin: auto;
+    height: 50%;
+    padding: 1em;
+}
+
+.session container > *{
+    padding: 0;
+    margin: 0;
+}
+

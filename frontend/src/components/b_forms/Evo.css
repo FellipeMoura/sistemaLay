@@ -1,0 +1,106 @@
+.ePanel{   
+    display: flex;
+    height: 100%;
+    padding-bottom: .5em;
+    
+}
+
+.ePanel input{
+    padding: .6rem;
+    border: none;
+    border-radius: 3px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+}
+.ePanel textarea{
+    min-height: 6em;
+}
+.rHeader{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+.rePanel{
+    min-width: 15em;
+    background-color: #f1f1f1;
+    display: flex;
+    min-height: 28em;
+    max-height: 72vh;
+    border: .1em solid gray;
+    flex-direction: column;
+    padding: 1em;
+    margin: 0;
+
+}
+
+.rHeader input{
+    margin-right: 1em;
+  
+}
+
+.sHeader{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.sHeader button{
+    border: 0;
+}
+
+.sHeader button > svg{
+    font-size: 1.5em;
+    fill: #868686;
+    transition: 0.2s;
+}
+
+.sHeader button > svg:hover{
+    fill: #a54242;
+}
+
+.rePanel input{
+    width: 9em;
+}
+
+
+
+.session{
+    background-color: #f1f1f1;
+    padding:  .5em;
+    margin: 0  .5em .5em .5em;
+    border: .1em solid gray;
+    width: 97%;
+    display: flex;
+    flex-direction: column;
+}
+
+.lePanel{
+    
+    display: flex;
+    max-height: 2em;    
+    flex-direction: column;
+    width: 60%;
+    overflow-y: scroll;
+    margin: 0;
+    max-height: 28em;
+}
+
+.rebutton{
+    min-width: 8em;
+    padding: 0 1em;
+    transition: .2s;
+    margin-left: 4em;
+    height: 2.7em;
+    background-color:rgb(207, 207, 207);
+    border: 0.02px solid rgb(148, 148, 148);
+}
+
+.rebutton > svg{
+    font-size: 1.7em;
+}
+
+.rebutton:hover{
+    background-color: #d5d5d5;
+}
+
