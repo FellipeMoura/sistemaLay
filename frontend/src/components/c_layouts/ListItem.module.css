@@ -3,6 +3,7 @@
     position: relative; 
     flex-wrap: wrap;
     overflow-y: scroll;
+    overflow:auto;
     padding: 0;
     max-height: 73vh;
     
