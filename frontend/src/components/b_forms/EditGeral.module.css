@@ -31,12 +31,14 @@
 
 .inputsContainer {
     background-color: #f1f1f1;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+    /*box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;*/
+    border: 1px solid gray;
+    border-radius: 5px;
     padding: 1em;
     min-height: 280px;
     width: 190vh;
     flex-wrap: wrap;
-    overflow-y: scroll;
+    overflow: auto;
 }
 
 .formControl {

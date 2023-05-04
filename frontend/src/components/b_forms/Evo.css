@@ -81,7 +81,7 @@
     max-height: 2em;    
     flex-direction: column;
     width: 60%;
-    overflow-y: scroll;
+    overflow: auto;
     margin: 0;
     max-height: 28em;
 }

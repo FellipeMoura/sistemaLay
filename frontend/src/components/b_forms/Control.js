@@ -39,13 +39,12 @@ function Control({ iduser, idrecord }) {
       .then((resp2) => {
 
         setSessions(resp2)
-        console.log(iduser)
-        console.log(resp2)
+        //console.log(resp2)
       })
       .catch(err => console.log(err))
   }, [])
 
-  console.log(sessions)
+  //console.log(sessions)
 
   function createControl(cadastro) {
 

@@ -12,7 +12,7 @@ function Evo({idrecord, iduser}) {
             'Content-type': 'application/json',
         },
         })
-        .then((resp) => resp.json())
+        .then((resp) =>resp.json())
         .then((resp2) => {
 
             setSessions(resp2)
@@ -61,12 +61,7 @@ function createSession(cadastro) {
         
    
       
-        fetch(`http://localhost:3333/api/delete2/${id}`,{
-            method: "DELETE",
-            headers: {
-              'Content-type': 'application/json',
-            },
-        })
+        fetch(`http://localhost:3333/api/delete2/${id}`,{method: "DELETE", headers: {'Content-type': 'application/json',},})
           .then((resp) => resp.json()).then((data) => {
             //console.log(data);
             window.location.replace(`/prontuario/${iduser}/${idrecord}/2`) 

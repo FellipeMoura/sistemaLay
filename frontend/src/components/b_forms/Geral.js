@@ -43,7 +43,7 @@ function Geral({project,setStep}) {
                     if(project[pos] > 0 ){
                     
                     return (
-                        <label className="value"> , {bd} </label>
+                        <label key={bd} className="value"> , {bd} </label>
                         )
                 }
                     

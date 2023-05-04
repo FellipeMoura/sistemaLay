@@ -76,8 +76,6 @@
     background-color: #f7f7f7;
     position: relative; 
     flex-wrap: wrap;
-
-    overflow-y: scroll;
     overflow:auto;
     padding: 0;
     max-height: 65vh;
