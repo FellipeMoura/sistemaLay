@@ -4,6 +4,7 @@
   box-sizing: border-box;
   font-family: 'Titillium Web', sans-serif;
   color: #444444;
+  
 }
 
 html,body, #root{
@@ -17,7 +18,7 @@ html,body, #root{
   font-family: 'Titillium Web', sans-serif;
   font-style: italic;
   font-weight: 300;
-  margin-bottom: 1vh;
+  margin-bottom: 1em;
   color: #000000;
 }
 
@@ -28,3 +29,4 @@ h1, h2, label{
 input {
   font-size:1em;
 }
+

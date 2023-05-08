@@ -21,7 +21,7 @@ function ListItem({users, search}) {
     return (
         
           
-            search ? 
+    search ? 
     <div className={styles.tableContainer}> 
         <span className={styles.space}>.</span>
         <table >

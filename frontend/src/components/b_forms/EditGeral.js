@@ -38,6 +38,7 @@ function RecordForm(props) {
     <BForm data={data} updateField={updateField}/>,
     <CForm data={data} updateField={updateField}/>
   ]
+  const stepsTitle =['Atendimento/Histórico', 'Exame Psíquico', 'Hipótese Diagnóstica']
 
   function editRecord(id, cadastro) {
    
@@ -71,16 +72,10 @@ function RecordForm(props) {
           <div className={styles.actions}>
             
               <button type="button" onClick={() => changeStep(currentStep-1)}>
-                <GrFormPrevious />
+                <GrFormPrevious /> 
               </button>
-          
-          </div>
-            
-            <div className={styles.inputsContainer}>
-              {currentComponent}
-            </div>
-            
-            <div className={styles.actions}>
+              <h1>{stepsTitle[currentStep]}</h1>
+              <div className={styles.actions}>
               {!isLastStep ? (
                 <button type="submit">
                 <GrFormNext />
@@ -91,6 +86,14 @@ function RecordForm(props) {
 
               )}
             </div>
+          
+          </div>
+            
+            <div className={styles.inputsContainer}>
+              {currentComponent}
+            </div>
+            
+            
         </form>
         
       </div>

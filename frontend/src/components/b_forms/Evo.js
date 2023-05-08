@@ -85,9 +85,12 @@ function createSession(cadastro) {
     //console.log(project.session)
 
     return (
-        <div className ="ePanel">
+        <div className ="evoPanel">
 
-            <div className="rePanel">
+            <div className="revoPanel">
+
+            <label className='inline'> 
+
                 <div className= 'rHeader'>
                  <InputDate
                     title="Data"
@@ -111,6 +114,8 @@ function createSession(cadastro) {
                     click={() => createSession(project)}
                 />
                 </div>
+
+                </label>
 
                 <div className= "rBody">                 
                      <div>   
@@ -148,7 +153,7 @@ function createSession(cadastro) {
 
             </div>
 
-            <div className="lePanel">
+            <div className="levoPanel">
             {sessions.map(session => {
                 let data
                 if(session.data){ data = session.data.substr(0, 10).split('-').reverse().join('/');}
@@ -157,13 +162,13 @@ function createSession(cadastro) {
                         <div className='session'>
                         <div className='sHeader'>
                             <div className='inline'> 
-                            <label>Sessão: <label className="value"> {session.session}</label></label>
-                            
+                                <label>Sessão: <label className="value"> {session.session}</label></label>
+                                <label>Data: <label className="value"> {data}</label></label>
+                                <label>Horario: <label className="value"> {session.hora}</label></label>
                                 
-                        </div>
+                            </div>
                         
-                            <label>Data: <label className="value"> {data}</label></label>
-                            <label>Horario: <label className="value"> {session.hora}</label></label>
+                           
                             <button
                                 type='button'
                                 id={session.id}

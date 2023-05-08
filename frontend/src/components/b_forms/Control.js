@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./Control.css"
-import {MdOutlineDelete} from 'react-icons/md'
+import { MdOutlineDelete } from 'react-icons/md'
 import { BsCheck2Square } from 'react-icons/bs'
 import { InputMasks, InputText, Button, InputDate } from '../d_inputs/Input';
 
@@ -134,14 +134,13 @@ function Control({ iduser, idrecord }) {
 
 
   const titulo = (sessions[0] ? <tr className=''>
-    <th className=''>Sessão</th><th className=''>Data</th><th className=''>Horário</th><th className=''>Valor</th><th className=''>Pagamento</th><th className='dele'>Excluir</th>
+    <th className=''>Sessão</th><th className=''>Data</th><th className=''>Horário</th><th className=''>Valor</th><th className=''>Pagamento</th><th style={{ width:'.1%'}}>Excluir</th>
   </tr> : '')
 
   return (
     <div className="cPanel">
 
       <div className="inputPanel">
-        <label className='sessionlabel'>{`Sessão: ${project.sessao}`}</label>
         <InputDate
           title="Data"
           name="data"
@@ -198,18 +197,16 @@ function Control({ iduser, idrecord }) {
                     />
 
                     : <BsCheck2Square />}</td>
-                   <td >
-                    
-                   
-                   <button
-                                type='button'
-                                id={session.id}
-                                onClick={(e) => deleteSession(session.id)}
+                  <td className='dele'>
 
-                            >
-                                <MdOutlineDelete/>
-                            </button>
-                    </td>
+
+                    <Button
+                      color='#b4b4b400'
+                      id={session.id}
+                      click={() => deleteSession(session.id)}
+                      value={<MdOutlineDelete />}
+                    />
+                  </td>
                 </tr>
               )
             })}

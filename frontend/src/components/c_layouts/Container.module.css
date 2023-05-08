@@ -1,5 +1,4 @@
 .container{
-    width: 1200px;
     display: flex;
     justify-content: space-between;
     margin: 0 auto;
@@ -9,7 +8,6 @@
 .min-height{
     align-items: center;
     justify-content: center;
-
     padding: 0;
     min-width: 100%;
 }

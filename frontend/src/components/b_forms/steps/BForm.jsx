@@ -20,8 +20,8 @@ const BForm = ({data, updateField}) => {
 
     return(
         <div className="reviewForm">
-            <h2>Exame Psíquico:</h2>
             <div className="Bform1">
+            <div className="bformt">
             <div><label htmlFor="ba">Aparência:</label>
                 <input
                     type="text"  
@@ -38,6 +38,7 @@ const BForm = ({data, updateField}) => {
                     value={data.bb || ''}
                     onChange={(e) => updateField("bb", e.target.value)}
                 /></div>
+            </div>
             </div>
             <div className="form-control score-container2">
                 <div className="score1">
@@ -184,6 +185,7 @@ const BForm = ({data, updateField}) => {
                  <div>
                 <label htmlFor="obs">Observação</label>
                 <textarea 
+                    className="obsB"
                     name="obs" 
                     id="obs"
                     value={data.obs || ''}

@@ -1,12 +1,13 @@
 .form{
-    background-color:#f5f5f5;
+    background-color: #f5f5f5;
     border-radius: 5px;
     display: flex;
     align-items: center;
     flex-direction: column;
     min-height: 95%;
     margin: auto;
-    width: 60em;
+    min-width: 35em;
+    max-width: 70em;
     border: 1px solid gray;
    /* box-shadow: rgba(188, 188, 194, 0.591) 0px 7px 29px 0px;*/
 }
@@ -26,7 +27,7 @@
     width: 90%;
     padding:5px;
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
 }
 

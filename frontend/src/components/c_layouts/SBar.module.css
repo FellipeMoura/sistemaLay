@@ -1,22 +1,23 @@
 .formContainer{
     position: relative;
-    width: 100vh;
+    width: 40em;
     display: flex;
     flex-direction: column;
     margin-top: 15px;
-    border-radius: 4vh;
+    border-radius: 5px;
     padding: 0;
     
 }
 
 .formContainer2{
     position: relative;
-    width: 100vh;
+    height: 2.5em;
+    width: 40em;
     display: flex;
     flex-direction: column;
     border-radius: 4vh;
     margin-top: 15px;
-    border-radius: 4vh;
+    border-radius: 20px;
     padding: 0;
     
 }
@@ -32,48 +33,15 @@
 
 }
 .header input{
-    height: 6vh;
+    height: 2.5em;
     border: none;
     margin: 0 2vh 0 1vh;
-    width: 110vh;
-}
+    width: 30em;
 
-.header button{
-    
-  margin: 0;
-}
-
-
-.btn{
-    font-weight: bold;
-    padding: 0 1em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #447461;
-    color: #101010;
-    height: 2.5em;
-    text-decoration: none;
-    transition: 0.2s;
-    border-radius: 4vh;
-    border-right: 1.5px solid #acacac;
-    
-    
-    
-}
-
-.btn > svg{
-    
-    font-size: 5vh;
-    fill: rgb(53, 51, 51);
-}
-
-.btn:hover{
-    background-color: #bfff9c;    
 }
 
 .header > svg{
     margin: 0 .2em;
     fill: rgb(70, 72, 72);
-    font-size: 5vh;
+    font-size: 1.5em;
 }

@@ -4,7 +4,6 @@ import styles from "../EditGeral.module.css"
 const CForm = ({data, updateField}) => {
     return(
         <div>
-            <h2>Hipótese Diagnóstica:</h2>
            <div className={styles.formControl}>
         
             <textarea             

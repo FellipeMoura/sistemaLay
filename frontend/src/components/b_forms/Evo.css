@@ -1,18 +1,23 @@
-.ePanel{   
+.evoPanel{   
     display: flex;
     height: 100%;
     padding-bottom: .5em;
-    
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
-.ePanel input{
+.evoPanel input{
     padding: .6rem;
     border: none;
+    
     border-radius: 3px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
 }
-.ePanel textarea{
+.evoPanel textarea{
     min-height: 6em;
+}
+.revoPanel textarea{
+    width: 90%;
 }
 .rHeader{
     margin: 0;
@@ -21,16 +26,16 @@
     flex-direction: row;
     height: 100%;
 }
-.rePanel{
-    min-width: 15em;
+.revoPanel{
+    min-width: 35em;
     background-color: #f1f1f1;
     display: flex;
     min-height: 28em;
     max-height: 72vh;
-    border: .1em solid gray;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
     flex-direction: column;
     padding: 1em;
-    margin: 0;
+    margin-bottom: 1em;
 
 }
 
@@ -47,10 +52,11 @@
 
 .sHeader button{
     border: 0;
+    cursor: pointer;
 }
 
 .sHeader button > svg{
-    font-size: 1.5em;
+    font-size: 2em;
     fill: #868686;
     transition: 0.2s;
 }
@@ -68,22 +74,21 @@
 .session{
     background-color: #f1f1f1;
     padding:  .5em;
-    margin: 0  .5em .5em .5em;
-    border: .1em solid gray;
-    width: 97%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    margin-bottom: 1em;
 }
 
-.lePanel{
-    
-    display: flex;
-    max-height: 2em;    
+.levoPanel{
+
+    display: flex; 
     flex-direction: column;
-    width: 60%;
-    overflow: auto;
-    margin: 0;
-    max-height: 28em;
+    width: auto;
+    height: auto;
+    min-width: 35em;
+    max-width: 50%;   
 }
 
 .rebutton{
@@ -92,8 +97,9 @@
     transition: .2s;
     margin-left: 4em;
     height: 2.7em;
-    background-color:rgb(207, 207, 207);
+    background-color:#e6dcdc;
     border: 0.02px solid rgb(148, 148, 148);
+    cursor: pointer;
 }
 
 .rebutton > svg{

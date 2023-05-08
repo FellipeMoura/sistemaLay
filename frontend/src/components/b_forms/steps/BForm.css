@@ -1,16 +1,34 @@
 .form-control.score-container2{
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .Bform1{
+    justify-content: space-around;
     display: flex;
-    flex-direction: row;
+    
+    margin-right: 5em;
 }
 .Bform1 > * > input{
     margin: 10px 10px;
-    width: 80vh;
+    width: 18em;
 }
+
+.bformt{
+    display: flex;
+    flex-wrap: wrap;
+}
+.bformt input{
+    margin: 1em 1em 0 0 ;
+    flex-wrap: wrap;
+}
+
+.Bform1a label{
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
 
 .score-container2 svg {
     margin: auto;
@@ -56,6 +74,7 @@
     font-size: 0.7rem;
 }
 
-.score1{
-    width: 70vh;
+.obsB{
+    width: 30em;
 }
+

@@ -6,7 +6,6 @@ const AForm = ({data, updateField}) => {
         <div>
            
            <div className={styles.formControl}>
-           <h2>Atendimento/Histórico:</h2>
             <label htmlFor="aa">Queixa Principal:</label>
             <textarea             
             name="text" 

@@ -6,7 +6,7 @@ import Evo from '../b_forms/Evo';
 import Control from '../b_forms/Control';
 import RecordForm from '../b_forms/EditGeral'
 import EditUser from '../b_forms/EditUser';
-import ResumoForm from '../b_forms/ResumoForm';
+import ResumoForm from '../b_forms/SessionForm';
  
 
 
@@ -86,7 +86,7 @@ function Record() {
         <ResumoForm iduser={iduser} idrecord={idrecord}/>
     ]
 
-    function getAge(dateString) {
+    /*function getAge(dateString) {
         const today = new Date();
         const birthDate = new Date(dateString);
         let age = today.getFullYear() - birthDate.getFullYear();
@@ -97,7 +97,7 @@ function Record() {
         }
         
         return age;
-    }
+    }*/
 
     return(
             <div className="painel">
@@ -107,7 +107,6 @@ function Record() {
                     <div className="header">
                         <label> Prontuário nº {project.id}</label>
                         <label> Paciente: {project.name}</label>
-                        <label> Idade: {getAge(project.nasc)}</label>
                     </div>
 
                     <div className="nav">

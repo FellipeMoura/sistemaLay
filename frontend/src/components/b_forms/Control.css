@@ -11,7 +11,8 @@
 
 .inputPanel{
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
-    justify-content: space-between;
+    justify-content: center;
+    min-width: 35em;
     width: 60%;
     background-color: #f1f1f1;
     display: flex;
@@ -36,11 +37,6 @@
     width: 100%;
 }
 
-.rBody > div > textarea{
-    height: auto;
-    width: 70vh;
-}
-
 .rBody label{
     margin: 0;
 }
@@ -54,8 +50,8 @@
     justify-content: center;
 }
 .tableContainer2 button svg{
-    font-size: 1.8em;
-    fill: #868686;
+    font-size: 1.5em;
+    fill:     #c73f3fbe;
     transition: 0.2s;
 }
 
@@ -71,7 +67,7 @@
 
 .tableContainer2{  
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
-
+    min-width: 35em;
     width: 60%;
     background-color: #f7f7f7;
     position: relative; 
@@ -108,6 +104,6 @@
 }
 
 .dele{
-    max-width: em;
+    width: 1px;
 }
 
