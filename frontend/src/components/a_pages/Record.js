@@ -7,6 +7,7 @@ import Control from '../b_forms/Control';
 import RecordForm from '../b_forms/EditGeral'
 import EditUser from '../b_forms/EditUser';
 import ResumoForm from '../b_forms/SessionForm';
+
  
 
 
@@ -21,7 +22,7 @@ function Record() {
 
     useEffect(() => {
         
-        fetch(`http://localhost:3333/api/record/${idrecord}`,{
+        fetch(`${process.env.REACT_APP_BACKEND}record/${idrecord}`,{
         method: "GET",
         heders:{
             'Content-type': 'application/json',

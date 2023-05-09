@@ -2,6 +2,7 @@ import {useState, useEffect} from 'react'
 import styles from './UserForm.module.css'
 import {InputMasks, Button, Radio, InputText, InputDate} from '../d_inputs/Input'
 
+
 const options = ['Feminino','Masculino','Não Informado' ]
 
 function EditUser({id, idrecord}){
@@ -9,7 +10,7 @@ function EditUser({id, idrecord}){
 
     useEffect(() => {
         
-        fetch(`http://localhost:3333/api/user/${id}`,{
+        fetch(`${process.env.REACT_APP_BACKEND}user/${id}`,{
         method: "GET",
         heders:{
             'Content-type': 'application/json',
@@ -37,7 +38,7 @@ function EditUser({id, idrecord}){
     function editPost(id, cadastro) {
    
       
-        fetch(`http://localhost:3333/api/update/${id}`,{
+        fetch(`${process.env.REACT_APP_BACKEND}update/${id}`,{
             method: "PUT",
             headers: {
               'Content-type': 'application/json',

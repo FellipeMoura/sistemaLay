@@ -1,6 +1,17 @@
 const UserService = require('../services/UserService')
 
 module.exports = {
+    verificar: async(req,res)=> {
+        let json = {error:'',result:{}}
+
+        let login = req.params.login
+        
+        login.usuario == process.env.DB_NAME && login.senha == process.env.DB_PASS ?
+            json.result = false : true
+
+        
+        res.json(json)
+    },
     buscarTodos: async(req,res)=> {
         let json = []
 

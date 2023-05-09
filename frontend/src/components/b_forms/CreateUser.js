@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { InputText, InputDate, InputMasks, Button, Radio } from '../d_inputs/Input'
 
+
 import styles from './UserForm.module.css'
 
 
@@ -12,7 +13,7 @@ function CreateForm({ createPost, createRecord, projectData }) {
     function createPost(cadastro) {
 
 
-        fetch("http://localhost:3333/api/user", {
+        fetch(`${process.env.REACT_APP_BACKEND}user`, {
             method: "POST",
             headers: {
                 'Content-type': 'application/json',
@@ -46,7 +47,7 @@ function CreateForm({ createPost, createRecord, projectData }) {
         //console.log(formTemplate);
 
 
-        fetch("http://localhost:3333/api/record", {
+        fetch(`${process.env.REACT_APP_BACKEND}record`, {
             method: "POST",
             headers: {
                 'Content-type': 'application/json',
@@ -153,7 +154,7 @@ function CreateForm({ createPost, createRecord, projectData }) {
                 <Button
                     color="#447461"
                     value='Cadastrar'
-                    click={(e) => createPost(project)}
+                    click={() => createPost(project)}
                 />
 
             </div>

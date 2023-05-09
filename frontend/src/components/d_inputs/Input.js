@@ -23,6 +23,23 @@ export function InputText({ width, flex, title, name, placeholder, handleOnChang
     )
 }
 
+export function InputPass({ width, flex, title, name, placeholder, handleOnChange, value }) {
+    return (
+        <div className='inputContainer'  style={ flex? { flexDirection: flex} : { alignItems: 'center'}}>
+            <label htmlFor={name}>{title}</label>
+            <input
+                style={{ width:  width}}
+                type='password'
+                name={name}
+                id={name}
+                placeholder={placeholder}
+                onChange={handleOnChange}
+                value={value}
+            />
+        </div>
+    )
+}
+
 export function InputDate({flex, title, name, placeholder, handleOnChange, value }) {
     return (
         <div className='inputContainer' style={ flex? { flexDirection: flex} : { alignItems: 'center'}}>

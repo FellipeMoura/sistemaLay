@@ -6,6 +6,7 @@ import { InputMasks, InputText, Button, InputDate } from '../d_inputs/Input';
 
 
 
+
 function Control({ iduser, idrecord }) {
 
   var data = new Date();
@@ -29,7 +30,7 @@ function Control({ iduser, idrecord }) {
   const [sessions, setSessions] = useState([])
   useEffect(() => {
 
-    fetch(`http://localhost:3333/api/control/${iduser}`, {
+    fetch(`${process.env.REACT_APP_BACKEND}control/${iduser}`, {
       method: "GET",
       heders: {
         'Content-type': 'application/json',
@@ -48,7 +49,7 @@ function Control({ iduser, idrecord }) {
 
   function createControl(cadastro) {
 
-    fetch(`http://localhost:3333/api/control`, {
+    fetch(`${process.env.REACT_APP_BACKEND}control`, {
       method: "POST",
       headers: {
         'Content-type': 'application/json',
@@ -70,7 +71,7 @@ function Control({ iduser, idrecord }) {
 
 
 
-      fetch(`http://localhost:3333/api/delete3/${id}`, {
+      fetch(`${process.env.REACT_APP_BACKEND}delete3/${id}`, {
         method: "DELETE",
         headers: {
           'Content-type': 'application/json',
@@ -93,7 +94,7 @@ function Control({ iduser, idrecord }) {
 
 
 
-      fetch(`http://localhost:3333/api/confirm/${id}`, {
+      fetch(`${process.env.REACT_APP_BACKEND}confirm/${id}`, {
         method: "PUT",
         headers: {
           'Content-type': 'application/json',

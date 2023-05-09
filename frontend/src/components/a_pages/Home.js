@@ -2,14 +2,13 @@ import styles from './Pacientes.module.css'
 import { useEffect, useState } from 'react';
 import RBar from '../c_layouts/RBar';
 
-function Prontuarios(){
-    const [users, setUsers] = useState([]);
 
-  
+function Home(login){
+    const [users, setUsers] = useState([]);
 
     
     useEffect(() => {           
-            fetch("http://localhost:3333/api/records",{
+            fetch(`${process.env.REACT_APP_BACKEND}records`,{
             method: "GET",
             heders:{
                 'Content-type': 'application/json',
@@ -34,4 +33,4 @@ function Prontuarios(){
     )
 }
 
-export default Prontuarios
+export default Home

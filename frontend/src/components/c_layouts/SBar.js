@@ -23,7 +23,7 @@ function SBar(props) {
   function deletePost(id) {
 
 
-    fetch(`http://localhost:3333/api/delete/${id}`, {
+    fetch(`${process.env.REACT_APP_BACKEND}delete/${id}`, {
       method: "DELETE",
       headers: {
         'Content-type': 'application/json',

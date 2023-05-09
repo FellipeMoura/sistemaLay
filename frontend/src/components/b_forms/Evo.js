@@ -2,11 +2,12 @@ import React, { useState, useEffect } from 'react';
 import {Button, InputMasks, InputDate} from '../d_inputs/Input'
 import "./Evo.css"
 import {MdOutlineDelete} from 'react-icons/md'
+
  
 function Evo({idrecord, iduser}) {
 
     useEffect(() => {           
-        fetch(`http://localhost:3333/api/sessions/${idrecord}`,{
+        fetch(`${process.env.REACT_APP_BACKEND}sessions/${idrecord}`,{
         method: "GET",
         heders:{
             'Content-type': 'application/json',
@@ -39,7 +40,7 @@ function Evo({idrecord, iduser}) {
 
 function createSession(cadastro) {
       
-    fetch(`http://localhost:3333/api/session`,{
+    fetch(`https://backend.protuarioreact.com.br/api/session`,{
         method: "POST",
         headers: {
           'Content-type': 'application/json',
@@ -61,7 +62,7 @@ function createSession(cadastro) {
         
    
       
-        fetch(`http://localhost:3333/api/delete2/${id}`,{method: "DELETE", headers: {'Content-type': 'application/json',},})
+        fetch(`${process.env.REACT_APP_BACKEND}delete2/${id}`,{method: "DELETE", headers: {'Content-type': 'application/json',},})
           .then((resp) => resp.json()).then((data) => {
             //console.log(data);
             window.location.replace(`/prontuario/${iduser}/${idrecord}/2`) 

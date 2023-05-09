@@ -17,6 +17,7 @@ router.get('/user/:id', UserController.buscarUm)
 router.get('/record/:id', RecordController.buscarUm)
 
 router.post('/user', UserController.inserir)
+router.get('/verificar/:login', UserController.verificar)
 router.post('/session', SessionsController.inserir)
 router.post('/record', RecordController.inserir)
 router.post('/control', ControlController.inserir)

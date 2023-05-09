@@ -2,6 +2,7 @@
 import {GrFormNext, GrFormPrevious, GrSend} from 'react-icons/gr'
 import {BiSave} from 'react-icons/bi'
 
+
 import AForm from "./steps/AForm"
 import BForm from "./steps/BForm"
 import CForm from "./steps/CForm"
@@ -43,7 +44,7 @@ function RecordForm(props) {
   function editRecord(id, cadastro) {
    
       
-    fetch(`http://localhost:3333/api/update2/${id}`,{
+    fetch(`${process.env.REACT_APP_BACKEND}update2/${id}`,{
         method: "PUT",
         headers: {
           'Content-type': 'application/json',
