@@ -7,22 +7,25 @@ import Navbar from './components/c_layouts/Navbar'
 import Record from './components/a_pages/Record'
 import { useState } from 'react'
 import Login from './components/a_pages/Login'
-import HomeLogin from './components/a_pages/LoginHome'
+import { AuthProvider } from './components/e_contexts/AuthContext'
+
 // <Route exact path ="/pacientes" element={<Pacientes />}></Route>
 
 //<Route exact path ='/login' element={ <Login login={login} setIsLogin={setIsLogin} setLogin={setLogin} /> }></Route>
 function App() {
   return (
+  <AuthProvider>
     <Router>
-      
-      <Navbar/>
       <Container customClass="min-height">
         <Routes>         
-          <Route exact path ='/' element={ <HomeLogin /> }></Route>
+          <Route exact path ='/' element={ <Home /> }></Route>
+          <Route exact path ='/login' element={ <Login /> }></Route>
           <Route exact path ="/prontuario/:iduser/:idrecord/:page" element={<Record />}></Route>
         </Routes>
       </Container>
     </Router>
+  </AuthProvider>
+    
   );
 }
 

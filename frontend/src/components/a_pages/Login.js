@@ -1,14 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import React from 'react';
 import { InputText, InputPass, Button } from '../d_inputs/Input';
 import './Login.css'
+import logo2 from '../../img/wall1.png'
+import { Context } from '../e_contexts/AuthContext';
 
-function Login({login,setLogin,setIsLogin}){
+function Login(){
+    const [login, setLogin] = useState({usuario:'',senha:''})
+    const [isLogin, setIsLogin] = useState(1)
 
-    function handleChange(e) {
+    const {verif, handleLogin} = useContext(Context)
+    //console.log('Login'+verif)
+    
+
+   async function handleChange(e) {
         setLogin({...login, [e.target.name]: e.target.value })
         
-        console.log(`${process.env.REACT_APP_USER}`)
     
     }
 
@@ -22,9 +29,10 @@ function Login({login,setLogin,setIsLogin}){
             window.alert('Login incorreto')
         }
     }
-
+//<img src={logo2} className="logo2" alt="Logo"/>
     return(
         <div className='wall'>
+            
             <div className='loginForm'>
                 <InputText
                     flex='column'
@@ -45,7 +53,7 @@ function Login({login,setLogin,setIsLogin}){
                  <Button
                     color= '#213e6d'
                     value='Login'
-                    click={() => logar()}
+                    click={() => handleLogin()}
 
         /> 
             </div>
