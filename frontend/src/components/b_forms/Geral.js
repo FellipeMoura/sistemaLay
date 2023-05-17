@@ -6,7 +6,7 @@ function Geral({project,setStep}) {
     
     const bds =[' Autopsíquica', " Alopsíquica", 'Temporal', 'Espacial']
     const bks = ['Distimia', 'Angústia', 'Ansiedade', 'Irritabilidade', 'Medo', 'Ambivalência afetiva', 'Pânico']
-    console.log()
+    console.log(project)
    
     return (
     <div className='geralContainer'>
@@ -16,7 +16,7 @@ function Geral({project,setStep}) {
             <div className="lPanel">
             <label>Prontuário nº:<label className="value"> {project.id}</label></label>
 
-                <label>Data de início:<label className="value"> {project.inicio}</label></label>
+                <label>Data de início:<label className="value"> {project.inicio.split('-').reverse().join('/')}</label></label>
                 
                 <label >Queixa Principal:<label  className="value">{project.aa}</label></label>
                 

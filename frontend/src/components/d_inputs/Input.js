@@ -148,3 +148,24 @@ export function Button({ className, click, value, color }) {
         </div>
     )
 }
+
+export function Select({padrao, width, flex, text, name, options, handleOnChange,value}){
+    
+    return (
+        <div className='inputContainer' style={ flex? { flexDirection: flex} : { alignItems: 'center'}}>
+            <label htmlFor={name}>{text}</label>
+            <select 
+                style={{ width:  width}}
+                name={name} 
+                id={name} 
+                onChange={handleOnChange} 
+                value={value || padrao || ''}
+            >
+                <option> {padrao || 'Selecione uma opção'}</option>
+                {options.map((option) => (
+                    <option value={option.id} key={option.id}>{option.name}</option>
+                ))}
+            </select>
+        </div>
+    )
+}

@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { InputText, InputDate, InputMasks, Button, Radio } from '../d_inputs/Input'
-
+import { Select, InputText, InputDate, InputMasks, Button, Radio } from '../d_inputs/Input'
 
 import styles from './UserForm.module.css'
 
@@ -8,10 +7,18 @@ import styles from './UserForm.module.css'
 function CreateForm({ createPost, createRecord, projectData }) {
 
     const [project, setProject] = useState(projectData || {})
-    const options = ['Feminino', 'Masculino', 'Não Informado']
-
+    const options = [
+        {id:'Masculino', name: 'Masculino'},
+        {id:'Nao informado', name: 'Não informado'}    
+    ]
+    const options2 = [
+        {id:'solteiro',name:'Solteira(o)'},
+        {id:'casado', name: 'Casada(o)'},
+        {id: 'divorciado', name:'Divorciada(o)'},
+        {id:'viuvo', name:'Viúva(o)'}
+    ]
     function createPost(cadastro) {
-
+        cadastro.sexo ? console.log('ok'): cadastro.sexo='Feminino' 
 
         fetch(`${process.env.REACT_APP_BACKEND}user`, {
             method: "POST",
@@ -99,15 +106,38 @@ function CreateForm({ createPost, createRecord, projectData }) {
                         name="nasc"
                         handleOnChange={handleChange}
                     />
-                    <div className='radiosContainer'>
-                        <Radio
-                            name="sexo"
-                            title="Sexo"
-                            data={project.sexo}
-                            values={options}
-                            handleOnChange={handleChange}
-                        />
+                    <div className={styles.inline2}>
+                    <Select
+                        flex='column'
+                        width='15em'
+                        options={options2}
+                        name='civil'
+                        value={project.civil}
+                        text= 'Estado Civil'
+                        handleOnChange={handleChange}
+                    />
+
+                    <InputText
+                        flex='column'
+                        width='4em'
+                        title="Filhos"
+                        name="filhos"
+                        placeholder="Não"
+                        handleOnChange={handleChange}
+                    />
+                   
                     </div>
+
+                    <Select
+                        padrao='Feminino'
+                        flex='column'
+                        width='10em'
+                        options={options}
+                        name='sexo'
+                        value={project.sexo}
+                        text= 'Sexo'
+                        handleOnChange={handleChange}
+                    />
                 </div>
                 <div className={styles.step}>
                     <InputMasks
@@ -140,6 +170,14 @@ function CreateForm({ createPost, createRecord, projectData }) {
                         title="E-mail"
                         name="email"
                         placeholder="Insira o e-mail do paciente..."
+                        handleOnChange={handleChange}
+                    />
+                    <InputText
+                        flex='column'
+                        width='15em'
+                        title="Profissão"
+                        name="profissao"
+                        placeholder="Insira a profissão do paciente..."
                         handleOnChange={handleChange}
                     />
                 </div>

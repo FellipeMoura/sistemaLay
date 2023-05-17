@@ -2,7 +2,7 @@ import {BrowserRouter as Router, Routes, Route}from 'react-router-dom'
 import Home from './components/a_pages/Home'
 //import Pacientes from './components/a_pages/Pacientes'
 import Container from './components/c_layouts/Container'
-import Navbar from './components/c_layouts/Navbar'
+
 //import Footer from './components/c_layouts/Footer'
 import Record from './components/a_pages/Record'
 import { useState } from 'react'

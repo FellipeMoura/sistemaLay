@@ -25,10 +25,10 @@ const formTemplate = {
 function RecordForm(props) {
   
   const [data, setData] = useState(props.project);
-  console.log(props.project)
+  
 
   const updateField = (key, value) => {
-    console.log(props.idUser)
+    console.log(data)
     setData((prev) => {
       return{...prev, [key]: value }
     })
@@ -54,8 +54,8 @@ function RecordForm(props) {
       .then((resp) => resp.json()).then((data) => {
           console.log(data);
           window.alert("Cadastrado alterado!");
-         window.location.replace(`/prontuario/${props.iduser}/${props.idrecord}/0`)
-         console.log(data.id);
+         window.location.replace(`/prontuario/${props.iduser}/${props.idrecord}/1`)
+
         
         //redirect
       })

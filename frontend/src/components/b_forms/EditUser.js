@@ -1,9 +1,18 @@
 import {useState, useEffect} from 'react'
 import styles from './UserForm.module.css'
-import {InputMasks, Button, Radio, InputText, InputDate} from '../d_inputs/Input'
+import {Select, InputMasks, Button, Radio, InputText, InputDate} from '../d_inputs/Input'
 
 
-const options = ['Feminino','Masculino','Não Informado' ]
+const options = [
+    {id:'Masculino', name: 'Masculino'},
+    {id:'Nao informado', name: 'Não informado'}    
+]
+const options2 = [
+    {id:'solteiro',name:'Solteira(o)'},
+    {id:'casado', name: 'Casada(o)'},
+    {id: 'divorciado', name:'Divorciada(o)'},
+    {id:'viuvo', name:'Viúva(o)'}
+]
 
 function EditUser({id, idrecord}){
     
@@ -37,9 +46,7 @@ function EditUser({id, idrecord}){
     
     function editPost(id, cadastro) {
 
-        cadastro.nasc =cadastro.nasc.substr(0, 10)
-        console.log(cadastro.nasc)
-   
+        if(cadastro.nasc){ cadastro.nasc =cadastro.nasc.substr(0, 10)}   
       
         fetch(`${process.env.REACT_APP_BACKEND}update/${id}`,{
             method: "PUT",
@@ -130,15 +137,39 @@ function EditUser({id, idrecord}){
                         value={project.nasc ? project.nasc.substr(0,10): ''}
                         handleOnChange={handleChange}
                     />
-                    <div className='radiosContainer'>
-                        <Radio
-                            name="sexo"
-                            title="Sexo"
-                            data={project.sexo}
-                            values={options}
-                            handleOnChange={handleChange}
-                        />
+                     <div className={styles.inline2}>
+                    <Select
+                        flex='column'
+                        width='15em'
+                        options={options2}
+                        name='civil'
+                        value={project.civil}
+                        text= 'Estado Civil'
+                        handleOnChange={handleChange}
+                    />
+
+                    <InputText
+                        flex='column'
+                        width='4em'
+                        title="Filhos"
+                        name="filhos"
+                        value={project.filhos}
+                        placeholder="Não"
+                        handleOnChange={handleChange}
+                    />
+                   
                     </div>
+
+                    <Select
+                        padrao='Feminino'
+                        flex='column'
+                        width='10em'
+                        options={options}
+                        name='sexo'
+                        value={project.sexo}
+                        text= 'Sexo'
+                        handleOnChange={handleChange}
+                    />
                 </div>
                 <div className={styles.step}>
                     <InputMasks
@@ -175,6 +206,15 @@ function EditUser({id, idrecord}){
                         name="email"
                         value={project.email}
                         placeholder="Insira o e-mail do paciente..."
+                        handleOnChange={handleChange}
+                    />
+                    <InputText
+                        flex='column'
+                        width='15em'
+                        title="Profissão"
+                        name="profissao"
+                        value={project.profissao}
+                        placeholder="Insira a profissão do paciente..."
                         handleOnChange={handleChange}
                     />
                 </div>

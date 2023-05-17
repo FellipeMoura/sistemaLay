@@ -16,7 +16,11 @@ module.exports = {
                 etel: users[i].etel,
                 email: users[i].email,
                 sexo: users[i].sexo,
-                nasc: users[i].nasc
+                nasc: users[i].nasc,
+                filhos: users[i].filhos,
+                civil: users[i].civil,
+                profissao: users[i].profissao
+
             })
         }
         res.json(json)
@@ -46,7 +50,11 @@ module.exports = {
         etel: req.body.etel,
         email: req.body.email,
         sexo: req.body.sexo,
-        nasc: req.body.nasc
+        nasc: req.body.nasc,
+        filhos: req.body.filhos,
+        civil: req.body.civil,
+        profissao: req.body.profissao
+        
         }
         console.log(user)
         let UserID = await UserService.insert
@@ -60,7 +68,10 @@ module.exports = {
             etel: user.etel,
             email: user.email,
             sexo: user.sexo,
-            nasc: user.nasc
+            nasc: user.nasc,
+            filhos: user.filhos,
+            civil: user.civil,
+            profissao: user.profissao
         };
         
         res.json(json)
@@ -78,7 +89,10 @@ module.exports = {
         etel: req.body.etel,
         email: req.body.email,
         sexo: req.body.sexo,
-        nasc: req.body.nasc
+        nasc: req.body.nasc,
+        filhos: req.body.filhos,
+        civil: req.body.civil,
+        profissao: req.body.profissao
         }
         await UserService.alterar(id, user);
         json.result ={
@@ -90,7 +104,10 @@ module.exports = {
             etel: user.etel,
             email: user.email,
             sexo: user.sexo,
-            nasc: user.nasc
+            nasc: user.nasc,
+            filhos: user.filhos,
+            civil: user.civil,
+            profissao: user.profissao
         };
         
         res.json(json)

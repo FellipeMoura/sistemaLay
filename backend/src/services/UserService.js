@@ -25,8 +25,8 @@ module.exports = {
     },
     insert: (user) => {
         return new Promise((aceito,rejeitado) =>{
-            db.query('INSERT INTO users(name, cpf, endereco, tel, etel, email, sexo, nasc) VALUES (?,?,?,?,?,?,?,?)',
-            [user.name, user.cpf, user.endereco, user.tel, user.etel, user.email, user.sexo, user.nasc] ,
+            db.query('INSERT INTO users(name, cpf, endereco, tel, etel, email, sexo, nasc, filhos, civil, profissao) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+            [user.name, user.cpf, user.endereco, user.tel, user.etel, user.email, user.sexo, user.nasc, user.filhos, user.civil, user.profissao] ,
             (error, results)=>{
                 if(error) { rejeitado(error); return; }                
                 aceito(results.insertId)
@@ -36,8 +36,8 @@ module.exports = {
     alterar: (id, user) => {
         return new Promise((aceito,rejeitado) =>{
             
-            db.query('UPDATE users SET name = ?, cpf = ?, endereco = ?, tel = ?, etel = ?, email = ?, sexo = ?, nasc = ? WHERE id = ?',
-            [user.name, user.cpf, user.endereco, user.tel, user.etel, user.email, user.sexo, user.nasc, id] ,
+            db.query('UPDATE users SET name = ?, cpf = ?, endereco = ?, tel = ?, etel = ?, email = ?, sexo = ?, nasc = ?, filhos = ?, civil = ?, profissao = ? WHERE id = ?',
+            [user.name, user.cpf, user.endereco, user.tel, user.etel, user.email, user.sexo, user.nasc, user.filhos, user.civil, user.profissao, id] ,
             (error, results)=>{
                 if(error) { rejeitado(error); return; }                
                 aceito(results.insertId)

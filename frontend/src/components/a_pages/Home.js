@@ -1,11 +1,12 @@
 import styles from './Pacientes.module.css'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import RBar from '../c_layouts/RBar';
+import { LogoutButton } from '../d_inputs/LogoutButton';
+
 
 
 function Home(login){
     const [users, setUsers] = useState([]);
-
     
     useEffect(() => {           
             fetch(`${process.env.REACT_APP_BACKEND}records`,{
@@ -25,7 +26,11 @@ function Home(login){
     return(
     
         <div className={styles.container}>
+            <div className={styles.logoutDiv}>
+            <LogoutButton/>
+            </div>
             <RBar setUsers={setUsers} users={users}/>
+           
         </div>
 
        

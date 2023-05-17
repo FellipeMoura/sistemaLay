@@ -9,7 +9,6 @@
     font-size: 1rem;
     margin-bottom: 1rem;
 }
-vh
 /*Forms*/
 .formContainer {
     display: flex;
@@ -27,7 +26,7 @@ vh
 }
 
 .inputsContainer {
-    background-color:antiquewhite ;
+    background-color:#e7e7e7 ;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
     border-radius: 10px;
     border: 1px solid rgb(214, 213, 193);
@@ -72,7 +71,7 @@ textarea {
 }
 
 .actions button {
-    background-color: #ece6e6;
+    background-color: #e7e7e700;
     font-size: 0.9rem;
     gap: 0.5rem;
     display: flex;

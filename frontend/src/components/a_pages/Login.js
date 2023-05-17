@@ -2,7 +2,6 @@ import { useEffect, useState, useContext } from 'react';
 import React from 'react';
 import { InputText, InputPass, Button } from '../d_inputs/Input';
 import './Login.css'
-import logo2 from '../../img/wall1.png'
 import { Context } from '../e_contexts/AuthContext';
 
 function Login(){
@@ -24,14 +23,14 @@ function Login(){
         
        if( login.usuario == process.env.REACT_APP_USER &&
             login.senha == process.env.REACT_APP_PASS){
-                setIsLogin(0)
+                handleLogin()
         }else{
             window.alert('Login incorreto')
         }
     }
 //<img src={logo2} className="logo2" alt="Logo"/>
     return(
-        <div className='wall'>
+        <div className='wall' >
             
             <div className='loginForm'>
                 <InputText
@@ -53,7 +52,7 @@ function Login(){
                  <Button
                     color= '#213e6d'
                     value='Login'
-                    click={() => handleLogin()}
+                    click={() => logar()}
 
         /> 
             </div>

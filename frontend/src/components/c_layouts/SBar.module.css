@@ -15,10 +15,12 @@
     width: 40em;
     display: flex;
     flex-direction: column;
-    border-radius: 4vh;
+    border-radius: 4em;
+    margin: auto;
     margin-top: 40px;
     border-radius: 20px;
     padding: 0;
+    
     
 }
 
@@ -27,15 +29,15 @@
     display: flex;
     justify-content:space-between;
     align-items: center;
-    border: .1px solid #acacac;
+    border: 1.5px solid #727272;
     border-right: 0;
-    border-radius: 4vh;
+    border-radius: 4em;
 
 }
 .header input{
     height: 2.5em;
     border: none;
-    margin: 0 2vh 0 1vh;
+    margin: 0 2em 0 1em;
     width: 30em;
 
 }

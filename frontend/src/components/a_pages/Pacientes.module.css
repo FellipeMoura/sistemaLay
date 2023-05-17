@@ -2,10 +2,15 @@
 .container{
     position: relative;
     display: flex;
-    flex-direction: row;
     justify-content: center;
-   
+    align-items: center;
+    flex-direction: column;
+}
 
+.logoutDiv{
+    display: flex;
+    justify-content: flex-end;
+    width: 100vw;
 }
 .search input{
     width: 30em;

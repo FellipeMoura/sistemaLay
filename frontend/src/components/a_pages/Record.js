@@ -10,7 +10,7 @@ import ResumoForm from '../b_forms/SessionForm';
 import logo from '../../img/logop.png'
 import { Link } from 'react-router-dom';
 import {TiArrowBackOutline} from 'react-icons/ti'
-
+import { LogoutButton } from '../d_inputs/LogoutButton';
  
 
 
@@ -34,7 +34,7 @@ function Record() {
         .then((resp) => resp.json())
         .then((resp2) => {
             console.log(resp2.result)
-            resp2.result.inicio = resp2.result.inicio.substr(0, 10).split('-').reverse().join('/')
+            resp2.result.inicio = resp2.result.inicio.substr(0, 10)
             setProject(resp2.result)
         })            
         .catch(err => console.log(err))
@@ -113,6 +113,11 @@ function Record() {
                         <label> Paciente: {project.name} </label>
                         <button onClick={()=>window.location.replace('/')}><TiArrowBackOutline/></button>
                     </div>
+                    <div>
+
+                    <div className='logoutDiv'>
+                        <LogoutButton/>
+                    </div>
 
                     <div className="nav">
                         <div className={`${active[3]}`} onClick={()=> change(4)}>Pessoal</div>
@@ -120,6 +125,8 @@ function Record() {
                         <div className={`${active[1]}`} onClick={()=> change(1)}>Controle</div>
                         <div className={`${active[2]}`} onClick={()=> change(2)}>Evolução</div>
                         <div className={`${active[4]}`} onClick={()=> change(5)}>Resumo</div>
+                    </div>
+
                     </div>
 
                 </div>

@@ -1,11 +1,11 @@
 .loginForm{
-    background-color:antiquewhite ;
+    background-color:rgba(49, 49, 49, 0.281) ;
     padding: 1em;
     display: flex;
     align-items: center;
     flex-direction: column;
     border-radius: 5px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+    box-shadow: rgba(5, 5, 5, 0.2) 0px 2px 8px 0;
 }
 
 .wall{
@@ -14,7 +14,14 @@ align-items: center;
 justify-content: center;
  width: 100vw;
  height: 100vh;
- background-color:cornflowerblue;
+background-image: url(../../img/wall1.png);
+background-color: rgb(219, 189, 214);
+background-repeat: no-repeat;
+background-position: center;
+}
+
+.wall label{
+    color: azure;
 }
 
 .logo2{
