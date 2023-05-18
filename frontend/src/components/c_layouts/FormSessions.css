@@ -1,0 +1,38 @@
+.fsContainer{
+    min-width: 35em;
+    background-color:#e7e7e7;
+    display: flex;
+    min-height: 72vh;
+    
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 1px solid rgb(238, 238, 238);
+    padding: 1em;
+    margin-bottom: 1em;
+
+}
+
+.fsHeader > *{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content:flex-start;
+ 
+}
+
+.fsHeader > * > *{
+    margin-right: 2em;
+ 
+}
+
+.fsBody{
+    height: 85%;
+}
+
+.fsBody > *{
+    height: 100%;
+}
+

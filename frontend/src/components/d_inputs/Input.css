@@ -109,3 +109,12 @@ background-color: #cdcdcd;
     display: flex;
     align-items: center;
 }
+
+.selectInput{
+    font-size: 1em;
+}
+
+.taContainer textarea{
+    min-height: 6em;
+    width: 90%;
+}

@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import styles from './UserForm.module.css'
 import {Select, InputMasks, Button, Radio, InputText, InputDate} from '../d_inputs/Input'
-
+//import history from "../e_contexts/history"
 
 const options = [
     {id:'Masculino', name: 'Masculino'},
@@ -58,31 +58,8 @@ function EditUser({id, idrecord}){
           .then((resp) => resp.json()).then((data) => {
             //console.log(data);
               window.alert("Cadastrado alterado!")
-              window.location.replace(`/prontuario/${id}/${idrecord}/1`)
-            
-            //redirect
-          })
-          .catch(err => console.log(err))
-        }
-    
-    function editPost(id, cadastro) {
-
-        cadastro.nasc =cadastro.nasc.substr(0, 10)
-        console.log(cadastro.nasc)
-   
-      
-        fetch(`${process.env.REACT_APP_BACKEND}update/${id}`,{
-            method: "PUT",
-            headers: {
-              'Content-type': 'application/json',
-            },
-            body: JSON.stringify(cadastro),
-        })
-          .then((resp) => resp.json()).then((data) => {
-            //console.log(data);
-              window.alert("Cadastrado alterado!")
-              window.location.replace(`/prontuario/${id}/${idrecord}/1`)
-            
+             // window.location.replace(`/prontuario/${id}/${idrecord}/0`)
+            // history.push(`/prontuario/${id}/${idrecord}/1`)
             //redirect
           })
           .catch(err => console.log(err))

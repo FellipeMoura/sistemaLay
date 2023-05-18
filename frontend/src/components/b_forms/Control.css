@@ -11,8 +11,8 @@
 
 .inputPanel{
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
-    justify-content: center;
-    min-width: 35em;
+    justify-content: space-around;
+    min-width: 42em;
     width: 60%;
     background-color:#e7e7e7 ;
     display: flex;
@@ -31,15 +31,6 @@
 
 }
 
-.rBody{
-    display: flex;
-    flex-direction: column;    
-    width: 100%;
-}
-
-.rBody label{
-    margin: 0;
-}
 
 .tdConfirm svg{
     font-size: 1.8em;
@@ -62,12 +53,12 @@
 
 .btnControl{
     
-    margin-top: -3px;
+    margin-top: -7px;
 }
 
 .tableContainer2{  
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
-    min-width: 35em;
+    min-width: 42em;
     width: 60%;
     background-color: #f7f7f7;
     position: relative; 

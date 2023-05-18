@@ -55,7 +55,6 @@ function RBar(props) {
         const results = props.users.filter(user =>( user.name.toLowerCase().indexOf(search)) !== -1);
         setUserFilter(results);
     }
-
     return (
         <div className={styles.formContainer2}>
             <div className={styles.header}>

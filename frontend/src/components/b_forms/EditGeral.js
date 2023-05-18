@@ -54,7 +54,7 @@ function RecordForm(props) {
       .then((resp) => resp.json()).then((data) => {
           console.log(data);
           window.alert("Cadastrado alterado!");
-         window.location.replace(`/prontuario/${props.iduser}/${props.idrecord}/1`)
+         window.location.replace(`/prontuario/${props.iduser}/${props.idrecord}/0`)
 
         
         //redirect

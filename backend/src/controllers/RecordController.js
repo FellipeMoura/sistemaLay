@@ -206,7 +206,7 @@ module.exports = {
             obs:record.obs
             
         };
-        
+        console.log(json)
         res.json(json)
     },
     excluir: async(req,res) =>{

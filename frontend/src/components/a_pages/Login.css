@@ -14,10 +14,11 @@ align-items: center;
 justify-content: center;
  width: 100vw;
  height: 100vh;
-background-image: url(../../img/wall1.png);
+background-image: url(../../img/wall2.png);
 background-color: rgb(219, 189, 214);
 background-repeat: no-repeat;
 background-position: center;
+background-size:90%;
 }
 
 .wall label{

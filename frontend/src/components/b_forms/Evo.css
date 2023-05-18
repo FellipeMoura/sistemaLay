@@ -6,45 +6,14 @@
     justify-content: space-around;
 }
 
-.evoPanel input{
-    padding: .6rem;
-    border: none;
-    
-    border-radius: 3px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
-}
-.evoPanel textarea{
-    min-height: 6em;
-}
-.revoPanel textarea{
-    width: 90%;
-}
-.rHeader{
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    height: 100%;
-}
-.revoPanel{
-    min-width: 35em;
-    background-color:#e7e7e7;
-    display: flex;
-    min-height: 28em;
-    max-height: 72vh;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+.sessoes{
+
+    display: flex; 
     flex-direction: column;
-    border-radius: 10px;
-    border: 1px solid rgb(238, 238, 238);
-    padding: 1em;
-    margin-bottom: 1em;
-
-}
-
-.rHeader input{
-    margin-right: 1em;
-  
+    width: auto;
+    height: auto;
+    min-width: 35em;
+    max-width: 50%;   
 }
 
 .sHeader{
@@ -68,12 +37,6 @@
     fill: #a54242;
 }
 
-.rePanel input{
-    width: 9em;
-}
-
-
-
 .session{
     background-color: #f1f1f1;
     padding:  .5em;
@@ -84,16 +47,6 @@
     border: 1px solid rgb(204, 204, 204);
     flex-direction: column;
     margin-bottom: 1em;
-}
-
-.levoPanel{
-
-    display: flex; 
-    flex-direction: column;
-    width: auto;
-    height: auto;
-    min-width: 35em;
-    max-width: 50%;   
 }
 
 .rebutton{

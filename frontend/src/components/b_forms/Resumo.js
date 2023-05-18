@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Button, InputMasks, InputDate, InputText } from '../d_inputs/Input'
-import "./SessionForm.css"
+import { Button, TextArea, InputDate, InputText } from '../d_inputs/Input'
+import "./Resumo.css"
 import { MdOutlineDelete } from 'react-icons/md'
+import FormSessions from '../c_layouts/FormSessions';
 
 
 function ResumoForm({ idrecord, iduser }) {
@@ -35,10 +36,10 @@ function ResumoForm({ idrecord, iduser }) {
         iduser: iduser,
         queixa: '',
         resumo: '',
-        sessao:0
+        sessao: 0
     })
     const [search, setSearch] = useState('');
-    const [userFilter, setUserFilter] = useState([])
+    //const [userFilter, setUserFilter] = useState([])
 
 
 
@@ -82,13 +83,6 @@ function ResumoForm({ idrecord, iduser }) {
         }
     }
 
-    function handleOnSubmit(event) {
-        event.preventDefault();
-        setSearch(event.target.value);
-        const results = project.filter(user => (user.name.toLowerCase().indexOf(search)) !== -1);
-        setUserFilter(results);
-    }
-
     function handleChange(e) {
         setProject({ ...project, [e.target.name]: e.target.value })
 
@@ -96,65 +90,65 @@ function ResumoForm({ idrecord, iduser }) {
 
     }
 
+    const header = (
+        <div>
+            <InputDate
+                flex='column'
+                title="Data"
+                name="data"
+                value={project.data || dataAtual}
+                handleOnChange={handleChange}
+            />
+
+            <InputText
+                flex='column'
+                width='2.5em'
+                title="Sessão"
+                value={project.sessao || ''}
+                name='sessao'
+                handleOnChange={handleChange}
+            />
+
+            <Button
+                color='#447461'
+                value='Registrar'
+                click={() => createSummary(project)}
+            />
+
+        </div>
+
+    )
+
+    const body = (
+        <div>
+            <TextArea
+                height='30vh'
+                name='queixa'
+                value={project.queixa || ''}
+                handleOnChange={handleChange}
+                title='Queixa'
+            />
+            <TextArea
+                height='20vh'
+                name='resumo'
+                value={project.resumo || ''}
+                handleOnChange={handleChange}
+                title='Resumo de sessão'
+            />
+        </div>
+
+
+    )
+
     return (
-        <div className="resumoPanel">
+        <div className="evoPanel">
 
-            <div className="revoPanel">
+            <FormSessions
+                header={header}
+                body={body}
+            />
 
-                <div className='rrHeader'>
-                    <label className='inline'>
-                        <InputDate
-                            title="Data"
-                            name="data"
-                            value={project.data || dataAtual}
-
-                            handleOnChange={handleChange}
-                        />
-
-                        <InputText
-                            width='2.5em'
-                            title="Sessão"
-                            value={project.sessao || ''}
-                            name='sessao'
-                            handleOnChange={handleChange}
-                        />
-
-                        <Button
-                            color='#447461'
-                            value='Registrar'
-                            click={() => createSummary(project)}
-                        />
-
-                    </label>
-                </div>
-
-                <div className="rBody">
-                    <div>
-                        <label>Queixa:</label>     <br />
-                        <textarea
-                            name="queixa"
-                            id="queixa"
-                            value={project.queixa || ''}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label>Resumo de sessão:</label><br />
-
-                        <textarea
-                            className='resumos'
-                            name="resumo"
-                            id="resumo"
-                            value={project.resumo || ''}
-                            onChange={handleChange}
-                        />
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div className="lePanel">
+            <div className="sessoes">
                 {sessions.map(session => {
                     let data
                     if (session.data) { data = session.data.substr(0, 10).split('-').reverse().join('/'); }

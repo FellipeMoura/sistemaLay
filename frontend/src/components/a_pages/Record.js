@@ -6,7 +6,7 @@ import Evo from '../b_forms/Evo';
 import Control from '../b_forms/Control';
 import RecordForm from '../b_forms/EditGeral'
 import EditUser from '../b_forms/EditUser';
-import ResumoForm from '../b_forms/SessionForm';
+import ResumoForm from '../b_forms/Resumo';
 import logo from '../../img/logop.png'
 import { Link } from 'react-router-dom';
 import {TiArrowBackOutline} from 'react-icons/ti'
