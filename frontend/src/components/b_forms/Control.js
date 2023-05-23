@@ -149,6 +149,7 @@ function Control({ iduser, idrecord }) {
           value={project.sessao || ''}
           name='sessao'
           handleOnChange={handleChange}
+          
         />
         <InputDate
           title="Data"
@@ -171,6 +172,7 @@ function Control({ iduser, idrecord }) {
           name="valor"
           value={project.valor || ''}
           handleOnChange={handleChange}
+          required
         />
 
         <Button

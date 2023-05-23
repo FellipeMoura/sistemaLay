@@ -1,44 +1,39 @@
-.tableContainer{
+.ulContainer{
     background-color: #f7f7f7;
     position: relative; 
     padding: 0;
-    height: 20px;
-    max-height: 73vh;
-    
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+    width: 95%;
+    margin: auto;
 }
-.tableContainer th{
+.ulContainer li{
     padding-left: 5px;
     background-color: #c23939;
     background-color: #fbfbfb;
-    height: 5vh;
     position: sticky;
-    top: -1px;
-    font-weight: normal;
-    width: 100%;
-    
+    font-weight: normal;  
+    list-style-type: none;
 
 }
-.tbody td{
-    padding-left: 5px;
-    width: 100vh;
+
+.ulItem{
+    height: 100%;
+    max-height: 60vh;
+    overflow: auto;
 }
 
-.tableContainer td:hover{
+.ulItem li:hover{
     transition:0.4s;
     background-color: #b4b4b4;
     cursor: pointer;
 }
 
-
-tr:nth-child(even) {
+li:nth-child(even) {
     background: #ffffff;
 }
-tr:nth-child(odd) {
+li:nth-child(odd) {
     background: #f0f0f0;
 }
 
-.space{
-   color: #fff;
-}
 
 

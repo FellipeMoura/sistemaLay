@@ -6,12 +6,13 @@ function ListItem({users, search}) {
     //const [id, setId] = useState('');
     
 
-    document.querySelectorAll("#idUser").forEach( function(tr) {
+    document.querySelectorAll("#idUser").forEach( function(li) {
     
-        tr.addEventListener("click", function(event) {
-        const el = event.target;
-        console.log(el)
-       window.location.replace(`/prontuario/${el.id}/${el.className}/2`)
+        li.addEventListener("click", function(event) {
+        const el = event.target
+        const key = event.target.value
+        console.log(key)
+        window.location.replace(`/prontuario/${key}/${el.className}/2`)
 
         });
     
@@ -22,19 +23,16 @@ function ListItem({users, search}) {
         
           
     search.length > 1 ? 
-    <div className={styles.tableContainer}> 
-        <span className={styles.space}>.</span>
-        <table >
-            <tbody className={styles.tbody}>
+    <div className={styles.ulContainer}> 
+  
+
+            <ul className={styles.ulItem}>
                 {users.map(user => {
                     return (
-                        <tr id="idUser" key={user.iduser}>
-                        <td id={user.iduser} className={user.id}>{user.name || '-'}</td>
-                        </tr>
+                        <li id="idUser"  value={user.iduser} key={user.iduser} className={user.id}>{user.name|| '?'}</li>
                     )
                 })}
-            </tbody>
-        </table>  
+            </ul>
     </div>
     : '' 
           
