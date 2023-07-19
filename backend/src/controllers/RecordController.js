@@ -11,6 +11,7 @@ module.exports = {
             json.push({
                 id: record[i].id,
                 iduser:record[i].iduser,
+                num:record[i].num,
                 name:record[i].name,
                 inicio:record[i].inicio,
                 att:record[i].att,    
@@ -66,6 +67,7 @@ module.exports = {
 
         let record ={    
             iduser:req.body.iduser,
+            num:req.body.num,
             inicio:req.body.inicio,
             att:req.body.att,    
             aa:req.body.aa,
@@ -96,11 +98,12 @@ module.exports = {
             ca:req.body.ca,
             obs:req.body.obs
         }
-        console.log(record)
+       // console.log(record)
         let RecordID = await RecordService.insert(record);
         json.result ={
             id: RecordID, 
             iduser: record.iduser,
+            num: record.num,
             inicio: record.inicio,
             att: record.att,
             aa: record.aa,
@@ -142,6 +145,7 @@ module.exports = {
         let id = req.params.id
 
         let record ={   
+            num:req.body.num, 
             inicio:req.body.inicio,
             att:req.body.att,    
             aa:req.body.aa,
@@ -174,7 +178,8 @@ module.exports = {
         }
         await RecordService.alterar(id, record);
         json.result ={
-            id, 
+            id,
+            num:record.num, 
             inicio:record.inicio,
             att:record.att,    
             aa:record.aa,
@@ -206,7 +211,7 @@ module.exports = {
             obs:record.obs
             
         };
-        console.log(json)
+     //   console.log(json)
         res.json(json)
     },
     excluir: async(req,res) =>{

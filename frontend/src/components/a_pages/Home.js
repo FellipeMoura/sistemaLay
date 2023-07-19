@@ -1,15 +1,15 @@
 import styles from './Home.module.css'
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState} from 'react';
 import RBar from '../c_layouts/RBar';
 import { LogoutButton } from '../d_inputs/LogoutButton';
+import {MdOutlineAttachMoney} from 'react-icons/md'
 
 
-
-function Home(login){
+function Home(){
     const [users, setUsers] = useState([]);
     
     useEffect(() => {           
-            fetch(`${process.env.REACT_APP_BACKEND}records`,{
+            fetch(`${process.env.REACT_APP_BACKEND}/records`,{
             method: "GET",
             heders:{
                 'Content-type': 'application/json',
@@ -17,7 +17,7 @@ function Home(login){
             })
             .then((resp) => resp.json())
             .then((resp2) => {
-                console.log(resp2)
+                //console.log(resp2)
                 setUsers(resp2)
             })            
             .catch(err => console.log(err))
@@ -32,7 +32,10 @@ function Home(login){
             </div>
             
             <RBar setUsers={setUsers} users={users}/>
-           
+           <button className={styles.hlancamentos} onClick={()=>window.location.replace('/control')}>
+            Lançamentos <MdOutlineAttachMoney/>
+            
+           </button>
         </div>
 
        

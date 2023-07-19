@@ -1,6 +1,5 @@
 import React from 'react';
 import './Geral.css'
-import {Button} from '../d_inputs/Input';
 import Info from '../c_layouts/Info';
 
  
@@ -12,7 +11,7 @@ function Geral({project,setStep}) {
 
    const left =(
     <div >
-    <label>Prontuário nº:<label className="value"> {project.id}</label></label>
+    <label>Prontuário nº:<label className="value"> {project.num}</label></label>
 
         <label>Data de início:<label className="value"> {project.inicio?project.inicio.split('-').reverse().join('/'):''}</label></label>
         
@@ -61,7 +60,7 @@ function Geral({project,setStep}) {
             if(project[pos] > 0 ){
             
             return (
-                <label className="value">, {bk} </label>
+                <label key={bk} className="value">, {bk} </label>
                 )
         }
             

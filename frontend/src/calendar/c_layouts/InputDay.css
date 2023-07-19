@@ -1,0 +1,270 @@
+.form{
+    background-color:#cfcfcf ;   
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    min-height: 100%;
+    margin: 0;
+    padding: 0 20px;
+    min-width: 60em;
+    max-width: 100%;
+    border-radius: 10px;
+    border: 1px solid rgb(212, 212, 212);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+}
+
+.inputForm p{
+    margin: 10px 0;
+}
+
+.inputForm label{
+    font-size: 1.2em;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+}
+.form div{
+    margin: 1px;
+}
+.form h1{
+    color: #5d5d5d;
+    padding-top: 2vh;
+    text-align: center;
+    width: 100%;
+    font-weight: normal;
+}
+
+.steps{
+    width: 100%;
+    padding:5px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.step{
+    margin: 2px;
+    padding: 5px;
+    width: 30em;
+}
+
+.step > * > input  {
+    margin-bottom: 15px;
+}
+.step > * > input[type=date]  {
+    margin-bottom: 15px;
+    width: 23vh;
+}
+
+
+
+.step radio {
+    margin-bottom: 10px;
+}
+.labelN {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.labelN p{
+    
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.labelN svg{
+    fill: #0e7821;
+    
+}
+.labelN div{
+    border: 2px solid #8b8b8b;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    height: 25px;
+    width: 25px;
+    padding:2px;
+    background-color: #f1f1f1;
+}
+.labelName button{
+
+    background-color: #40474e;
+    color:#fff;
+    padding: 5px;
+    text-decoration: none;
+    transition: .5s;
+    cursor: pointer;
+    border: none;
+    margin:0 1vh;
+}
+
+.btnC{
+    background-color: #0e7821;
+}
+.btnB{
+    background-color:#1a1b1c;
+}
+.btnE{
+    background-color: #002887;
+}
+.btnD{
+    background-color: #902323;
+}
+
+.step svg {
+    margin: auto;
+    cursor:pointer;
+    transition:0.5s;
+    font-size:1.5rem;
+    border: solid black 1px;
+    fill: #f1f1f1;
+    
+}
+
+
+
+.score1{
+    width: 70vh;
+}
+
+.radioContainer {
+    display: flex;
+    flex-direction: column;
+    margin: 0 8px;
+    text-align: center;
+    position: relative;
+
+}
+
+.radioContainer input {
+    opacity: 0;
+    justify-content: center;
+
+}
+
+.radioContainer p{
+    font-style: italic;
+    font-weight: 300;
+    font-size: 0.7rem;
+    margin-top:0.4rem;
+}
+
+.inline2{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.thproc th{
+    background-color: #515253;
+    color: #f1f1f1;
+    padding: 0 10px;
+}
+
+.tdproc td{
+    text-align: center;
+    background-color: antiquewhite;
+    max-width: 400px;
+    padding: 0 5px;
+}
+
+.tableproc tr{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+    height: 30px;
+    
+}
+
+
+.nomeproc:hover{
+    cursor: pointer;
+    opacity: 0.5;
+    transition: 0.3s;
+}
+
+/*
+
+
+
+
+
+
+
+
+
+.Bform1{
+    display: flex;
+    flex-direction: row;
+}
+.Bform1 > * > input{
+    margin: 10px 10px;
+    width: 80vh;
+}
+
+.radiosContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.radiosContainer > *{
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    background-color: #f1f1f1;
+
+}
+
+textarea {
+      
+    height: 120px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+}
+
+.radiosContainer input{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+}
+
+.formControl{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+.formControl label{
+    margin-bottom: .6em;
+    font-weight: bold;
+}
+
+
+.step input:checked ~ svg{
+    fill:#c23939;
+}
+.radiosContainer input{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    color: #c23939;
+    font-size: 0.9rem;
+}
+
+.form input,
+textarea {
+  
+    padding: .6rem;
+    border: none;
+    border-radius: 5px;
+    
+}
+*/

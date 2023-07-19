@@ -14,15 +14,15 @@ function AuthProvider({ children }) {
 
         if(token){
             api.defaults.headers.Authorization = `Bearer ${(token)}`
-            console.log((token))
-            setVerif(true)
+         //   console.log((token))
+            setVerif(token)
         }
 
         setLoading(false)
 
     }, [])
 
-    async function handleLogin(){
+    async function handleLogin(x){
 
         
         const { data: {token} } = await api.post(`verif`)
@@ -30,7 +30,7 @@ function AuthProvider({ children }) {
         localStorage.setItem('token', JSON.stringify(token))        
         setVerif(true)
         //history.push('/')
-        window.location.replace('/')       
+        x==0?window.location.replace('/') : window.location.replace('/s')     
         
 
     }

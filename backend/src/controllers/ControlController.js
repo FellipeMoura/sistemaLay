@@ -19,6 +19,24 @@ module.exports = {
         }
         res.json(json)
     },
+    buscarTudo: async(req,res)=> {
+        let json = []
+        
+        let control = await ControlService.buscarTudo()
+
+        for(let i in control){
+            json.push({
+                id: control[i].id,
+                iduser: control[i].iduser,
+                sessao: control[i].sessao,
+                data: control[i].data,
+                valor: control[i].valor,
+                hora: control[i].hora,
+                confirm: control[i].confirm
+            })
+        }
+        res.json(json)
+    },
     inserir: async(req,res)=> {
         let json = {error:'',result:{}}
         

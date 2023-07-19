@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Button, TextArea, InputDate, InputText } from '../d_inputs/Input'
 import "./Resumo.css"
-import { MdOutlineDelete } from 'react-icons/md'
 import FormSessions from '../c_layouts/FormSessions';
+import InfoCard from '../c_layouts/ResumoCard';
 
 
 function ResumoForm({ idrecord, iduser }) {
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_BACKEND}summarys/${iduser}`, {
+        fetch(`${process.env.REACT_APP_BACKEND}/summarys/${iduser}`, {
             method: "GET",
             heders: {
                 'Content-type': 'application/json',
@@ -21,7 +21,7 @@ function ResumoForm({ idrecord, iduser }) {
                 //console.log(resp2)
             })
             .catch(err => console.log(err))
-    }, [])
+    }, [iduser])
 
     var data = new Date();
     var dia = String(data.getDate()).padStart(2, '0');
@@ -34,18 +34,15 @@ function ResumoForm({ idrecord, iduser }) {
         data: dataAtual,
         hora: '',
         iduser: iduser,
-        queixa: '',
         resumo: '',
         sessao: 0
     })
-    const [search, setSearch] = useState('');
-    //const [userFilter, setUserFilter] = useState([])
 
 
 
     function createSummary(cadastro) {
 
-        fetch(`${process.env.REACT_APP_BACKEND}summary`, {
+        fetch(`${process.env.REACT_APP_BACKEND}/summary`, {
             method: "POST",
             headers: {
                 'Content-type': 'application/json',
@@ -60,6 +57,27 @@ function ResumoForm({ idrecord, iduser }) {
             .catch(err => console.log(err))
     }
 
+    function editSession(id, cadastro) {
+        let project = cadastro
+        if(cadastro.data){ project.data =cadastro.data.substr(0, 10)}   
+        console.log(project)
+        fetch(`${process.env.REACT_APP_BACKEND}/update5/${id}`,{
+            method: "PUT",
+            headers: {
+              'Content-type': 'application/json',
+            },
+            body: JSON.stringify(project),
+        })
+          .then((resp) => resp.json()).then((data) => {
+            //console.log(data);
+              window.alert("Cadastrado alterado!")
+             window.location.replace(`/prontuario/${iduser}/${idrecord}/5`)
+            // history.push(`/prontuario/${id}/${idrecord}/1`)
+            //redirect
+          })
+          .catch(err => console.log(err))
+        }
+
     function deleteSession(id) {
 
         var resp = window.confirm("Confirma a exclusão deste registro?");
@@ -67,7 +85,7 @@ function ResumoForm({ idrecord, iduser }) {
 
 
 
-            fetch(`${process.env.REACT_APP_BACKEND}delete4/${id}`, {
+            fetch(`${process.env.REACT_APP_BACKEND}/delete4/${id}`, {
                 method: "DELETE",
                 headers: {
                     'Content-type': 'application/json',
@@ -121,19 +139,13 @@ function ResumoForm({ idrecord, iduser }) {
 
     const body = (
         <div>
+            
             <TextArea
-                height='30vh'
-                name='queixa'
-                value={project.queixa || ''}
-                handleOnChange={handleChange}
-                title='Queixa'
-            />
-            <TextArea
-                height='20vh'
+                height='50vh'
                 name='resumo'
                 value={project.resumo || ''}
                 handleOnChange={handleChange}
-                title='Resumo de sessão'
+                title='Resumo'
             />
         </div>
 
@@ -148,33 +160,15 @@ function ResumoForm({ idrecord, iduser }) {
                 body={body}
             />
 
-            <div className="sessoes">
-                {sessions.map(session => {
-                    let data
-                    if (session.data) { data = session.data.substr(0, 10).split('-').reverse().join('/'); }
-
-                    return (
-                        <div className='session'>
-                            <div className='sHeader'>
-                                <label>Data: <label className="value"> {data}</label></label>
-                                <label>Sessão: <label className="value"> {session.sessao}</label></label>
-                                <button
-                                    type='button'
-                                    id={session.id}
-                                    onClick={(e) => deleteSession(session.id)}
-
-                                >
-                                    <MdOutlineDelete />
-                                </button>
-                            </div>
-                            <label>Queixa: <label className="value"> {session.queixa}</label></label>
-                            <label>Resumo: <label className="value"> {session.resumo}</label></label>
-                        </div>
-                    )
-                })}
+        
+                <InfoCard
+                sessions={sessions}
+                edit={editSession}
+                    del={deleteSession}
+                />
 
 
-            </div>
+        
 
         </div>
     );

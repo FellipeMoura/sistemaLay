@@ -1,0 +1,130 @@
+#dayPage {
+  width: 100%;
+  overflow-x: hidden;
+  
+  
+  //background-color: blueviolet;
+
+
+  .headerPage {
+    height: 50px;
+    width: 100%;
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 2em;
+    color: #d0d9da;
+    background-color: #1e4794;
+    font-weight: 550;
+  }
+
+  .headerPage svg{
+    fill: #f1f1f1;
+  }
+
+
+  .data button {
+    border: none;
+    font-size: 1em;
+    padding: 5px;
+    cursor: pointer;
+    background-color: #7a424200;
+    color: #f1f1f1;
+  }
+
+  .content {
+    //margin-left: -3px;
+    display: flex;
+    width: 100%;
+    
+
+     background-color: #00a0e427;
+  }
+
+}
+
+
+#dayCard {
+
+  
+  width: 100%;
+  height: 100%;
+
+
+
+
+
+  .inlineHours {
+
+    display: flex;
+    flex-direction: row;
+
+    .horas {
+      width: 4vw;
+      margin-top: 24px;
+      margin-right: 1px;
+      display: inline-block;
+      height: 100%;
+      transition: all ease 0.2s;
+      font-size: 1em;
+
+
+    }
+
+    .horas>div {
+
+      background-image: linear-gradient(#e6e6e6, #d1e2e2);
+      padding: 5px;
+      margin-bottom: 1px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+    }
+
+
+  }
+
+  .atendList {
+
+    display: flex;
+    display: inline-block;
+   
+    height: 100%;
+  
+
+    .atendente {
+      display: flex;
+      
+      .atendButton {
+        border: none;
+        font-style: italic;
+        margin-left: 2px;
+        font-size: 1em;
+
+      }
+      .atendButton:hover{
+        cursor: pointer;
+        opacity: 0.9;
+        background-color: #d1e2e2;
+        transition: 0.3s;
+
+      }
+
+
+    }
+
+    .atendente button {
+      width: 100%;
+      background-color:#c3dfeb00;
+      text-align: center;
+      font-style: italic;
+
+
+
+    }
+
+  }
+
+
+}

@@ -96,7 +96,7 @@ export function Checkbox({ text, name, updateField, values, item }) {
                     type="checkbox"
                     value={dados}
                     name={name}
-                    checked={item === '1'}
+                    checked={item === 1}
                     onChange={(e) => updateField2(e, name, e.target.value)}
                 />
                 <GiCheckMark />
@@ -114,12 +114,13 @@ export const Radio = ({ handleOnChange, title, name, data, values }) => {
                 return (
                     <label className="radioContainer">
                         <input
+                            key={i}
                             type="radio"
                             values={i}
                             value={i}
                             name={name}
                             required
-                            checked={data == i}
+                            checked={data === i}
                             onChange={handleOnChange}
                         />
                         <GiCheckMark />
@@ -133,12 +134,12 @@ export const Radio = ({ handleOnChange, title, name, data, values }) => {
 }
 
 
-export function Button({ className, click, value, color }) {
+export function Button({ className, click, value, color, width }) {
     return (
         <div className='botao'>
 
             <button
-                style={{ backgroundColor: `${color}` }}
+                style={{ backgroundColor: `${color}`, width: width? width : '' }}
                 type='button'
                 className={className}
                 onClick={click}

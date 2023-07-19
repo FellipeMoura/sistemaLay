@@ -1,28 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import {Button, InputMasks, InputDate, InputText, TextArea} from '../d_inputs/Input'
 import "./Evo.css"
-import {MdOutlineDelete} from 'react-icons/md'
+
 import FormSessions from '../c_layouts/FormSessions';
+import InfoCard from '../c_layouts/EvoCard';
 
  
 function Evo({idrecord, iduser}) {
-
-    useEffect(() => {           
-        fetch(`${process.env.REACT_APP_BACKEND}sessions/${idrecord}`,{
-        method: "GET",
-        heders:{
-            'Content-type': 'application/json',
-        },
-        })
-        .then((resp) =>resp.json())
-        .then((resp2) => {
-            setSessions(resp2)
-        }).then(() => {
-            project.session = sessions.length+1
-        })             
-        .catch(err => console.log(err))
-    }, [])
-   
     var data = new Date();
     var dia = String(data.getDate()).padStart(2, '0');
     var mes = String(data.getMonth() + 1).padStart(2, '0');
@@ -34,8 +18,24 @@ function Evo({idrecord, iduser}) {
         data: dataAtual,
         hora: '',
         idrecord: idrecord,
-        session: 0                                   
+        session: ''                                   
             })
+
+    useEffect(() => {           
+        fetch(`${process.env.REACT_APP_BACKEND}/sessions/${idrecord}`,{
+        method: "GET",
+        heders:{
+            'Content-type': 'application/json',
+        },
+        })
+        .then((resp) =>resp.json())
+        .then((resp2) => {
+            setSessions(resp2)
+        })             
+        .catch(err => console.log(err))
+    }, [idrecord, project])
+   
+   
     
     
 
@@ -56,6 +56,28 @@ function createSession(cadastro) {
       .catch(err => console.log(err))
     }
 
+    function editSession(id, cadastro) {
+        let project = cadastro
+        if(cadastro.data){ project.data =cadastro.data.substr(0, 10)}   
+        console.log(project)
+        fetch(`${process.env.REACT_APP_BACKEND}/update4/${id}`,{
+            method: "PUT",
+            headers: {
+              'Content-type': 'application/json',
+            },
+            body: JSON.stringify(project),
+        })
+          .then((resp) => resp.json()).then((data) => {
+            //console.log(data);
+              window.alert("Cadastrado alterado!")
+             window.location.replace(`/prontuario/${iduser}/${idrecord}/2`)
+            // history.push(`/prontuario/${id}/${idrecord}/1`)
+            //redirect
+          })
+          .catch(err => console.log(err))
+        }
+
+
     function deleteSession(id) {
 
         var resp= window.confirm("Confirma a exclusão deste registro?");
@@ -63,7 +85,7 @@ function createSession(cadastro) {
         
    
       
-        fetch(`${process.env.REACT_APP_BACKEND}delete2/${id}`,{method: "DELETE", headers: {'Content-type': 'application/json',},})
+        fetch(`${process.env.REACT_APP_BACKEND}/delete2/${id}`,{method: "DELETE", headers: {'Content-type': 'application/json',},})
           .then((resp) => resp.json()).then((data) => {
             //console.log(data);
             window.location.replace(`/prontuario/${iduser}/${idrecord}/2`) 
@@ -73,8 +95,6 @@ function createSession(cadastro) {
           .catch(err => console.log(err))
         }
     }
-    
-
     
     function handleChange(e) {
         setProject({...project, [e.target.name]: e.target.value })
@@ -133,6 +153,7 @@ function createSession(cadastro) {
                         title="Evolução do caso"
                     />
                     <TextArea
+                        placeholder='Escuta clínica'
                         name='proc'
                         value={project.proc || ''}
                         handleOnChange={handleChange}
@@ -152,36 +173,11 @@ function createSession(cadastro) {
             />
 
 
-            <div className="sessoes">
-            {sessions.map(session => {
-                let data
-                if(session.data){ data = session.data.substr(0, 10).split('-').reverse().join('/');}
-                    
-                    return (
-                        <div className='session'>
-                        <div className='sHeader'>
-                                <label>Sessão: <label className="value"> {session.session}</label></label>
-                                <label>Data: <label className="value"> {data}</label></label>
-                                <label>Horario: <label className="value"> {session.hora}</label></label>                        
-                           
-                            <button
-                                type='button'
-                                id={session.id}
-                                onClick={(e) => deleteSession(session.id)}
-
-                            >
-                                <MdOutlineDelete/>
-                            </button>
-                        </div>
-                        <label>Demanda trabalhada: <label className="value"> {session.demanda}</label></label>
-                        <label>Evolução do caso: <label className="value"> {session.evolucao}</label></label>
-                        <label>Procedimentos adotados: <label className="value"> {session.proc}</label></label>
-                        </div>
-                    )
-                })}
-            
-            
-            </div>
+            <InfoCard
+                sessions={sessions}
+                del={deleteSession}
+                edit={editSession}
+            />
 
         </div>
     );

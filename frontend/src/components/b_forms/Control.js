@@ -30,7 +30,7 @@ function Control({ iduser, idrecord }) {
   const [sessions, setSessions] = useState([])
   useEffect(() => {
 
-    fetch(`${process.env.REACT_APP_BACKEND}control/${iduser}`, {
+    fetch(`${process.env.REACT_APP_BACKEND}/control/${iduser}`, {
       method: "GET",
       heders: {
         'Content-type': 'application/json',
@@ -41,17 +41,15 @@ function Control({ iduser, idrecord }) {
 
         setSessions(resp2)
         //console.log(resp2)
-      }).then(() => {
-        project.session = sessions.length+1
-    }) 
+      }) 
       .catch(err => console.log(err))
-  }, [])
+  }, [iduser, project])
 
   //console.log(sessions)
 
   function createControl(cadastro) {
 
-    fetch(`${process.env.REACT_APP_BACKEND}control`, {
+    fetch(`${process.env.REACT_APP_BACKEND}/control`, {
       method: "POST",
       headers: {
         'Content-type': 'application/json',
@@ -73,7 +71,7 @@ function Control({ iduser, idrecord }) {
 
 
 
-      fetch(`${process.env.REACT_APP_BACKEND}delete3/${id}`, {
+      fetch(`${process.env.REACT_APP_BACKEND}/delete3/${id}`, {
         method: "DELETE",
         headers: {
           'Content-type': 'application/json',
@@ -96,7 +94,7 @@ function Control({ iduser, idrecord }) {
 
 
 
-      fetch(`${process.env.REACT_APP_BACKEND}confirm/${id}`, {
+      fetch(`${process.env.REACT_APP_BACKEND}/confirm/${id}`, {
         method: "PUT",
         headers: {
           'Content-type': 'application/json',

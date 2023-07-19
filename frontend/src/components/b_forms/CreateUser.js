@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import { Select, InputText, InputDate, InputMasks, Button, Radio } from '../d_inputs/Input'
+import { Select, InputText, InputDate, InputMasks, Button} from '../d_inputs/Input'
 
 import styles from './UserForm.module.css'
 
 
-function CreateForm({ createPost, createRecord, projectData }) {
+function CreateForm({ handleCloseModal }) {
 
-    const [project, setProject] = useState(projectData || {})
+    const [project, setProject] = useState( {})
     const options = [
         {id:'Masculino', name: 'Masculino'},
         {id:'Nao informado', name: 'Não informado'}    
@@ -20,7 +20,7 @@ function CreateForm({ createPost, createRecord, projectData }) {
     function createPost(cadastro) {
         cadastro.sexo ? console.log('ok'): cadastro.sexo='Feminino' 
 
-        fetch(`${process.env.REACT_APP_BACKEND}user`, {
+        fetch(`${process.env.REACT_APP_BACKEND}/user`, {
             method: "POST",
             headers: {
                 'Content-type': 'application/json',
@@ -29,8 +29,9 @@ function CreateForm({ createPost, createRecord, projectData }) {
         })
             .then((resp) => resp.json()).then((data) => {
                 createRecord(data.result.id)
-                window.alert(`Usuário Cadastrado!`)
-                window.location.replace("/")
+         
+                console.log(data.result)
+                //window.location.replace("/")
 
             })
             .catch(err => console.log(err))
@@ -54,7 +55,7 @@ function CreateForm({ createPost, createRecord, projectData }) {
         //console.log(formTemplate);
 
 
-        fetch(`${process.env.REACT_APP_BACKEND}record`, {
+        fetch(`${process.env.REACT_APP_BACKEND}/record`, {
             method: "POST",
             headers: {
                 'Content-type': 'application/json',
@@ -63,7 +64,8 @@ function CreateForm({ createPost, createRecord, projectData }) {
         })
             .then((resp) => resp.json()).then((data) => {
                 console.log(data);
-                //window.location.replace("/prontuarios")
+                window.alert(`Usuário Cadastrado!`)
+                window.location.replace("/")
 
                 //redirect
             })
@@ -72,7 +74,7 @@ function CreateForm({ createPost, createRecord, projectData }) {
 
     function handleChange(e) {
         setProject({ ...project, [e.target.name]: e.target.value })
-        console.log(project)
+        //console.log(project)
 
     }
 
@@ -148,12 +150,20 @@ function CreateForm({ createPost, createRecord, projectData }) {
                         placeholder="Insira o telefone do paciente..."
                         handleOnChange={handleChange}
                     />
+                    <InputText
+                        flex='column'
+                        width='25em'
+                        title="Contato de Emergência (Nome)"
+                        name="contato"
+                        placeholder="Insira o contato de emergência..."
+                        handleOnChange={handleChange}
+                    />
                     <InputMasks
                         flex='column'
                         mask='2'
-                        title="Nº de Emergencia"
+                        title="Contato de Emergência (Telefone)"
                         name="etel"
-                        placeholder="Insira um telefone para emergências..."
+                        placeholder="Telefone de emergência..."
                         handleOnChange={handleChange}
                     />
                     <InputText
@@ -187,7 +197,7 @@ function CreateForm({ createPost, createRecord, projectData }) {
                 <Button
                     color="#8f2828"
                     value='Voltar'
-                    click={() => window.location.replace('/')}
+                    click={() => handleCloseModal()}
                 />
                 <Button
                     color="#447461"

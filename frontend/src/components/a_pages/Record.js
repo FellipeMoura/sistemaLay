@@ -11,6 +11,7 @@ import logo from '../../img/logop.png'
 import { Link } from 'react-router-dom';
 import {TiArrowBackOutline} from 'react-icons/ti'
 import { LogoutButton } from '../d_inputs/LogoutButton';
+import SupervisaoForm from '../b_forms/Supervisao';
  
 
 
@@ -25,7 +26,7 @@ function Record() {
 
     useEffect(() => {
         
-        fetch(`${process.env.REACT_APP_BACKEND}record/${idrecord}`,{
+        fetch(`${process.env.REACT_APP_BACKEND}/record/${idrecord}`,{
         method: "GET",
         heders:{
             'Content-type': 'application/json',
@@ -33,7 +34,7 @@ function Record() {
         })
         .then((resp) => resp.json())
         .then((resp2) => {
-            console.log(resp2.result)
+            //console.log(resp2.result)
             resp2.result.inicio = resp2.result.inicio.substr(0, 10)
             setProject(resp2.result)
         })            
@@ -41,18 +42,20 @@ function Record() {
 
         
         
-    }, [])
+    }, [idrecord])
 
   
    
     //console.log(project)
    function thisPage(){
     switch(page){
-        case '0': return(['on','off','off','off','off'])
-        case '1': return(['off','on','off','off','off'])
-        case '2': return(['off','off','on','off','off'])
-        case '3': return(['off','off','off','on','off'])
-        case '5': return(['off','off','off','off','on'])
+        case '0': return(['on','off','off','off','off','off'])
+        case '1': return(['off','on','off','off','off','off'])
+        case '2': return(['off','off','on','off','off','off'])
+        case '3': return(['off','off','off','on','off','off'])
+        case '5': return(['off','off','off','off','on','off'])
+        case '5': return(['off','off','off','off','on','off'])
+        case '6': return(['off','off','off','off','off','on'])
         default: return(['off','off','on','off','off'])
     }
    } 
@@ -60,19 +63,22 @@ function Record() {
     const [active, setActive] = useState(thisPage)
     function change(button){
         if(button === 0){
-            setActive(['on','off','off','off','off'])
+            setActive(['on','off','off','off','off','off'])
             setStep(button)
         }else if(button === 1){
-            setActive(['off','on','off','off','off'])
+            setActive(['off','on','off','off','off','off'])
             setStep(button)
         }else if(button === 2){
-            setActive(['off','off','on','off','off'])
+            setActive(['off','off','on','off','off','off'])
             setStep(button)
         }else if(button === 4){
-            setActive(['off','off','off','on','off'])
+            setActive(['off','off','off','on','off','off'])
             setStep(button)
         }else if(button === 5){
-            setActive(['off','off','off','off','on'])
+            setActive(['off','off','off','off','on','off'])
+            setStep(button)
+        }else if(button === 6){
+            setActive(['off','off','off','off','off','on'])
             setStep(button)
         }
     }
@@ -87,7 +93,8 @@ function Record() {
         <Evo iduser={iduser} idrecord={idrecord}/>, 
         <RecordForm project={project} iduser={iduser} idrecord={idrecord}/>,
         <EditUser id={iduser} idrecord={idrecord}/>,
-        <ResumoForm iduser={iduser} idrecord={idrecord}/>
+        <ResumoForm iduser={iduser} idrecord={idrecord}/>,
+        <SupervisaoForm iduser={iduser} idrecord={idrecord}/>
     ]
 
     /*function getAge(dateString) {
@@ -125,6 +132,7 @@ function Record() {
                         <div className={`${active[1]}`} onClick={()=> change(1)}>Controle</div>
                         <div className={`${active[2]}`} onClick={()=> change(2)}>Evolução</div>
                         <div className={`${active[4]}`} onClick={()=> change(5)}>Resumo</div>
+                        <div className={`${active[5]}`} onClick={()=> change(6)}>Supervisão</div>
                     </div>
 
                     </div>

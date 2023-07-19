@@ -12,17 +12,21 @@
 /*Forms*/
 .formContainer {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+ 
     height: 100%;
+
     margin: auto;
 }
 
-.formContainer form{
-    min-width: 35em;
-    margin: 0 auto;
-    height: 73vh;
-    display: flex;
-    flex-direction: column;
+.formContainer > div{
+
+    padding: 1em;
+}
+
+.formContainer > div{
+
+    padding: 1em;
 }
 
 .inputsContainer {
@@ -37,6 +41,7 @@
 }
 
 .formControl {
+   
     display: flex;
     flex-direction: column;
     gap: .6rem;
@@ -88,7 +93,21 @@ textarea {
     background-color: #cecaca;
 }
 
-.actions > h1{
-    text-align: center;
+.formContainer  h1{
+    font-weight: 500;
+    margin-bottom: 1em;
     width: 10em;
+}
+
+.cform{
+    background-color: #e0dff3;
+}
+
+.aform{
+    background-color: #d6ebf3;
+}
+
+.aform > div{
+    display: flex;
+    flex-direction: row;
 }

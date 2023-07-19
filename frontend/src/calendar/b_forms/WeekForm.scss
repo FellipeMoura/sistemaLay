@@ -1,0 +1,60 @@
+
+
+#monthCard {
+
+  margin: 10px;
+  width: 100%;
+  height: 100%;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+
+  .header {
+    text-align: center;
+    font-weight: bold;
+    color: #143296;
+  }
+
+  .inlineHours {
+    display: flex;
+    flex-direction: row;
+
+    .horas {
+      margin-top: 1.15em;
+      margin-right: 1px;
+      display: inline-block;
+      height: 100%;
+      transition: all ease 0.2s;
+      border-radius: 10px;
+      font-size: 1.5em;
+
+
+    }
+
+    .horas>div {
+      margin: 1px;
+      padding: 5px;
+      display: flex;
+      align-items: center;
+    }
+
+
+  }
+
+  .weekDaysWeek {
+    
+    border-bottom: 1px solid #ccc;
+    color: #4a4e5a;
+    height: 1.15em;
+    display: flex;
+    justify-content: center;
+
+
+
+  }
+
+  .weekDaysWeek span{
+    text-align: center;
+    margin: 1px;
+  }
+
+
+}

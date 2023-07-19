@@ -23,8 +23,8 @@ module.exports = {
     alterar: (id, summarys) => {
         return new Promise((aceito,rejeitado) =>{
             
-            db.query('UPDATE summarys SET iduser=?, sessao=?, valor=?, confirm=?, data=?, hora WHERE id = ?',
-            [summarys.iduser, summarys.sessao, summarys.valor, summarys.confirm, summarys.data, summarys.hora, id] ,
+            db.query('UPDATE summarys SET queixa=?, data=?, resumo=? WHERE id = ?',
+            [summarys.queixa, summarys.data, summarys.resumo, id] ,
             (error, results)=>{
                 if(error) { rejeitado(error); return; }                
                 aceito(results.insertId)

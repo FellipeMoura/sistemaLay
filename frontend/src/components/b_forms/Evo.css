@@ -24,17 +24,19 @@
 
 .sHeader button{
     border: 0;
+    margin-left: 7px;
     cursor: pointer;
 }
 
 .sHeader button > svg{
     font-size: 2em;
-    fill: #868686;
+ 
     transition: 0.2s;
 }
 
 .sHeader button > svg:hover{
-    fill: #a54242;
+    fill: #444d9e;
+
 }
 
 .session{

@@ -1,3 +1,6 @@
+.reviewForm{
+    background-color: #ede8f3;
+}
 .form-control.score-container2{
     display: flex;
     flex-wrap: wrap;
@@ -17,16 +20,19 @@
 
 .bformt{
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
 }
 .bformt input{
     margin: 1em 1em 0 0 ;
     flex-wrap: wrap;
+
 }
 
-.Bform1a label{
+.bformt label{
     flex-wrap: wrap;
-    flex-direction: column;
+    margin-left: 5em;
+
 }
 
 

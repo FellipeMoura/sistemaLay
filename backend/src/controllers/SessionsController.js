@@ -10,7 +10,7 @@ module.exports = {
             json.push({
                 id: sessions[i].id,
                 idrecord: sessions[i].idrecord,
-                iduser: sessions[i].iduser,
+                idsuser: sessions[i].iduser,
                 session: sessions[i].session,
                 demanda: sessions[i].demanda,
                 evolucao: sessions[i].evolucao,
@@ -52,6 +52,33 @@ module.exports = {
             
         };
         
+        res.json(json)
+    },
+    alterar: async(req,res)=> {
+        let json = {error:'',result:{}}
+        
+        let id = req.params.id
+
+        let session ={
+        session: req.body.session,
+        demanda: req.body.demanda,
+        evolucao: req.body.evolucao,
+        proc: req.body.proc,      
+        data: req.body.data,
+        hora: req.body.hora,
+        
+        }
+        await SessionsService.alterar(id, session);
+        json.result ={
+            id, 
+            session: session.session,
+            demanda: session.demanda,
+            evolucao: session.evolucao,
+            proc: session.proc,     
+            data: session.data,
+            hora: session.hora,
+        };
+        //console.log(json)
         res.json(json)
     },
     excluir: async(req,res) =>{

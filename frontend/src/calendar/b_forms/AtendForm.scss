@@ -1,0 +1,144 @@
+.atend {
+    padding: 0 10px;
+
+
+
+
+    .headerAtend {
+        display: flex;
+        justify-content: space-around;
+        padding: 2px 0;
+
+    }
+
+    .headerAtend button {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 70px;
+        cursor: pointer;
+        border-radius: 5px;
+
+    }
+
+    .headerAtend svg {
+        font-size: 15px;
+    }
+
+    .aHour {
+        display: flex;
+        flex-direction: column;
+        height: 50px;
+        border-bottom: 1px solid #bcaece;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+        margin: 2px;
+        width: 100px;
+
+    }
+
+    .aHour:hover {
+
+        cursor: pointer;
+    }
+
+    .bodyAtend {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        background-color: rgb(57, 82, 104);
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+
+        span {
+            color: aliceblue;
+
+        }
+
+        .atendHora {
+            margin-top: 30px;
+
+            .atendHoras {
+                margin: 0 5px;
+                width: 40px;
+                height: 30px;
+
+            }
+
+        }
+
+        .atendOpt {
+
+
+            .daysAtend {
+                display: inline-block;
+
+
+                transition: all ease 0.2s;
+                border-radius: 10px;
+
+                font-size: 1.5em;
+
+                .daysAtend>div>span {
+                    font-size: 20px;
+                }
+            }
+
+            .semAtend {
+
+                margin: 0 5px;
+                width: 40px;
+                height: 30px;
+                font-size: 20px;
+
+            }
+
+            .cardAtend {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 30px;
+                margin: 0 5px;
+                width: 40px;
+                height: 30px;
+                font-size: 20px;
+                background-color: aliceblue;
+                //border: 1px rgb(0, 0, 0) solid;
+
+            }
+        }
+    }
+
+
+
+
+}
+
+.inativas{
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    
+
+    
+
+   
+}
+.inativas div{
+    background-color: rgb(191, 239, 245);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+
+}
+
+.inativas span{
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    
+    
+    }
+.editA{
+    width: 80%;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

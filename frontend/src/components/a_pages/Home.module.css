@@ -2,8 +2,8 @@
 .container{
     position: relative;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    align-items:center;
     flex-direction: column;
     
 }
@@ -54,4 +54,26 @@ margin-bottom: 0.5em;
 
 .newprojectContainer p{
     color: #7b7b7b;
+}
+
+.hlancamentos{
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+    border: none;
+    font-size: 30px;
+    background-color: #572f2f;
+    color: aliceblue;
+    padding: 0 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.hlancamentos:hover{
+    opacity: 0.8;
+}
+
+.hlancamentos svg{
+    fill: aliceblue;
 }

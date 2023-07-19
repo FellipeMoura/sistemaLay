@@ -1,0 +1,39 @@
+
+  #monthCard {
+   
+    margin: 10px;
+    width: 100%;
+    height: 100%;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+
+  
+    .header {
+      text-align: center;
+      font-weight: bold;
+      color: #143296;
+    }
+  
+    .weekDays {
+      border-bottom: 1px solid #cccccc;
+      color: #143296;
+      .weekDay {
+        display: inline-block;
+        width: 14%;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.5em;
+        margin: 1px;
+      }
+    }
+  
+    .week {
+      margin: 2px;
+
+      .buttonMonth{
+        border: none;
+        font-size: 30px;
+        cursor: pointer;
+      }
+    }
+    
+  }

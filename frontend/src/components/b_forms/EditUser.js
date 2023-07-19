@@ -1,89 +1,89 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import styles from './UserForm.module.css'
-import {Select, InputMasks, Button, Radio, InputText, InputDate} from '../d_inputs/Input'
+import { Select, InputMasks, Button, Radio, InputText, InputDate } from '../d_inputs/Input'
 //import history from "../e_contexts/history"
 
 const options = [
-    {id:'Masculino', name: 'Masculino'},
-    {id:'Nao informado', name: 'Não informado'}    
+    { id: 'Masculino', name: 'Masculino' },
+    { id: 'Nao informado', name: 'Não informado' }
 ]
 const options2 = [
-    {id:'solteiro',name:'Solteira(o)'},
-    {id:'casado', name: 'Casada(o)'},
-    {id: 'divorciado', name:'Divorciada(o)'},
-    {id:'viuvo', name:'Viúva(o)'}
+    { id: 'solteiro', name: 'Solteira(o)' },
+    { id: 'casado', name: 'Casada(o)' },
+    { id: 'divorciado', name: 'Divorciada(o)' },
+    { id: 'viuvo', name: 'Viúva(o)' }
 ]
 
-function EditUser({id, idrecord}){
-    
+function EditUser({ id, idrecord }) {
+
 
     useEffect(() => {
-        
-        fetch(`${process.env.REACT_APP_BACKEND}user/${id}`,{
-        method: "GET",
-        heders:{
-            'Content-type': 'application/json',
-        },
-        })
-        .then((resp) => resp.json())
-        .then((resp2) => {
-        
-        setProject(resp2.result)
-        })            
-        .catch(err => console.log(err))
 
-        
-        
-    }, [])
+        fetch(`${process.env.REACT_APP_BACKEND}/user/${id}`, {
+            method: "GET",
+            heders: {
+                'Content-type': 'application/json',
+            },
+        })
+            .then((resp) => resp.json())
+            .then((resp2) => {
+
+                setProject(resp2.result)
+            })
+            .catch(err => console.log(err))
+
+
+
+    }, [id])
     //console.log(user)
     const [project, setProject] = useState({})
 
     function handleChange(e) {
-        setProject({...project, [e.target.name]: e.target.value })
+        setProject({ ...project, [e.target.name]: e.target.value })
         console.log(project)
     }
 
-    
+
     function editPost(id, cadastro) {
 
-        if(cadastro.nasc){ cadastro.nasc =cadastro.nasc.substr(0, 10)}   
-      
-        fetch(`${process.env.REACT_APP_BACKEND}update/${id}`,{
+        if (cadastro.nasc) { cadastro.nasc = cadastro.nasc.substr(0, 10) }
+
+        fetch(`${process.env.REACT_APP_BACKEND}/update/${id}`, {
             method: "PUT",
             headers: {
-              'Content-type': 'application/json',
+                'Content-type': 'application/json',
             },
             body: JSON.stringify(cadastro),
         })
-          .then((resp) => resp.json()).then((data) => {
-            //console.log(data);
-              window.alert("Cadastrado alterado!")
-             // window.location.replace(`/prontuario/${id}/${idrecord}/0`)
-            // history.push(`/prontuario/${id}/${idrecord}/1`)
-            //redirect
-          })
-          .catch(err => console.log(err))
-        }
-    
-        function deleteUser(id) {
-
-            var resp= window.confirm("Confirma a exclusão deste registro?");
-            if(resp){
-            
-       
-          
-            fetch(`${process.env.REACT_APP_BACKEND}delete/${id}`,{method: "DELETE", headers: {'Content-type': 'application/json',},})
-              .then(() => {
+            .then((resp) => resp.json()).then((data) => {
                 //console.log(data);
-                window.location.replace(`/`) 
-                
+                window.alert("Cadastrado alterado!")
+                // window.location.replace(`/prontuario/${id}/${idrecord}/0`)
+                // history.push(`/prontuario/${id}/${idrecord}/1`)
                 //redirect
-              })
-              .catch(err => console.log(err))
-            }
-        }
+            })
+            .catch(err => console.log(err))
+    }
 
-    return(
+    function deleteUser(id) {
+
+        var resp = window.confirm("Confirma a exclusão deste registro?");
+        if (resp) {
+
+
+
+            fetch(`${process.env.REACT_APP_BACKEND}/delete/${id}`, { method: "DELETE", headers: { 'Content-type': 'application/json', }, })
+                .then(() => {
+                    //console.log(data);
+                    window.location.replace(`/`)
+
+                    //redirect
+                })
+                .catch(err => console.log(err))
+        }
+    }
+
+    return (
         <form className={styles.form}>
             <div className={styles.steps}>
                 <div className={styles.step}>
@@ -111,30 +111,30 @@ function EditUser({id, idrecord}){
                         flex='column'
                         title="Data de nascimento"
                         name="nasc"
-                        value={project.nasc ? project.nasc.substr(0,10): ''}
+                        value={project.nasc ? project.nasc.substr(0, 10) : ''}
                         handleOnChange={handleChange}
                     />
-                     <div className={styles.inline2}>
-                    <Select
-                        flex='column'
-                        width='15em'
-                        options={options2}
-                        name='civil'
-                        value={project.civil}
-                        text= 'Estado Civil'
-                        handleOnChange={handleChange}
-                    />
+                    <div className={styles.inline2}>
+                        <Select
+                            flex='column'
+                            width='15em'
+                            options={options2}
+                            name='civil'
+                            value={project.civil}
+                            text='Estado Civil'
+                            handleOnChange={handleChange}
+                        />
 
-                    <InputText
-                        flex='column'
-                        width='4em'
-                        title="Filhos"
-                        name="filhos"
-                        value={project.filhos}
-                        placeholder="Não"
-                        handleOnChange={handleChange}
-                    />
-                   
+                        <InputText
+                            flex='column'
+                            width='4em'
+                            title="Filhos"
+                            name="filhos"
+                            value={project.filhos}
+                            placeholder="Não"
+                            handleOnChange={handleChange}
+                        />
+
                     </div>
 
                     <Select
@@ -144,7 +144,7 @@ function EditUser({id, idrecord}){
                         options={options}
                         name='sexo'
                         value={project.sexo}
-                        text= 'Sexo'
+                        text='Sexo'
                         handleOnChange={handleChange}
                     />
                 </div>
@@ -158,13 +158,22 @@ function EditUser({id, idrecord}){
                         placeholder="Insira o telefone do paciente..."
                         handleOnChange={handleChange}
                     />
+                    <InputText
+                        flex='column'
+                        width='25em'
+                        title="Contato de Emergência (Nome)"
+                        value={project.contato}
+                        name="contato"
+                        placeholder="Insira o contato de emergência..."
+                        handleOnChange={handleChange}
+                    />
                     <InputMasks
                         flex='column'
                         mask='2'
-                        title="Nº de Emergencia"
-                        name="etel"
+                        title="Contato de Emergência (Telefone)"
                         value={project.etel}
-                        placeholder="Insira um telefone para emergências..."
+                        name="etel"
+                        placeholder="Telefone de emergência..."
                         handleOnChange={handleChange}
                     />
                     <InputText
@@ -197,22 +206,22 @@ function EditUser({id, idrecord}){
                 </div>
             </div>
             <div className={styles.steps}>
-            
-            <Button
-            color= '#be0909be'
-            value='Excluir'
-            click={() => deleteUser(id)}
 
-            />
-            <Button
-            color= '#213e6d'
-            value='Alterar'
-            click={() => editPost(id, project)}
+                <Button
+                    color='#be0909be'
+                    value='Excluir'
+                    click={() => deleteUser(id)}
 
-            />
+                />
+                <Button
+                    color='#213e6d'
+                    value='Alterar'
+                    click={() => editPost(id, project)}
+
+                />
 
             </div>
 
         </form>
-        )
-}export default EditUser
+    )
+} export default EditUser

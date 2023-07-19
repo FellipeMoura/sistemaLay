@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, {useState, useMemo } from 'react';
 import ListItem from './ListItem'
 import styles from './SBar.module.css'
 import Modal from 'react-modal'
@@ -9,11 +9,10 @@ import {Button} from '../d_inputs/Input';
 
 
 
+
 function RBar(props) {
     const [search, setSearch] = useState('');
-    //const [recordsFilter, setRecordsFilter] = useState([])
-    const [userFilter, setUserFilter] = useState([])
-    
+        
     const[modalIsOpen, setIsOpen] =useState(false)
 
     function handleOpenModal(){
@@ -36,25 +35,10 @@ function RBar(props) {
         }
     }
     
-    //const [user, setUser] = useState({});
-
-
-
-
-  /*  function handleOnSubmit(event) {
-        event.preventDefault();
-        setSearch(event.target.value);
-        console.log(props.records.name)
-        const results = props.records.filter(record =>( record.name.toLowerCase().indexOf(search)) !== -1);
-        setRecordsFilter(results);
-    }*/
-
-    function handleOnSubmit(event) {
-        event.preventDefault();
-        setSearch(event.target.value);
-        const results = props.users.filter(user =>( user.name.toLowerCase().indexOf(search)) !== -1);
-        setUserFilter(results);
-    }
+    const results = useMemo(() =>{
+        const lowerBusca = search.toLowerCase()
+        return props.users.filter(user =>( user.name.toLowerCase().includes(lowerBusca.toLowerCase())));
+    },[search])
     return (
         <div className={styles.formContainer2}>
             <div className={styles.header}>
@@ -62,7 +46,7 @@ function RBar(props) {
                 <input
                     type="text"
                     placeholder="Pesquisar paciente..."
-                    onChange={handleOnSubmit}
+                    onChange={(e)=>setSearch(e.target.value)}
                 />
                 <Button
                 color = '#447461'
@@ -74,7 +58,7 @@ function RBar(props) {
                 
             <ListItem 
             className={styles.tab}
-            users={userFilter}
+            users={results}
             search={search}
             />
 

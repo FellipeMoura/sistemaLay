@@ -1,50 +1,52 @@
 import React from 'react'
 import styles from "../EditGeral.module.css"
-import { InputDate } from '../../d_inputs/Input'
+import { InputDate, TextArea, InputText } from '../../d_inputs/Input'
 
-var i = true
-
-const AForm = ({ data, updateField }) => {
-    
+const AForm = ({ data, handleChange }) => {
 
 
-  console.log(data.inicio)
     return (
-        <div>
+
+        <div className={styles.aform}>
+            <h1>Atendimento/Histórico:</h1>
+            <div>
+            <InputText
+            width='50px'
+                title="Prontuário nº"
+                name="num"
+                id='num'
+                value={data.num || ''}
+                handleOnChange={handleChange}
+            />
             <InputDate
                 title="Início"
                 name="inicio"
                 id='inicio'
                 value={data.inicio || ''}
-                handleOnChange={(e) => updateField("inicio", e.target.value)}
+                handleOnChange={handleChange}
             />
-            <div className={styles.formControl}>
-                <label htmlFor="aa">Queixa Principal:</label>
-                <textarea
-                    name="text"
-                    id="aa"
-                    value={data.aa || ''}
-                    onChange={(e) => updateField("aa", e.target.value)}
-                />
             </div>
-            <div className={styles.formControl}>
-                <label htmlFor="ab">Medicamentos Utilizados:</label>
-                <textarea
-                    name="text"
-                    id="ab"
-                    value={data.ab || ''}
-                    onChange={(e) => updateField("ab", e.target.value)}
-                />
-            </div>
-            <div className={styles.formControl}>
-                <label htmlFor="ac">Outro Tratamentos:</label>
-                <textarea
-                    name="text"
-                    id="ac"
-                    value={data.ac || ''}
-                    onChange={(e) => updateField("ac", e.target.value)}
-                />
-            </div>
+            <TextArea
+                name='aa'
+                value={data.aa || ''}
+                handleOnChange={handleChange}
+                title="Queixa Principal"
+            />
+            <TextArea
+                name='ab'
+                placeholder='Não utiliza'
+                value={data.ab || ''}
+                handleOnChange={handleChange}
+                title="Medicamentos Utilizados"
+            />
+            <TextArea
+                placeholder='Não realiza'
+                name='ac'
+                value={data.ac || ''}
+                handleOnChange={handleChange}
+                title="Outros Tratamentos"
+            />
+
         </div>
     )
 }

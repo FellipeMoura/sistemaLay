@@ -1,0 +1,120 @@
+.inputContainer{
+    display: flex;
+    margin-bottom: 1em;
+}
+
+.inputContainer label{
+    padding-right: 4px;
+    font-weight: bold;
+    
+}
+
+.inputContainer input, select {
+    padding: .6rem;
+    border: none;
+    border-radius: 3px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+    margin-bottom: .6em;
+    margin-right: .6em;
+}
+
+
+.radios{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.botao button{
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 1em;
+    border: none;
+    padding: 0 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.5em;
+    text-decoration: none;
+    transition: 0.2s;
+    border-radius: 20px;
+    color: #f1f1f1;
+    margin-left: 2px;
+    
+}    
+.botao button:hover{
+cursor: pointer;
+background-color: #cdcdcd; 
+}
+.form-control.score-container{
+    flex-direction: row;
+    gap: 2rem;
+    justify-content:left;
+    margin-top: 20px;
+    border: 0;
+    margin-left: -4px;    
+}
+
+.form-control{
+    flex-direction: row;
+    
+    
+}
+.score-container svg {
+    margin-left: 2rem;
+    cursor:pointer;
+    transition:0.5s;
+    font-size:3rem;
+}
+
+.score-container svg:hover{
+    fill:#5961f0;
+}
+
+
+
+
+
+
+.radioContainer input::placeholder{
+    color:#7b7b7b
+}
+
+.radioContainer svg:hover{
+    fill:#7f7f7f;
+}
+
+.radioContainer input:checked ~ svg{
+    fill:#c23939;
+}
+
+
+.logoutButton{
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 1em;
+    border: none;
+    padding: 0 1em;
+    height: 2.5em;
+    text-decoration: none;
+    transition: 0.2s;
+    margin-left: 2px;
+    cursor: pointer;
+    background-color:#7b7b7b00
+
+}
+
+.logoutButton span{
+    font-weight: 700;
+    font-size: 1.2em;
+    color: #7c1919;
+    display: flex;
+    align-items: center;
+}
+
+.selectInput{
+    font-size: 1em;
+}
+
+.taContainer textarea{
+    min-height: 6em;
+    width: 90%;
+}

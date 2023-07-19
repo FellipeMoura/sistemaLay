@@ -1,0 +1,148 @@
+.lastBalao{
+  display: none;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+  border: 2px solid #dddd;
+  background-color: #eeee;
+  width: 200px;
+  padding: 10px;
+  border-radius: 4px;
+  position: relative;
+  top: -150px;
+  right: 200%;
+}
+
+.firstBalao{
+  display: none;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+  border: 2px solid #dddd;
+  background-color: #eeee;
+  width: 200px;
+  padding: 10px;
+  border-radius: 4px;
+  position: relative;
+  top: -50px;
+  left: 110%;
+}
+
+.firstLastBalao{
+  display: none;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+  border: 2px solid #dddd;
+  background-color: #eeee;
+  width: 200px;
+  padding: 10px;
+  border-radius: 4px;
+  position: relative;
+  top: -50px;
+  right: 200%;
+}
+
+.balao{
+  display: none;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+  border: 2px solid #dddd;
+  background-color: #f1f1f1;
+  width: 200px;
+  padding: 10px;
+  border-radius: 4px;
+  position: relative;
+  top: -150px;
+  left: 110%;
+}
+
+
+
+
+
+.cards{
+ display: flex;
+ flex-direction: row; 
+  border-bottom: 1px solid #c3dfeb;
+ border-right: 1px solid #c3dfeb;
+
+
+.card{
+    //border-radius: 20px; 
+    display: flex;
+    flex-direction: column;
+    height: 60px;
+    //background-color: '';
+    //border: 1px solid #ecc9c9;
+    cursor: pointer;
+    
+  }
+
+.empCard{
+  //border-radius: 20px; 
+  display: flex;
+  flex-direction: column;
+  height: 60px;
+  background-color: '';
+  //border: 1px solid #ecc9c9;
+  cursor: pointer;
+  
+}
+
+  .fullBorder{
+    border-radius: 10px;
+  //  border-top: 1px solid #818181;
+   // border-right: 1px solid #818181;
+  }
+  .topBorder{
+    border-radius: 10px 10px 0 0;
+   // border: 1px solid #818181;
+ //   border-bottom: 1px solid #818181;
+  }
+  .bottomBorder{
+    border-radius: 0 0 10px 10px ;
+    //border-top: 1px solid #818181;
+  }
+
+  .indisp{
+   background-color: #acc4ce;
+    // border-radius: 10px;
+  //  border: 1px solid #818181;
+
+  }
+ 
+
+  .card:hover > p{
+   font-weight:bold;
+
+  }
+
+  .card:hover .balao{
+    display: block;
+    opacity: 1;
+   
+  }
+
+  .card:hover .lastBalao{
+    display: block;
+    opacity: 1;
+   
+  }
+
+  .card:hover .firstBalao{
+    display: block;
+    opacity: 1;
+   
+  }
+
+  .card:hover .firstLastBalao{
+    display: block;
+    opacity: 1;
+   
+  }
+
+  .card p{
+    //color: aliceblue;
+    font-weight: unset;
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+}
+

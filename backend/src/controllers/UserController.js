@@ -1,5 +1,5 @@
 const UserService = require('../services/UserService')
-
+const SupervisaoService = require('../services/SupervisaoService')
 module.exports = {
     buscarTodos: async(req,res)=> {
         let json = []
@@ -19,7 +19,8 @@ module.exports = {
                 nasc: users[i].nasc,
                 filhos: users[i].filhos,
                 civil: users[i].civil,
-                profissao: users[i].profissao
+                profissao: users[i].profissao,
+                contato: users[i].contato
 
             })
         }
@@ -53,7 +54,8 @@ module.exports = {
         nasc: req.body.nasc,
         filhos: req.body.filhos,
         civil: req.body.civil,
-        profissao: req.body.profissao
+        profissao: req.body.profissao,
+        contato: req.body.contato
         
         }
         console.log(user)
@@ -71,8 +73,15 @@ module.exports = {
             nasc: user.nasc,
             filhos: user.filhos,
             civil: user.civil,
-            profissao: user.profissao
+            profissao: user.profissao,
+            contato: user.contato
         };
+
+        supervisao = {
+            iduser: json.result.id,
+            conceito: 'vazio'
+        }
+        await SupervisaoService.insert(supervisao)
         
         res.json(json)
     },
@@ -92,7 +101,8 @@ module.exports = {
         nasc: req.body.nasc,
         filhos: req.body.filhos,
         civil: req.body.civil,
-        profissao: req.body.profissao
+        profissao: req.body.profissao,
+        contato: req.body.contato
         }
         await UserService.alterar(id, user);
         json.result ={
@@ -107,9 +117,10 @@ module.exports = {
             nasc: user.nasc,
             filhos: user.filhos,
             civil: user.civil,
-            profissao: user.profissao
+            profissao: user.profissao,
+            contato: user.contato
         };
-        
+        //console.log(json)
         res.json(json)
     },
     excluir: async(req,res) =>{

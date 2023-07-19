@@ -1,0 +1,47 @@
+.form-control.score-container{
+    flex-direction: row;
+    gap: 2rem;
+    justify-content:left;
+    margin-top: 20px;
+    border: 0;
+    margin-left: -4px;    
+}
+
+.form-control{
+    flex-direction: row;
+    
+    
+}
+.score-container svg {
+    margin-left: 2rem;
+    cursor:pointer;
+    transition:0.5s;
+    font-size:3rem;
+}
+
+.score-container svg:hover{
+    fill:#5961f0;
+}
+
+
+#logo-woman:checked ~ svg{
+    fill:#f053d6;
+}
+#logo-man:checked ~ svg{
+    fill:#3a89ff;
+}
+
+
+
+.radioContainer input::placeholder{
+    color:#7b7b7b
+}
+
+.radioContainer svg:hover{
+    fill:#7f7f7f;
+}
+
+.radioContainer input:checked ~ svg{
+    fill:#c23939;
+}
+
