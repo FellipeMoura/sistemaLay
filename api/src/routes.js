@@ -16,6 +16,7 @@ router.get('/disp/:data/:hora/:hora_fim/:sala/:unidade', MaestrinController.disp
 router.get('/user/:id', ClientController.buscarUm)
 
 
+
 router.post('/user', ClientController.inserir)
 router.post('/maestrin', MaestrinController.inserir)
 
@@ -23,6 +24,7 @@ router.put('/update/:id', ClientController.alterar)
 router.put('/alterarS/:nome', MaestrinController.alterarS)
 router.put('/alterarA/:atendente/:unidade', MaestrinController.alterarA)
 router.put('/agendar/:id/:data', ProcController.agendar)
+router.put('/attAssinado/:data/:hora', MaestrinController.attAssinado)
 
 router.delete('/delete5/:id', MaestrinController.excluir)
 router.delete('/delete/:id', ClientController.excluir)

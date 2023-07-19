@@ -19,6 +19,45 @@ module.exports = {
             })
         })
     },
+    buscarVerificarAgendaP: (data, hora) => {
+        return new Promise((aceito,rejeitado) =>{
+            db.query( 'select * from agenda_p where data = ? and hora < ? and confirm = 1 and assinado = 0',
+            [data, hora], (error, results)=>{               
+                if(error) { rejeitado(error); return; }
+                aceito(results);
+            })
+        })
+    },
+    buscarAssAgendaProc: (data, id_sub_venda) => {
+        return new Promise((aceito,rejeitado) =>{
+            db.query( `select id from agenda_procedimento where data like "${data}%" and id_sub_venda = ? and assinatura is not null`,
+            [id_sub_venda], (error, results)=>{               
+                if(error) { rejeitado(error); return; }
+                aceito(results);
+            })
+        })
+    },
+    buscarAssinadoAgendaP: (assinado) => {
+        return new Promise((aceito,rejeitado) =>{
+            db.query( 'select id from agenda_p where assinado = ?',
+            [assinado], (error, results)=>{               
+                if(error) { rejeitado(error); return; }
+                aceito(results);
+            })
+        })
+    },
+    alterarAssinado: (assinado, id) => {
+        return new Promise((aceito,rejeitado) =>{
+            
+            db.query('UPDATE agenda_p SET assinado = ? WHERE id = ?',
+            [assinado, id] ,
+            (error, results)=>{
+                if(error) { rejeitado(error); return; }                
+                aceito(results.insertId)
+            }
+            )
+        })
+    },
     buscarAtendente: (nome) => {
         return new Promise((aceito,rejeitado) =>{
             db.query('SELECT * FROM atendentes WHERE nome = ?', [nome], (error, results)=>{               
@@ -50,6 +89,18 @@ module.exports = {
             
             db.query('UPDATE agenda_p SET confirm = 1, WHERE id = ?',
             [id] ,
+            (error, results)=>{
+                if(error) { rejeitado(error); return; }                
+                aceito(results.insertId)
+            }
+            )
+        })
+    },
+    alterar: (id, user) => {
+        return new Promise((aceito,rejeitado) =>{
+            
+            db.query('UPDATE users SET name = ?, cpf = ?, endereco = ?, tel = ?, etel = ?, email = ?, sexo = ?, nasc = ?, filhos = ?, civil = ?, profissao = ? WHERE id = ?',
+            [user.name, user.cpf, user.endereco, user.tel, user.etel, user.email, user.sexo, user.nasc, user.filhos, user.civil, user.profissao, id] ,
             (error, results)=>{
                 if(error) { rejeitado(error); return; }                
                 aceito(results.insertId)

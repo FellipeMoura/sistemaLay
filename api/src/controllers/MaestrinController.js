@@ -70,6 +70,8 @@ module.exports = {
                 hora: users[i].hora.substr(0,5),
                 hora_fim:users[i].hora_fim.substr(0,5),
                 atendente: users[i].atendente,
+                assinado: users[i].assinado,
+                confirm: users[i].confirm,
                 indice: users[i].indice,
                 nome_procedimento: users[i].nome_procedimento,
                 unidade: users[i].unidade
@@ -127,6 +129,59 @@ module.exports = {
         }
 
         res.json(json);
+
+    },
+    attAssinado: async (req, res) => {
+        let json = []
+
+        let data = req.params.data
+        let hora = req.params.hora
+
+        let resposta = ''
+        let result = []
+
+        let resp = await MaestrinService.buscarVerificarAgendaP(data, hora)
+
+        for (let i in resp) {
+            
+            json.push({
+           
+                id: resp[i].id,
+                id_venda_sub: resp[i].id_venda_sub,
+                hora_fim: resp[i].hora_fim,
+
+           
+            })
+        }
+        
+        if(json.length > 0){
+        
+            for (let i in json){
+            
+            result = await MaestrinService.buscarAssAgendaProc(data, json[i].id_venda_sub)
+            
+            if(result.length === 1){
+                resposta = 'result = 1'
+                await MaestrinService.alterarAssinado(result[0].id, json[i].id)
+            }else if(result.length > 1){
+                resposta = 'result = 2'
+                for(let j in result){
+                    
+                    let result2 = await MaestrinService.buscarAssinadoAgendaP(result[j].id)
+                    
+                    if(result2.length === 0){
+                        await MaestrinService.alterarAssinado(result[j].id, json[i].id)
+                    }
+                }
+            }else if(json[i].hora_fim < hora){
+                console.log('deu certo')
+                await MaestrinService.alterarAssinado(1, json[i].id)
+            }
+        }
+    }
+        console.log(json)
+
+        res.json(result);
 
     },
     buscarAtendente: async (req, res) => {
@@ -225,6 +280,8 @@ module.exports = {
             user: req.body.user,
             hora: req.body.hora,
             hora_fim: req.body.hora_fim,
+            //confirm: req.body.confirm,
+           // assinado: req.body.assinado,
             atendente: req.body.atendente,
             indice: req.body.indice,
             nome_procedimento: req.body.nome_procedimento,
@@ -270,6 +327,16 @@ module.exports = {
 
         res.json(json)
     },
+    confirmarAgenda: async (req, res) => {
+        let json = { error: '', result: {} }
+
+        let id = req.params.id
+
+        await MaestrinService.confirmarAgenda(id);
+        json.result = {id_venda_sub: id_venda_sub};
+        //console.log(json)
+        res.json(json)
+    },
     alterar: async (req, res) => {
         let json = { error: '', result: {} }
 
@@ -303,16 +370,6 @@ module.exports = {
             civil: user.civil,
             profissao: user.profissao
         };
-        //console.log(json)
-        res.json(json)
-    },
-    confirmarAgenda: async (req, res) => {
-        let json = { error: '', result: {} }
-
-        let id = req.params.id
-
-        await MaestrinService.confirmarAgenda(id);
-        json.result = {id_venda_sub: id_venda_sub};
         //console.log(json)
         res.json(json)
     },
