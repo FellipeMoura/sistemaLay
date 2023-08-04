@@ -84,11 +84,11 @@ module.exports = {
             })
         })
     },
-    confirmarAgenda: (id) => {
+    confirmarAgenda: (value, data, id_venda_sub) => {
         return new Promise((aceito,rejeitado) =>{
             
-            db.query('UPDATE agenda_p SET confirm = 1, WHERE id = ?',
-            [id] ,
+            db.query('UPDATE agenda_p SET confirm = ? WHERE data = ? and id_venda_sub = ?',
+            [value, data, id_venda_sub] ,
             (error, results)=>{
                 if(error) { rejeitado(error); return; }                
                 aceito(results.insertId)

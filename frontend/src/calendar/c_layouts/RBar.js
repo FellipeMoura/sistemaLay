@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import styles from './SBar.module.css'
 import Modal from 'react-modal'
 import { AiOutlineSearch } from 'react-icons/ai'
@@ -7,10 +7,57 @@ import { Button, InputText } from '../d_inputs/Input';
 
 export default function RBar(props) {
     const [search, setSearch] = useState('');
+    const [last, setLast] = useState({})
+
+
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_CALENDAR}/buscarUltimo/${props.unidade}`, {
+            method: "GET",
+            heders: {
+                'Content-type': 'application/json',
+            },
+        })
+            .then((resp) => resp.json())
+            .then((resp2) => {
+
+                setLast(resp2)
+
+
+            })
+            .catch((err) => { return err })
+
+    }, []);
+
+    function lastName(e) {
+        props.setName2(e)
+        //console.log(index)
+        getProcs(e.id_cliente)
+
+    }
 
     function setSearch2(e){
            // console.log(results)
             setSearch(e)
+    }
+
+    function getProcs(id) {
+
+
+
+        fetch(`${process.env.REACT_APP_CALENDAR}/procs/${id}`, {
+            method: "GET",
+            heders: {
+                'Content-type': 'application/json',
+            },
+        })
+            .then((resp) => resp.json())
+            .then((resp2) => {
+                console.log('teste')
+                props.setOptions(resp2)
+                console.log(resp2)
+
+            })
+            .catch(err => console.log(err))
     }
 
 
@@ -28,9 +75,14 @@ export default function RBar(props) {
                     placeholder="Pesquisar cliente..."
                     handleOnChange={(e) => setSearch2(e.target.value)}
                 />
+                <button                
+                    onClick={()=>lastName(last)}
+                >Último</button>
+               
             </div>
 
             <ListItem
+                getProcs={getProcs}
                 setName={props.setName}
                 setCurrentName={props.setCurrentName}
                 handleChange={props.handleChange}
@@ -44,29 +96,11 @@ export default function RBar(props) {
     );
 }
 
-function ListItem({ users, search, setOptions, setCurrentName, handleChange, setName }) {
+function ListItem({ users, search, setOptions, getProcs, handleChange, setName }) {
 
     //const [id, setId] = useState('');
 
-    function getProcs(id) {
-
-
-
-        fetch(`${process.env.REACT_APP_CALENDAR}/procs/${id}`, {
-            method: "GET",
-            heders: {
-                'Content-type': 'application/json',
-            },
-        })
-            .then((resp) => resp.json())
-            .then((resp2) => {
-
-                setOptions(resp2)
-                console.log(resp2)
-
-            })
-            .catch(err => console.log(err))
-    }
+    
 
     function clickName(index) {
         setName(users[index])
@@ -74,6 +108,7 @@ function ListItem({ users, search, setOptions, setCurrentName, handleChange, set
         getProcs(users[index].id)
 
     }
+
 
 
    // document.querySelectorAll("#idUser").forEach(function (td) {
@@ -96,14 +131,13 @@ function ListItem({ users, search, setOptions, setCurrentName, handleChange, set
         search.length > 1 ?
             <div className={styles.ulContainer}>
 
-
-                <ul className={styles.ulItem} style={{ backgroundColor: 'white' }}>
+     <table >
+                            
                    
                     {users.map(user => (
                         
-                            <table key={user.id} onClick={() => clickName(users.indexOf(user))}>
                                 <tr
-                                    
+                                key={user.id} onClick={() => clickName(users.indexOf(user))}
                                     id="idUser"
                                     className={styles.trClient}
                                    // type='button'
@@ -111,23 +145,23 @@ function ListItem({ users, search, setOptions, setCurrentName, handleChange, set
                                     //value={users.indexOf(user)}
                                     
                                 >
-                                    <td style={{ width: `300px` }}>
+                                    <td style={{ marginLeft:'20px',width: `300px` }}>
                                         {user.nome || '-'}
 
                                     </td>
 
-                                    <td>
+                                    <td style={{ width: `200px` }}>
 
                                         {user.telefone || '-'}
 
                                     </td>
                                 </tr>
-                                </table>
+                                
                            
                         
                     ))}
                     
-                </ul>
+                    </table>
             </div>
             : ''
 

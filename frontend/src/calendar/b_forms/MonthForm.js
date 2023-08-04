@@ -12,7 +12,7 @@ export default function MonthForm(props) {
   const [currentMonth, setCurrentMonth] = useState(props.currentMonth);
   const [dateSelected, setDateSelected] = useState([]);
 
- // console.log(props.currentMonth);
+  console.log(props.currentMonth);
 
   const month = [
     "January",
@@ -179,7 +179,7 @@ function DayCard(props) {
 
   function toDay(){
     props.setCurrentDay(moment(props.day).locale("pt"))
-    props.setCurrentFormat(3)
+    props.setCurrentFormat(1)
   }
 
   return (

@@ -6,9 +6,9 @@ import { insertB, deleteA, fecharA } from '../f_aux/functions'
 import moment from 'moment'
 
 
-function InputDay({ unidade, handleCloseModal, dataCard, clients, params, user }) {
+function InputDay({ unidade, setCurrentFormat,dataCard, clients, user }) {
 
-    const [project, setProject] = useState(dataCard.hora ? dataCard : params)
+    const [project, setProject] = useState(dataCard)
     const [currentName, setCurrentName] = useState(dataCard.nome_cliente ? 0 : 1)
     const [currentProc, setCurrentProc] = useState(project.procedimento ? 0 : 1)
     const [currentSala, setCurrentSala] = useState(project.sala ? 0 : 1)
@@ -202,7 +202,7 @@ function InputDay({ unidade, handleCloseModal, dataCard, clients, params, user }
                 <Button
                     color="#474747"
                     value='Voltar'
-                    click={() => handleCloseModal(2)}
+                    click={() => setCurrentFormat(1)}
                 />
                 <Button
                     color="#8f2828"

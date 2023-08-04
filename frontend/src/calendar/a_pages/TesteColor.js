@@ -1,35 +1,38 @@
 import React from "react";
 
 export function TesteColor() {
-    const colors = [
+  const colors = [
     
-        '#ce6060',
-        '#ce7a60',
-        '#ce9560',
-        '#cea860',
-        '#cecc60',
-        '#b1ce60',
-        '#72ce60',
-        '#60ce81',
-        '#60cea9',
-        '#60bece',
-        '#6093ce',
-        '#6074ce',
-        '#6760ce',
-        '#9060ce',
-        '#b460ce',
-        '#ce60c5',
-        '#ce609d',
-        '#ce606f',
-        '#af3334',
-        '#af6033',
-        '#af9233',
-        '#9caf33',
-        '#33afa5',
-        '#af33a9',
-        '#cc90d1'
-      
-      ]
+    '#f1f1f1',
+    '#ce7a60',
+    '#ce9560',
+    '#0074f8',
+    '#cecc60',
+    '#be8686',
+    '#ce6060',
+    '#60cea9',
+    '#33afa5',
+    '#60bece',
+    '#6093ce',
+    '#6074ce',
+    '#6760ce',
+    '#9060ce',
+    '#abffd1',
+    '#ce60c5',
+    '#ebf3a5',
+    '#ce606f',
+    '#cea860',
+    '#af6033',
+    '#af9233',
+    '#9caf33',
+    '#c0c783',
+    '#af33a9',
+    '#f9b1ff',
+    '#ffbebf',
+    '#fffb00',
+    '#aef800',
+    '#a886d3'
+    ]
 
     return (
         <div>

@@ -182,7 +182,7 @@ export function Select({ padrao, width, flex, text, name, options, handleOnChang
             >
                 <option> {padrao || 'Selecione uma opção'}</option>
                 {options.map((option) => (
-                    <option value={options.indexOf(option)} name={option.nome} key={option.id}>{option.nome}</option>
+               option.id && <option value={options.indexOf(option)} name={option.nome} key={option.id}>{option.id +(option.nome ? '-' + option.nome: '')}</option>
                 ))}
             </select>
         </div>

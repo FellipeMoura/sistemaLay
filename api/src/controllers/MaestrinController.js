@@ -29,6 +29,7 @@ module.exports = {
             '18:40:00',
             '19:20:00'
         ]
+        let hora_fim =[]
 
         let project = []
 
@@ -51,6 +52,8 @@ module.exports = {
                 unidade: 0
 
             }])
+            hora_fim.push(project[i][0].hora_fim)
+           // console.log(project)
         }
 
         let users = await MaestrinService.buscarTodos(data, atendente, unidade)
@@ -87,23 +90,18 @@ module.exports = {
 
         }
 
-        for(let i in project){
-
-            if(i>0){
-                if(project[i-1][0].hora_fim > project[i][0].hora){
-                    //console.log(project[i])
-                    //console.log(project[i-1])
-                    project[i]=project[i-1]
-                    project[i][0].indice = parseInt(project[i][0].indice)+1
-                    //console.log(project[i][0].indice)
-                    
-                } 
-            }
-            }
-        //console.log(project)
-
+        for (let i of json) {
+                
+                    if(i.hora_fim > hora_fim[i.indice]){
+                       // console.log(i.hora_fim +'---'+ hora_fim[i.indice])
+                        if(project[parseInt(i.indice)+1][0].id === 0){ 
+                            project[parseInt(i.indice)+1][0] = i 
+                        }else{ 
+                            project[parseInt(i.indice)+1].unshift(i)                
+                        }
+                    }
+        }
         res.json(project);
-
     },
     buscarAtendentes: async (req, res) => {
         let json = []
@@ -127,9 +125,7 @@ module.exports = {
                 dom: atendentes[i].dom
             })
         }
-
         res.json(json);
-
     },
     attAssinado: async (req, res) => {
         let json = []
@@ -161,10 +157,8 @@ module.exports = {
             result = await MaestrinService.buscarAssAgendaProc(data, json[i].id_venda_sub)
             
             if(result.length === 1){
-                resposta = 'result = 1'
-                await MaestrinService.alterarAssinado(result[0].id, json[i].id)
+                 await MaestrinService.alterarAssinado(result[0].id, json[i].id)
             }else if(result.length > 1){
-                resposta = 'result = 2'
                 for(let j in result){
                     
                     let result2 = await MaestrinService.buscarAssinadoAgendaP(result[j].id)
@@ -173,13 +167,13 @@ module.exports = {
                         await MaestrinService.alterarAssinado(result[j].id, json[i].id)
                     }
                 }
-            }else if(json[i].hora_fim < hora){
-                console.log('deu certo')
+            }else{
+                 if(json[i]){
                 await MaestrinService.alterarAssinado(1, json[i].id)
-            }
+            }}
         }
     }
-        console.log(json)
+        console.log(result)
 
         res.json(result);
 
@@ -262,7 +256,7 @@ module.exports = {
         }
 
 
-
+        console.log(json)
         //resp.length > 0 ?  res.json(false) : res.json(true)
         json.length === 0 ? res.json(false) : res.json(json[0])
     },
@@ -288,21 +282,6 @@ module.exports = {
             unidade: req.body.unidade
 
         }
-        //console.log(user)
-       // let j =true;
-       // let count = 0;
-       // let inicio = moment("2023-01-01 "+user.hora)
-       // let fim = moment("2023-01-01 "+user.hora_fim)
-        //x.format('HH:mm')===y.format('HH:mm')? console.log('sim'):console.log('nao')
-     //   while(j){
-    //        fim > inicio.add(40, 'minutes') ?
-    //            inicio.add(40,'minutes') 
-    //            && count++
-    //   :j=false
-   //         console.log(count)
-    
-     //   }
-
 
 
 
@@ -330,48 +309,14 @@ module.exports = {
     confirmarAgenda: async (req, res) => {
         let json = { error: '', result: {} }
 
-        let id = req.params.id
+        let id_venda_sub = req.params.id
+        let data = req.params.data.substr(0,10)
+        let value = req.params.value
 
-        await MaestrinService.confirmarAgenda(id);
-        json.result = {id_venda_sub: id_venda_sub};
+        await MaestrinService.confirmarAgenda(value, data, id_venda_sub);
+       // json.result = {id_venda_sub: id_venda_sub};
         //console.log(json)
-        res.json(json)
-    },
-    alterar: async (req, res) => {
-        let json = { error: '', result: {} }
-
-        let id = req.params.id
-
-        let user = {
-            name: req.body.name,
-            cpf: req.body.cpf,
-            endereco: req.body.endereco,
-            tel: req.body.tel,
-            etel: req.body.etel,
-            email: req.body.email,
-            sexo: req.body.sexo,
-            nasc: req.body.nasc,
-            filhos: req.body.filhos,
-            civil: req.body.civil,
-            profissao: req.body.profissao
-        }
-        await UserService.alterar(id, user);
-        json.result = {
-            id,
-            name: user.name,
-            cpf: user.cpf,
-            endereco: user.endereco,
-            tel: user.tel,
-            etel: user.etel,
-            email: user.email,
-            sexo: user.sexo,
-            nasc: user.nasc,
-            filhos: user.filhos,
-            civil: user.civil,
-            profissao: user.profissao
-        };
-        //console.log(json)
-        res.json(json)
+        res.json('agenda'+id_venda_sub+' valor:'+value)
     },
     alterarA: async (req, res) => {
         let json = { error: '', result: {} }

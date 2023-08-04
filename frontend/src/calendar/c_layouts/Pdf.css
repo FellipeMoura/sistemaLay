@@ -1,0 +1,88 @@
+.pdfForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    width: 600px;
+    background-color: #f1f1f1;
+
+    padding: 20px;
+
+}
+
+.pdfForm h2{
+    margin: 5px;
+    text-align: center;
+}
+
+.pdfOpt button{
+    width: 20px;
+    height: 20px;
+    border: 1px solid #818181;
+    margin-right: 5px;
+}
+
+.pdfAtend{
+    border: 1px solid #414141;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+   background-color: #ebebeb;
+   padding: 5px;
+   height: 900px;
+   width: 500px;
+}
+
+
+.cliCard{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-between;
+  
+}
+
+
+.pdfOpt{
+    display: flex;
+    height: 25px;
+    align-items: center;
+    width: 200px;
+}
+
+.pdfOpt svg{
+    fill: #3f9e43;
+}
+.dataCli{
+    height: 50px;
+    margin-top: 10px;
+}
+.inlineButton{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+.inlineButton button{
+    margin: 5px;
+}
+
+.pdfBar{
+    display: flex;
+    flex-direction: row;
+}
+
+.pdfBar div{
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.3rem;
+    margin: 0 .4em;
+    padding: 0 .6em;
+    border-radius: 10px 10px 0 0;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+}
+
+.on{
+    border-bottom: 2px solid rgb(139, 5, 5);
+}

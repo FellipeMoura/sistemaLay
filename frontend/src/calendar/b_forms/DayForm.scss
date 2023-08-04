@@ -7,6 +7,8 @@
 
 
   .headerPage {
+    position: sticky;
+    top: 0;
     height: 50px;
     width: 100%;
     box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
@@ -17,6 +19,13 @@
     color: #d0d9da;
     background-color: #1e4794;
     font-weight: 550;
+
+
+    .pdfHeader{
+      color: #f1f1f1;
+      cursor: pointer;
+      margin-top: 6px;
+    }
   }
 
   .headerPage svg{
@@ -29,7 +38,7 @@
     font-size: 1em;
     padding: 5px;
     cursor: pointer;
-    background-color: #7a424200;
+    background-color: #ebf3a500;
     color: #f1f1f1;
   }
 
@@ -97,6 +106,8 @@
       display: flex;
       
       .atendButton {
+        position: sticky;
+        top: 0;
         border: none;
         font-style: italic;
         margin-left: 2px;

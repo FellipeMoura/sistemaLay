@@ -10,7 +10,22 @@ module.exports = {
             })
         })
     },
-
+    buscarDataVendaSub: (id) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('SELECT data_agendamento, qnt_sessao, id FROM vendas_sub WHERE id = ?',[id], (error, results)=>{
+                if(error) { rejeitado(error); return; }
+                aceito(results);
+            })
+        })
+    },
+    buscarDataAgendaP: (data,id_venda_sub) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('SELECT id FROM agenda_p WHERE data = ? and id_venda_sub = ? ',[data,id_venda_sub], (error, results)=>{
+                if(error) { rejeitado(error); return; }
+                aceito(results);
+            })
+        })
+    },
     buscarCOUNT: (id) => {
         return new Promise((aceito,rejeitado) =>{
             db.query('SELECT COUNT(*) FROM agenda_procedimento WHERE id_sub_venda = ? AND (status = 3 or 2)', [id], (error, results)=>{
@@ -45,11 +60,19 @@ module.exports = {
             )
         })
     },
-    agendar: (id, data) => {
+    buscarLogin_p: (nome) => {
+        return new Promise((aceito, rejeitado)=>{
+            db.query('SELECT login FROM atendentes WHERE nome = ?',[nome], (error, results)=>{
+                if(error) { rejeitado(error); return; }
+                aceito(results);
+            })
+        })
+    },
+    agendar: (data, qnt, id, atendente) => {
         return new Promise((aceito,rejeitado) =>{
             
-            db.query('UPDATE `vendas_sub` SET data_agendamento = ? WHERE id =?',
-            [data, id] ,
+            db.query('UPDATE `vendas_sub` SET data_agendamento = ?, qnt_sessao = ?, atendente_proc = ? WHERE id =?',
+            [data, qnt,  atendente, id] ,
             (error, results)=>{
                 if(error) { rejeitado(error); return; }                
                 aceito(results.insertId)

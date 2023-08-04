@@ -2,20 +2,65 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import 'moment/locale/pt-br'
 import "./DayForm.scss";
-import { Days } from "../f_aux/WeekStyled";
+
 import { IconButton, Input } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import Day from "../c_layouts/Day";
 import Anestesic from "../c_layouts/Anestesic";
-import InputDay from "../c_layouts/InputDay";
-import InputAnes from "../c_layouts/InputAnes";
+import { AiOutlineFilePdf } from 'react-icons/ai'
+import { MdPersonAdd } from 'react-icons/md'
+import { SlRefresh } from 'react-icons/sl'
 import Modal from 'react-modal'
+import { Pdf } from "../c_layouts/Pdf";
+import { NewAten } from "../c_layouts/NewAten";
 
 
 export default function DayForm(props) {
 
   const [project, setProject] = useState([])
+
+  const [modalIsOpen, setIsOpen] = useState(false)
+
+  function handleCloseModal() {
+    setIsOpen(false)
+
+  }
+
+  function handleOpenModal(value) {
+    setCurrentModal(value)
+    setIsOpen(true)
+  }
+
+  const modals = [
+    <Pdf
+      atendentes={props.atendentes}
+      handleCloseModal={handleCloseModal}
+    />,
+    <NewAten
+      user={props.user}
+      unidade={props.unidade}
+      handleCloseModal={handleCloseModal}
+    />
+  ]
+  const [currentModal, setCurrentModal] = useState(0)
+
+
+  const customStyles = {
+    content: {
+      left: '50%',
+      top: '50%',
+      bottom: '-40%',
+      right: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+
+      //height: '400px'
+
+    }
+  }
+
+
 
   //console.log(props.currentDay.format('ddd'))
 
@@ -28,7 +73,6 @@ export default function DayForm(props) {
     //console.log(props.currentDay)
 
   }
-
   return (
     <div id="dayPage">
 
@@ -40,21 +84,35 @@ export default function DayForm(props) {
         >
           <KeyboardArrowLeftIcon style={{ color: "#143296", fontSize: 40 }} />
         </IconButton>
+        <Modal
+          ariaHideApp={false}
+          isOpen={modalIsOpen}
+          onRequestClose={handleCloseModal}
+          style={customStyles}
+        >
+          {modals[currentModal]}
+        </Modal>
+        <div className="pdfHeader" onClick={() => handleOpenModal(0)}>
+          <AiOutlineFilePdf />
+        </div>
+        <div className="pdfHeader" onClick={() => window.location.replace(`/calendar/${props.unidade}/${props.user}`)}>
+          <SlRefresh />
+        </div>
         <div className="data">
           <button
             type="button"
             onClick={() => ''}
           >
-            {props.currentDay.format('DD')+' /'}
+            {props.currentDay.format('DD') + ' /'}
           </button>
-          
+
           <button
             type="button"
             onClick={() => props.setCurrentFormat(props.currentDay.format('M'))}
           >
-            {props.currentDay.format('MMM')+' /'}
+            {props.currentDay.format('MMM') + ' /'}
           </button>
-          
+
           <button
             type="button"
             onClick={() => ''}
@@ -62,6 +120,10 @@ export default function DayForm(props) {
             {props.currentDay.format('YY')}
           </button>
         </div>
+        <div className="pdfHeader" onClick={() => handleOpenModal(1)}>
+          <MdPersonAdd />
+        </div>
+        <div></div>
         <IconButton
           size="small"
           onClick={() => mudar(props.currentDay.clone().add(1, "day"))}
@@ -74,11 +136,14 @@ export default function DayForm(props) {
       <div className="content">
 
         <WeekCard
+          isEdit={props.isEdit}
+          setIsEdit={props.setIsEdit}
+          setInput={props.setInput}
           user={props.user}
           unidade={props.unidade}
-          clients={props.clients}   
+          clients={props.clients}
           atendentes={props.atendentes}
-          day={props.currentDay}   
+          day={props.currentDay}
           size={'3em'}
         // mes={mes}
 
@@ -93,37 +158,9 @@ export default function DayForm(props) {
 function WeekCard(props) {
 
 
-  const [dataCard, setDataCard] = useState({})
-
-  const [modalIsOpen, setIsOpen] = useState(false)
-  const [modalIsOpen2, setIsOpen2] = useState(false)
-
-
-  function handleOpenModal(x, project) {
-    
-    x==1 ? setIsOpen(true) : setIsOpen2(true)
-    setDataCard(project)
-  }
-
-  function handleCloseModal(x) {
-    (x===1)? setIsOpen(false): setIsOpen2(false)
-
-  }
-
-  const customStyles = {
-    content: {
-      left: '50%',
-      top: '50%',
-      bottom: '-40%',
-      right: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-
-    }
-  }
   //const [horas, setHoras] = useState (horas)
 
-    let horarioss = [
+  let horarioss = [
     '08:00',
     '08:40',
     '09:20',
@@ -182,7 +219,7 @@ function WeekCard(props) {
     '#bd5d75',
 
   ]
-  //console.log(opacity[props.atendentes.indexOf(props.calendar[0][1])])
+
   return (
     <div id="dayCard">
 
@@ -200,41 +237,14 @@ function WeekCard(props) {
         </div>
 
 
-        <Modal
-          ariaHideApp={false}
-          isOpen={modalIsOpen}
-          onRequestClose={handleCloseModal}
-          style={customStyles}
-        >
-          <InputDay
-            user={props.user} 
-            unidade={props.unidade}
-            clients={props.clients}
-            dataCard={dataCard}
-            handleCloseModal={handleCloseModal}
-          />
-        </Modal>
-        <Modal
-          ariaHideApp={false}
-          isOpen={modalIsOpen2}
-          onRequestClose={handleCloseModal}
-          style={customStyles}
-        >
-          <InputAnes 
-            user={props.user}
-            unidade={props.unidade}
-            clients={props.clients}
-            dataCard={dataCard}
-            handleCloseModal={handleCloseModal}
-          />
-        </Modal>
-
         <Anestesico
+          isEdit={props.isEdit}
+          setIsEdit={props.setIsEdit}
+          setInput={props.setInput}
           user={props.user}
-          handleOpenModal={handleOpenModal}
           day={props.day}
           unidade={props.unidade}
-          countAten={94/(props.atendentes.length+1)}
+          countAten={94 / (props.atendentes.length + 1)}
         />
 
         {props.atendentes ? props.atendentes.map((day) => (
@@ -242,18 +252,20 @@ function WeekCard(props) {
           //console.log(day.color+opacity[props.atendentes.indexOf(day)]),
 
           <DayCard
+            isEdit={props.isEdit}
+            setIsEdit={props.setIsEdit}
+            setInput={props.setInput}
             user={props.user}
             color={color[props.atendentes.indexOf(day)]}
             horarios={horarios}
-            handleOpenModal={handleOpenModal}
-            countAten={94/(props.atendentes.length+1)}
+
+            countAten={94 / (props.atendentes.length + 1)}
             atendente={day}
             isOne={props.atendentes.length - props.atendentes.indexOf(day)}
             key={day.nome}
             day={props.day}
             unidade={props.unidade}
-            dateSelected={props.dateSelected}
-            setDateSelected={props.setDateSelected}
+
           />
         )) : () => props.mapCalendar()}
 
@@ -270,11 +282,11 @@ function WeekCard(props) {
 
 
 function DayCard(props) {
-  const [state, setState] = useState("");
+  const [states, setStates] = useState();
   const [card, setCard] = useState([]);
   //const sem = `props.day.${sem}.substr(card.indexOf(hora), 1)`
 
-  
+
   function semana(x, hora) {
 
     if (x == 0) {
@@ -309,17 +321,17 @@ function DayCard(props) {
       .then((resp) => resp.json())
       .then((resp2) => {
         setCard(resp2)
-       //  console.log(resp2)
+        //  console.log(resp2)
 
       })
       .catch(err => console.log(err))
-     // console.log(card)
+    // console.log(card)
   }, [props.day, props.card]);
 
   return (
-    <div  className="atendList" >
-      <div className='atendente'style={{width: (props.countAten)+'vw'}}>
-        <button className="atendButton" 
+    <div className="atendList" >
+      <div className='atendente' style={{ width: (props.countAten) + 'vw' }}>
+        <button className="atendButton"
           onClick={() => window.location.replace(`/EditA/${props.unidade}/${props.atendente.nome}/${props.user}`)}>
           {props.atendente.nome}
 
@@ -330,7 +342,7 @@ function DayCard(props) {
       {
         card.map((hora) => (
 
-         // console.log(card[card.indexOf(hora)][0]),
+          // console.log(card[card.indexOf(hora)][0]),
           <div
             style={{ backgroundColor: `` }}
 
@@ -339,17 +351,19 @@ function DayCard(props) {
           >
 
             <Day
+              isEdit={props.isEdit}
+              setIsEdit={props.setIsEdit}
+              setInput={props.setInput}
               user={props.user}
               isOne={props.isOne}
               horario={props.horarios[card.indexOf(hora)]}
-              horario_fim={props.horarios[card.indexOf(hora)+1]}
+              horario_fim={props.horarios[card.indexOf(hora) + 1]}
               index={card.indexOf(hora)}
               countAten={props.countAten}
               unidade={props.unidade}
               hora={hora[0].hora}
               color={props.color}
               card={card[card.indexOf(hora)]}
-              handleOpenModal={props.handleOpenModal}
               disp={semana(props.day.format('d'), card.indexOf(hora))}
             />
 
@@ -368,7 +382,7 @@ function Anestesico(props) {
   //const sem = `props.day.${sem}.substr(card.indexOf(hora), 1)`
 
 
-  
+
 
 
   useEffect(() => {
@@ -386,15 +400,15 @@ function Anestesico(props) {
       })
       .catch(err => console.log(err))
 
-    
+
 
   }, [props.day]);
 
   return (
     <div className="atendList">
-      <div className='atendente' style={{width: (props.countAten)+'vw'}}>
+      <div className='atendente' style={{ width: (props.countAten) + 'vw' }}>
         <button className="atendButton"
-         >
+        >
           Anestésico
 
         </button>
@@ -413,12 +427,15 @@ function Anestesico(props) {
           >
 
             <Anestesic
-            countAten={props.countAten}
+              isEdit={props.isEdit}
+              setIsEdit={props.setIsEdit}
+              setInput={props.setInput}
+              countAten={props.countAten}
               unidade={props.unidade}
               hora={hora[0].hora}
               color={props.color}
               card={card[card.indexOf(hora)]}
-              handleOpenModal={props.handleOpenModal}
+
             />
 
 
@@ -428,7 +445,7 @@ function Anestesico(props) {
       }
     </div>
 
-    
+
   );
 }
 

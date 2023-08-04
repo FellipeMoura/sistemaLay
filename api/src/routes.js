@@ -21,9 +21,10 @@ router.post('/user', ClientController.inserir)
 router.post('/maestrin', MaestrinController.inserir)
 
 router.put('/update/:id', ClientController.alterar)
+router.put('/confirmarAgenda/:id/:data/:value', MaestrinController.confirmarAgenda)
 router.put('/alterarS/:nome', MaestrinController.alterarS)
 router.put('/alterarA/:atendente/:unidade', MaestrinController.alterarA)
-router.put('/agendar/:id/:data', ProcController.agendar)
+router.put('/agendar/:id/:data/:confirm/:atendente', ProcController.agendar)
 router.put('/attAssinado/:data/:hora', MaestrinController.attAssinado)
 
 router.delete('/delete5/:id', MaestrinController.excluir)

@@ -5,13 +5,13 @@
 
 .formContainer22{
     position: relative;
-    height: 2.5em;
+
     width: 28em;
     display: flex;
     flex-direction: column;
 
     margin: auto;
-    margin-top: 40px;
+
     
     padding: 0;
     
@@ -19,18 +19,19 @@
 }
 
 .ulContainer{
-    min-height: 20em;
+    max-height: 250px;
     overflow-y: auto;
 }
 
-.ulItem button{
-    border: none;
+.ulContainer tr{
+   background-color: #f1f1f1;
+  
 }
 
-.ulItem li{
-    margin-left: 5px;
-    list-style: none;
-}
+.ulContainer td{
+    padding-left: 10px;
+ }
+
 
 .header{
     background-color: #ffffff;
@@ -39,14 +40,34 @@
     align-items: center;
     border: 1.5px solid #727272;
     border-radius: 5px;
+    
+
+}
+.header2{
+    background-color: #ffffff;
+    display: flex;
+    height: 2.7em;
+    align-items: center;
+    
+  
+    border: 1.5px solid #727272;
+    border-radius: 5px;
 
 }
 .header input{
     height: 2.5em;
     margin: 0 2em 0 1em;
 }
-
+.header2 input{
+    height: 2.5em;
+    margin-top: 25px;
+}
 .header > svg{
+    margin: 0 .2em;
+    fill: rgb(70, 72, 72);
+    font-size: 1.5em;
+}
+.header2 > svg{
     margin: 0 .2em;
     fill: rgb(70, 72, 72);
     font-size: 1.5em;

@@ -5,56 +5,73 @@ import MonthForm from '../b_forms/MonthForm'
 import WeekForm from '../b_forms/WeekForm'
 import DayForm from '../b_forms/DayForm'
 import moment from "moment";
+import InputDay from "../c_layouts/InputDay";
+import InputAnes from "../c_layouts/InputAnes";
 
 function Calendar() {
-    const {data} = useParams()
-    const {unidade} = useParams()
-    const {user} = useParams()
-    const [clients,setClients] = useState([])
-    const [atendentes, setAtendentes ] = useState([])
+    const { data } = useParams()
+    const { unidade } = useParams()
+    const { user } = useParams()
+    const [clients, setClients] = useState([])
+    const [atendentes, setAtendentes] = useState([])
     const [mes, setMes] = useState(0)
+    const [dataCard, setDataCard] = useState({})
+    const [isEdit, setIsEdit] = useState(false)
 
-    console.log(user)
-    //console.log(moment().locale("pt-br"))
+    // console.log(user)
+    //console.log()
     useEffect(() => {
         //console.log(unidade)
-        fetch(`${process.env.REACT_APP_CALENDAR}/clients`,{
-        method: "GET",
-        heders:{
-            'Content-type': 'application/json',
-        },
+        fetch(`${process.env.REACT_APP_CALENDAR}/clients`, {
+            method: "GET",
+            heders: {
+                'Content-type': 'application/json',
+            },
         })
-        .then((resp) => resp.json())
-        .then((resp2) => {
-            
-            setClients(resp2)
-           // console.log(resp2.length)
-        })             
-        .catch(err => console.log(err))
+            .then((resp) => resp.json())
+            .then((resp2) => {
 
-        fetch(`${process.env.REACT_APP_CALENDAR}/atendentes/${unidade}`,{
-        method: "GET",
-        heders:{
-            'Content-type': 'application/json',
-        },
+                setClients(resp2)
+                // console.log(resp2.length)
+            })
+            .catch(err => console.log(err))
+
+        fetch(`${process.env.REACT_APP_CALENDAR}/atendentes/${unidade}`, {
+            method: "GET",
+            heders: {
+                'Content-type': 'application/json',
+            },
         })
-        .then((resp) => resp.json())
-        .then((resp2) => {
-            
-            setAtendentes(resp2)
-        })             
-        .catch(err => console.log(err))
+            .then((resp) => resp.json())
+            .then((resp2) => {
 
-        
-        
+                setAtendentes(resp2)
+            })
+            .catch(err => console.log(err))
+
+
+        fetch(`${process.env.REACT_APP_CALENDAR}/attAssinado/${moment().locale("pt-br").format('Y-MM-DD/HH:mm')}`, {
+            method: "PUT",
+            heders: {
+                'Content-type': 'application/json',
+            },
+        })
+            .then((resp) => resp.json())
+            .then((resp2) => {
+
+            })
+            .catch(err => console.log(err))
+
+
+
     }, [])
 
-    const [currentDay, setCurrentDay] = useState(data? moment(data.split('-')).clone().locale("pt-br").subtract(1, 'month'): moment().locale("pt-br"));
-    const [currentFormat, setCurrentFormat] = useState(3)
-    function setToMonth(month){
-        setMes(month-1)
-        
-        setCurrentFormat(1)
+    const [currentDay, setCurrentDay] = useState(data ? moment(data.split('-')).clone().locale("pt-br").subtract(1, 'month') : moment().locale("pt-br"));
+    const [currentFormat, setCurrentFormat] = useState(1)
+    function setToMonth(month) {
+        setMes(month - 1)
+        console.log(month - 1)
+        setCurrentFormat(0)
     }
     const color = [
 
@@ -74,19 +91,23 @@ function Calendar() {
 
     ]
 
+    function setInput(page, dataCard) {
+        setDataCard(dataCard)
+        setCurrentFormat(page)
+
+    }
+
 
     const pers = [
-        <YearForm />,
-        <MonthForm 
+        <MonthForm
             currentMonth={mes}
             setCurrentDay={setCurrentDay}
             setCurrentFormat={setCurrentFormat}
         />,
-        <WeekForm 
-            setCurrentDay={setCurrentDay}
-            setCurrentFormat={setCurrentFormat}
-        />,
         <DayForm
+            isEdit={isEdit}
+            setIsEdit={setIsEdit}
+            setInput={setInput}
             user={user}
             clients={clients}
             currentDay={currentDay}
@@ -94,10 +115,26 @@ function Calendar() {
             unidade={unidade}
             atendentes={atendentes}
             setCurrentFormat={setToMonth}
+        />,
+        <InputDay
+            setIsEdit={setIsEdit}
+            user={user}
+            unidade={unidade}
+            dataCard={dataCard}
+            setCurrentFormat={setCurrentFormat}
+            clients={clients}
+        />,
+        <InputAnes
+            setIsEdit={setIsEdit}
+            user={user}
+            unidade={unidade}
+            dataCard={dataCard}
+            setCurrentFormat={setCurrentFormat}
+            clients={clients}
         />
     ]
 
-    
+
 
     return (
         pers[currentFormat]

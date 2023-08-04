@@ -30,4 +30,9 @@ input {
   font-size:1em;
 }
 
+.inlineButton{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 

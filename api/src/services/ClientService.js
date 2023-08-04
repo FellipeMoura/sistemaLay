@@ -4,7 +4,7 @@ module.exports = {
     
     buscarTodos: () => {
         return new Promise((aceito, rejeitado)=>{
-            db.query('SELECT DISTINCT acompanhamento.id, acompanhamento.nome_l, acompanhamento.telefone_l FROM vendas_sub, acompanhamento WHERE acompanhamento.id = vendas_sub.id_cliente AND vendas_sub.vendido = 9', (error, results)=>{
+            db.query('SELECT DISTINCT acompanhamento.id, acompanhamento.nome_l, acompanhamento.telefone_l FROM vendas_sub, acompanhamento WHERE acompanhamento.id = vendas_sub.id_cliente AND vendas_sub.venda like "sim"', (error, results)=>{
                 if(error) { rejeitado(error); return; }
                 aceito(results);
             })

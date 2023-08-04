@@ -115,17 +115,48 @@ module.exports = {
         res.json(json)
     },
     agendar: async(req,res)=> {
-        let json = {error:'',result:{}}
+        let json = {error:false,result:{}}
         
         let id = req.params.id
         let data = req.params.data
+        let confirm = req.params.confirm
+        let atendente = req.params.atendente
+       // let resp = await ProcService.buscarDataVendaSub(id)
+        let resp2
+       
+       
+        if(confirm == 1){
+            let login = await ProcService.buscarLogin_p(atendente)
+            console.log('confirm == 1')
+           
+                //console.log('qnt sessao = 0')
 
-        
-        await ProcService.agendar(id, data);
-        json.result ={
-            id: id,
-            data: data
-        };
+                resp2 = await ProcService.buscarDataAgendaP(data,id) 
+
+                console.log(login)
+                await ProcService.agendar(data,resp2.length,id,login[0].login)
+
+           
+        }else{
+            console.log('desmarcando na venda_sub...')
+            await ProcService.agendar('0000-00-00','0',id,'')
+
+
+        }
+       // console.log("resp:  ")
+      // console.log(resp)
+      //  console.log("resp2:  ")
+       // console.log(resp2)
+            //json.result = resp
+
+            
+
+           
+
+       // json.result ={
+        //    id: id,
+        //    data: data
+        //};
         //console.log(json)
         res.json(json)
     },
