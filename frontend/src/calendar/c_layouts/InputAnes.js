@@ -4,9 +4,10 @@ import './InputDay.css'
 import RBar from './RBar'
 import { insertB, deleteA, fecharA } from '../f_aux/functions'
 import moment from 'moment'
+import { ProcList } from './ProcList'
 
 
-function InputDay({ unidade, setCurrentFormat,dataCard, clients, user }) {
+function InputDay({ unidade, setCurrentFormat,dataCard, clients, user, setIsEdit }) {
 
     const [project, setProject] = useState(dataCard)
     const [currentName, setCurrentName] = useState(dataCard.nome_cliente ? 0 : 1)
@@ -99,7 +100,7 @@ function InputDay({ unidade, setCurrentFormat,dataCard, clients, user }) {
 
     }
     function setProc(e) {
-        setProject({ ...project, ['nome_procedimento']: options[e.target.value].nome, ['procedimento']: options[e.target.value].id_pacote })
+        setProject({ ...project, ['nome_procedimento']: options[e].nome, ['procedimento']: options[e].id_pacote })
         
         setCurrentProc(0)
       //console.log(options)
@@ -128,6 +129,11 @@ function InputDay({ unidade, setCurrentFormat,dataCard, clients, user }) {
 
     }
 
+    function transferir(){
+        setCurrentFormat(1)
+        setIsEdit(project)
+    }
+
 
 
     const nameStates = [
@@ -143,14 +149,9 @@ function InputDay({ unidade, setCurrentFormat,dataCard, clients, user }) {
 
     const procStates = [
         labelProc,
-        <Select
-            flex='column'
-            width='15em'
-            options={options}
-            value={project.nome_procedimento}
-            name='procedimento'
-            text='Procedimento'
-            handleOnChange={setProc}
+        <ProcList
+            setProc={setProc}
+            procs={options}
         />
     ]
 
@@ -170,15 +171,9 @@ function InputDay({ unidade, setCurrentFormat,dataCard, clients, user }) {
                 {procStates[currentProc]}
                 
                 <div className='inline2'>               
-                    <InputTime
-                        value={project.hora}
-                        name='hora'
-                        title='Início'
-                        handleOnChange={handleChange2}
-
-                    />
+                <p>início:<label>{project.hora}</label></p>
                     
-                        <p>Fim:<label>{project.hora_fim || moment(`2020.05.05 ${project.hora}`).add(40,'minutes').format('HH:mm')}</label>
+                <p>Fim:<label>{project.hora_fim || moment(`2020.05.05 ${project.hora}`).add(40,'minutes').format('HH:mm')}</label>
                         </p>
                     
 
@@ -189,31 +184,40 @@ function InputDay({ unidade, setCurrentFormat,dataCard, clients, user }) {
             </div>
             <div className={'buttons'}>
 
-                <Button
-                    color="#2d4492"
-                    value='Novo'
-                    click={() => limpar(false)}
-                />
+            {project.id > 0 &&
+                    <Button
+                        color="#2d4492"
+                        value='Novo'
+                        click={() => limpar(false)}
+                    />
+                }
+
                 <Button
                     color="#447461"
                     value='Cadastrar'
-                    click={() => insertB(idC, project, unidade, user)}
+                    click={() => insertB(idC, project, unidade, user,)}
                 />
+
                 <Button
                     color="#474747"
                     value='Voltar'
                     click={() => setCurrentFormat(1)}
                 />
-                <Button
-                    color="#8f2828"
-                    value='Excluir'
-                    click={() => deleteA(project, unidade, user)}
-                />
-                <Button
-                    color="#6c388f"
-                    value='Bloquear'
-                    click={() => fecharA(project, unidade, user)}
-                />
+                {project.id > 0 &&
+                    <Button
+                        color="#8f2828"
+                        value='Excluir'
+                        click={() => deleteA(project, unidade, user)}
+                    />
+                }
+               
+                {project.id > 0 &&
+                    <Button
+                        color="#6c388f"
+                        value='Transferir'
+                        click={() => transferir()}
+                    />
+                }
 
             </div>
         </form>

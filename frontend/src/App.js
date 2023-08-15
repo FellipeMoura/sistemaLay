@@ -26,10 +26,10 @@ function App() {
       <Container customClass="min-height">
         <AuthProvider>
           <Routes>
-            <Route exact path='/' element={<Home />}></Route>
+            <Route exact path='/home' element={<Home />}></Route>
             <Route exact path='/s' element={<Sucess />}></Route>
             <Route exact path='/teste' element={<TesteColor/>}></Route>
-            <Route exact path='/control' element={<Lancamentos />}></Route>
+            <Route exact path='/control/:page' element={<Lancamentos />}></Route>
             <Route exact path='/login' element={<Login />}></Route>
             <Route exact path="/prontuario/:iduser/:idrecord/:page" element={<Record />}></Route>
 

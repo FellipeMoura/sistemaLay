@@ -7,8 +7,8 @@ export function TesteColor() {
     '#ce7a60',
     '#ce9560',
     '#0074f8',
-    '#cecc60',
-    '#be8686',
+    '#FF00FF',
+    '#DC143C',
     '#ce6060',
     '#60cea9',
     '#33afa5',
@@ -25,13 +25,24 @@ export function TesteColor() {
     '#af6033',
     '#af9233',
     '#9caf33',
-    '#c0c783',
+    '#DAA520',
     '#af33a9',
     '#f9b1ff',
     '#ffbebf',
     '#fffb00',
     '#aef800',
-    '#a886d3'
+    '#a886d3',
+    '#ffdc9a',
+    '#806d6d',
+    '#A52A2A',
+    '#A020F0',
+    '#ADFF2F',
+    '#FF4500',
+    '#FF7F50',
+    '#228B22',
+    '#3CB371',
+    '#FFD700',
+    '#B22222'
     ]
 
     return (

@@ -30,7 +30,7 @@ function AuthProvider({ children }) {
         localStorage.setItem('token', JSON.stringify(token))        
         setVerif(true)
         //history.push('/')
-        x==0?window.location.replace('/') : window.location.replace('/s')     
+        x==0?window.location.replace('/home') : window.location.replace('/s')     
         
 
     }

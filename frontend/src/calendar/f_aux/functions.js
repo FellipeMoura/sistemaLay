@@ -1,6 +1,8 @@
-import Anestesic from "../c_layouts/Anestesic"
+import moment from "moment"
+
 
 export function agendar(cadastro, confirm) {
+
     //   var value2 = cadastro.confirm == 0 ? 1 : 0
     //let resp = window.confirm(`Deseja ocultar a ${props.atendente} atendente da agenda?`)
     // if (resp) {
@@ -14,7 +16,7 @@ export function agendar(cadastro, confirm) {
         body: JSON.stringify(cadastro),
     })
         .then((resp) => resp.json()).then((data) => {
-           
+
 
         })
         .catch(err => console.log(err))
@@ -27,7 +29,7 @@ export function agendar(cadastro, confirm) {
 export function insertA(id, old, cadastro, unidade, user) {
     cadastro.unidade = unidade
     cadastro.user = user
-    if(old.id_venda_sub == 3){
+    if (old.id_venda_sub == 3) {
         deleteB(old)
     }
     id > 0 && old.id_venda_sub != 3 ? window.alert("Horário ocupado! Exclua este agendamento ou acrescente um novo") :
@@ -43,7 +45,7 @@ export function insertA(id, old, cadastro, unidade, user) {
                     body: JSON.stringify(cadastro),
                 })
                     .then((resp) => resp.json()).then((data) => {
-                      //  agendar(cadastro, 1)
+                        //  agendar(cadastro, 1)
                         window.alert(`Cadastrado!`)
                         window.location.replace(`/calendar/${unidade}/${cadastro.data}/${user}`)
                     })
@@ -60,9 +62,10 @@ export function insertB(id, cadastro, unidade, user) {
     cadastro.unidade = unidade
     cadastro.user = user
     cadastro.procedimento = 3
+    console.log(cadastro)
 
     id > 0 ? window.alert("Horário ocupado! Exclua este agendamento ou acrescente um novo") :
-        cadastro.nome_cliente && cadastro.procedimento ?
+        cadastro.nome_cliente ?
 
             (fetch(`${process.env.REACT_APP_CALENDAR}/maestrin`, {
                 method: "POST",
@@ -97,10 +100,10 @@ export function insertB(id, cadastro, unidade, user) {
        */ : window.alert('erro')
 }
 
-export function insertC(disp, cadastro, unidade, user) {
+export function insertC(cadastro, unidade, user) {
 
-    if (disp == 0) {
-      var resp = window.confirm('Deseja abrir este horário?')
+    
+        var resp = window.confirm('Deseja abrir este horário?')
 
         if (resp) {
             cadastro.id_venda_sub = 3;
@@ -117,21 +120,40 @@ export function insertC(disp, cadastro, unidade, user) {
                 body: JSON.stringify(cadastro),
             })
                 .then((resp) => resp.json()).then((data) => {
-                    
+
                     window.location.replace(`/calendar/${unidade}/${cadastro.data}/${user}`)
                 })
                 .catch(err => console.log(err)))
         }
-    }
+    
 }
 
-export function alterarAgenda(id, cadastro) {
-    //   var value2 = cadastro.confirm == 0 ? 1 : 0
+export function insertSala(cadastro, unidade, user) {
+
+    (fetch(`${process.env.REACT_APP_CALENDAR}/insertSala`, {
+        method: "POST",
+        headers: {
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify(cadastro),
+    })
+        .then((resp) => resp.json()).then((data) => {
+            window.alert('Cadastrado!')
+           // window.location.replace(`/calendar/${unidade}/${user}`)
+        })
+        .catch(err => console.log(err)))
+}
+
+
+
+export function alterarAgenda(isEdit, cadastro) {
+    cadastro.hora_fim = moment(`2020.05.05 ${cadastro.hora}`).add(isEdit.duracao, 'minutes').format('HH:mm')
+    console.log(cadastro)
     //let resp = window.confirm(`Deseja ocultar a ${props.atendente} atendente da agenda?`)
     // if (resp) {
 
     //console.log(`${process.env.REACT_APP_CALENDAR}/agendar/${cadastro.id_venda_sub}/${cadastro.data.substr(0, 10)}/${confirm}/${cadastro.atendente}`)
-    fetch(`${process.env.REACT_APP_CALENDAR}/alterarAgenda/${id}`, {
+    fetch(`${process.env.REACT_APP_CALENDAR}/alterarAgenda/${isEdit.id}`, {
         method: "PUT",
         headers: {
             'Content-type': 'application/json',
@@ -139,12 +161,54 @@ export function alterarAgenda(id, cadastro) {
         body: JSON.stringify(cadastro),
     })
         .then(() => {
-           
-           // window.location.replace(`/calendar/${cadastro.unidade}/${cadastro.data}/${user}`)
+
+            // 
         })
         .catch(err => console.log(err))
 
 }
+
+export function editarA(cadastro, user) {
+    console.log(cadastro)
+    //let resp = window.confirm(`Deseja ocultar a ${props.atendente} atendente da agenda?`)
+    // if (resp) {
+
+    //console.log(`${process.env.REACT_APP_CALENDAR}/agendar/${cadastro.id_venda_sub}/${cadastro.data.substr(0, 10)}/${confirm}/${cadastro.atendente}`)
+    fetch(`${process.env.REACT_APP_CALENDAR}/alterar`, {
+        method: "PUT",
+        headers: {
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify(cadastro),
+    })
+        .then(() => {
+
+            window.alert(`Agenda atualizada!`)
+            window.location.replace(`/calendar/${cadastro.unidade}/${cadastro.data}/${user}`)
+        })
+        .catch(err => console.log(err))
+
+}
+
+export function editarSala(cadastro, unidade, user) {
+
+    //console.log(`${process.env.REACT_APP_CALENDAR}/agendar/${cadastro.id_venda_sub}/${cadastro.data.substr(0, 10)}/${confirm}/${cadastro.atendente}`)
+    fetch(`${process.env.REACT_APP_CALENDAR}/alterarSala`, {
+        method: "PUT",
+        headers: {
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify(cadastro),
+    })
+        .then(() => {
+            
+            window.alert(`Agenda atualizada!`)
+            window.location.replace(`/calendar/${unidade}/${user}`)
+        })
+        .catch(err => console.log(err))
+
+}
+
 
 
 export function deleteA(project, unidade, user) {
@@ -163,8 +227,8 @@ export function deleteA(project, unidade, user) {
         })
             .then((resp) => resp.json()).then((data) => {
                 if (project.nome_cliente) {
-                   desmarcar(project)
-             
+                    desmarcar(project)
+
                 }
                 window.location.replace(`/calendar/${unidade}/${project.data.substr(0, 10)}/${user}`)
             })
@@ -174,21 +238,42 @@ export function deleteA(project, unidade, user) {
 
 export function deleteB(project) {
 
-        fetch(`${process.env.REACT_APP_CALENDAR}/delete5/${project.id}`, {
-            method: "DELETE",
-            headers: {
-                'Content-type': 'application/json',
-            },
-        })
-            .then((resp) => resp.json())
-            .catch(err => console.log(err))
-    
+    fetch(`${process.env.REACT_APP_CALENDAR}/delete5/${project.id}`, {
+        method: "DELETE",
+        headers: {
+            'Content-type': 'application/json',
+        },
+    })
+        .then((resp) => resp.json())
+        .catch(err => console.log(err))
+
 }
 
-export function fecharA(cadastro, unidade, user, nota) {
+export function deleteSala(id, unidade, user) {
+
+    let resp = window.confirm("Confirma a exclusão desta Sala?")
+   if (resp) {
+
+       fetch(`${process.env.REACT_APP_CALENDAR}/deleteSala/${id}`, {
+           method: "DELETE",
+           headers: {
+               'Content-type': 'application/json',
+           },
+       })
+           .then((resp) => resp.json()).then((data) => {
+            
+               window.location.replace(`/calendar/${unidade}/${user}`)
+           })
+           .catch(err => console.log(err))
+       }
+}
+
+
+export function fecharA(cadastro, unidade, user) {
     if (cadastro.id_venda_sub > 0) { window.alert('Exclua este registro primeiro.') } else {
-        cadastro.nome_procedimento = nota
+
         cadastro.nome_cliente = 'bloqueio';
+        if(!cadastro.nota){ cadastro.nota = 'fechado'}
         cadastro.id_cliente = 135;
         cadastro.procedimento = 4;
         cadastro.id_venda_sub = 1;
@@ -213,6 +298,31 @@ export function fecharA(cadastro, unidade, user, nota) {
 
 }
 
+
+
+export function confirmarAgenda(cadastro, user) {
+
+    var value2 = cadastro.confirm == 0 ? 1 : 0
+
+    fetch(`${process.env.REACT_APP_CALENDAR}/confirmarAgenda/${cadastro.id_cliente}/${cadastro.data.substr(0, 10)}/${value2}/${cadastro.id_venda_sub}`, {
+        method: "PUT",
+        headers: {
+            'Content-type': 'application/json',
+        },
+        body: JSON.stringify(),
+    })
+        .then((resp) => resp.json()).then((data) => {
+            // agendar(cadastro, value2)
+            window.alert(cadastro.confirm == 0 ? "Horário confirmado!" : "Confirmação pendente!")
+
+            window.location.replace(`/calendar/${cadastro.unidade}/${cadastro.data}/${user}`)
+            // history.push(`/prontuario/${id}/${idrecord}/1`)
+            //redirect
+        })
+        .catch(err => console.log(err))
+    //    }
+}
+
 function desmarcar(cadastro) {
     //   var value2 = cadastro.confirm == 0 ? 1 : 0
     //let resp = window.confirm(`Deseja ocultar a ${props.atendente} atendente da agenda?`)
@@ -227,7 +337,7 @@ function desmarcar(cadastro) {
         body: JSON.stringify(cadastro),
     })
         .then((resp) => resp.json()).then((data) => {
-           
+
 
         })
         .catch(err => console.log(err))
@@ -235,7 +345,7 @@ function desmarcar(cadastro) {
 }
 
 export function buscarUltimo(unidade) {
-    
+
     let result = {}
     fetch(`${process.env.REACT_APP_CALENDAR}/buscarUltimo/${unidade}`, {
         method: "GET",
@@ -245,15 +355,15 @@ export function buscarUltimo(unidade) {
     })
         .then((resp) => resp.json())
         .then((resp2) => {
-          
-          result = resp2
-         // console.log(result)
-           // return( result)
-    
-        })
-        .catch((err) =>{ return err})
-        .then(()=>{return result})
 
-        
+            result = resp2
+            // console.log(result)
+            // return( result)
+
+        })
+        .catch((err) => { return err })
+        .then(() => { return result })
+
+
 }
 

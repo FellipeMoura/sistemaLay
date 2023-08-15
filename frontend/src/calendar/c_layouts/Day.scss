@@ -82,6 +82,12 @@
   //  border: 1px solid #818181;
 
   }
+
+  .indisp p{
+    font-size: 12px;
+ 
+   }
+  
  
 
   .card:hover > p{
@@ -115,6 +121,7 @@
 
   .card > div p{
     //color: aliceblue;
+    padding-left: 2px;
     font-weight: unset;
     font-size: 14px;
     white-space: nowrap;

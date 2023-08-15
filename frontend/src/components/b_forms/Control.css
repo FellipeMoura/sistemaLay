@@ -80,7 +80,10 @@
     
 
 }
-
+.dashControl{
+    display: flex;
+    flex-direction: column;
+}
 .btnconfirm{    
     margin: 4px auto;
     max-height: 2em;

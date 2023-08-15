@@ -4,8 +4,8 @@ export function getColor(i){
       '#ce7a60',
       '#ce9560',
       '#0074f8',
-      '#cecc60',
-      '#be8686',
+      '#FF00FF',
+      '#DC143C',
       '#ce6060',
       '#60cea9',
       '#33afa5',
@@ -20,9 +20,9 @@ export function getColor(i){
       '#ce606f',
       '#cea860',
       '#af6033',
-      '#af9233',
-      '#9caf33',
-      '#c0c783',
+      '#af9233', 
+      '#FFD700',  
+      '#DAA520',
       '#af33a9',
       '#f9b1ff',
       '#ffbebf',
@@ -31,7 +31,16 @@ export function getColor(i){
       '#a886d3',
       '#ffdc9a',
       '#806d6d',
-      '#7955f8'
+      '#A52A2A',
+      '#A020F0',
+      '#ADFF2F',
+      '#FF4500',
+      '#FF7F50',
+      '#228B22',
+      '#3CB371',
+   
+      '#B22222',
+      '#9caf33',
         
       ]
       let result = color[i]? color[i]: ''

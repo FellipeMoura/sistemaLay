@@ -8,9 +8,10 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import Day from "../c_layouts/Day";
 import Anestesic from "../c_layouts/Anestesic";
-import { AiOutlineFilePdf } from 'react-icons/ai'
-import { MdPersonAdd } from 'react-icons/md'
-import { SlRefresh } from 'react-icons/sl'
+import { AiOutlineFilePdf, AiFillSetting } from 'react-icons/ai'
+import { MdPersonAdd  } from 'react-icons/md'
+import { SlRefresh} from 'react-icons/sl'
+
 import Modal from 'react-modal'
 import { Pdf } from "../c_layouts/Pdf";
 import { NewAten } from "../c_layouts/NewAten";
@@ -95,9 +96,10 @@ export default function DayForm(props) {
         <div className="pdfHeader" onClick={() => handleOpenModal(0)}>
           <AiOutlineFilePdf />
         </div>
-        <div className="pdfHeader" onClick={() => window.location.replace(`/calendar/${props.unidade}/${props.user}`)}>
-          <SlRefresh />
+        <div className="pdfHeader" onClick={() => handleOpenModal(1)}>
+          <MdPersonAdd />
         </div>
+  
         <div className="data">
           <button
             type="button"
@@ -108,7 +110,7 @@ export default function DayForm(props) {
 
           <button
             type="button"
-            onClick={() => props.setCurrentFormat(props.currentDay.format('M'))}
+            onClick={() => props.setToMonth(props.currentDay.format('M'))}
           >
             {props.currentDay.format('MMM') + ' /'}
           </button>
@@ -120,10 +122,12 @@ export default function DayForm(props) {
             {props.currentDay.format('YY')}
           </button>
         </div>
-        <div className="pdfHeader" onClick={() => handleOpenModal(1)}>
-          <MdPersonAdd />
+        <div className="pdfHeader" onClick={() => window.location.replace(`/calendar/${props.unidade}/${props.user}`)}>
+          <SlRefresh />
         </div>
-        <div></div>
+        <div className="pdfHeader" onClick={() => props.setCurrentFormat(4, {})}>
+          <AiFillSetting />
+        </div>
         <IconButton
           size="small"
           onClick={() => mudar(props.currentDay.clone().add(1, "day"))}
@@ -238,6 +242,7 @@ function WeekCard(props) {
 
 
         <Anestesico
+         
           isEdit={props.isEdit}
           setIsEdit={props.setIsEdit}
           setInput={props.setInput}
@@ -427,6 +432,7 @@ function Anestesico(props) {
           >
 
             <Anestesic
+              user={props.user}
               isEdit={props.isEdit}
               setIsEdit={props.setIsEdit}
               setInput={props.setInput}

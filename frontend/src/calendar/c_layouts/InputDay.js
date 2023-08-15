@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react'
 import { Select, InputText, Button, InputTime } from '../d_inputs/Input'
 import './InputDay.css'
 import RBar from './RBar'
-import { insertA, deleteA, fecharA} from '../f_aux/functions'
+import { insertA, deleteA, fecharA, editarA, confirmarAgenda } from '../f_aux/functions'
 import moment from 'moment'
-import { ProcList } from './ProcList'
+import { ProcList, SalaList } from './ProcList'
 import { GiCheckMark } from 'react-icons/gi'
 
 
@@ -15,45 +15,10 @@ function InputDay({ setIsEdit, unidade, setCurrentFormat, dataCard, clients, use
     const [currentSala, setCurrentSala] = useState(project.sala ? 0 : 1)
     const [options, setOptions] = useState([])
     const [idC, setIdC] = useState(dataCard.id)
-    const [nota, setNota] = useState('')
-    const [confirm, setConfirm] = useState(project.confirm)
     
+    const [confirm, setConfirm] = useState(project.confirm)
+    const [sala, setSala] = useState([])
 
-
-    const sala = [
-        { id: 0, nome: 'Livre' },
-        { id: 1, nome: 'Endermo Glúteo' },
-        { id: 2, nome: 'Carboxterapia' },
-        { id: 3, nome: 'Criofrequência + Ultracavitação' },
-        { id: 4, nome: 'Criolipólise' },
-        { id: 5, nome: 'Dermapen' },
-        { id: 6, nome: 'Estimulação Russa' },
-        { id: 7, nome: 'Heccus' },
-        { id: 8, nome: 'Hidrolipoclasia' },
-        { id: 9, nome: 'Camuflagem de estrias' },
-        { id: 10, nome: 'Lipocavitação + Lipocavity Wave' },
-        { id: 11, nome: 'Luz Pulsada' },
-        { id: 12, nome: 'Ladshape' },
-        { id: 13, nome: 'Mega Shape' },
-        { id: 14, nome: 'New Skin' },
-        { id: 15, nome: 'Power Shape + Eletroestimulação Total Sculptor' },
-        { id: 16, nome: 'Spa Detox' },
-        { id: 17, nome: 'Radiofrequência' },
-        { id: 18, nome: 'Radiofrequência Fracionada + Jato de Plasma ' },
-        { id: 19, nome: 'Laser Venus' },
-        { id: 20, nome: 'Vacum Laser + Striort' },
-        { id: 21, nome: 'Laser Black Peel + Remoção de Tatuagem + Despigmentação de sobrancelha' },
-        { id: 22, nome: 'Depilação a Laser' },
-        { id: 23, nome: ' Ultrasson Microfocado' },
-        { id: 24, nome: 'Laser Lavieen' },
-        { id: 25, nome: 'Enzima Capilar' },
-        { id: 26, nome: 'Enzima Papada' },
-        { id: 27, nome: 'Enzima Intramuscular' },
-        { id: 28, nome: 'Enzima Local' },
-        { id: 29, nome: 'Limpeza de Pele' },
-        { id: 30, nome: 'Drenagem' },
-        { id: 31, nome: 'Criolipólise de Placas' }
-    ]
 
     function handleChange(e) {
         setProject({ ...project, [e.target.name]: e.target.value })
@@ -61,98 +26,46 @@ function InputDay({ setIsEdit, unidade, setCurrentFormat, dataCard, clients, use
     }
     function handleChange2(e) {
         setProject({ ...project, [e.target.name]: e.target.value })
+       
     }
     function duracaoChange(e) {
-        setProject({ ...project, ['hora_fim']: moment(`2020.05.05 ${project.hora}`).add(e.target.value, 'minutes').format('HH:mm') })
+        setProject({ ...project, ['duracao']: e.target.value, ['hora_fim']: moment(`2020.05.05 ${project.hora}`).add(e.target.value, 'minutes').format('HH:mm') })
         //   console.log(project.hora_fim)
     }
 
     function limpar(x) {
 
-        if (x && idC > 0) { window.alert('Exclua este registro primeiro.') } else {
 
-            setProject({ ...project, ['nome_cliente']: '', ['procedimento']: '', ['id']: '', ['sala']: '' })
 
-            setCurrentName(1)
-            setCurrentProc(1)
-            setCurrentSala(1)
-            setOptions([])
-            //console.log(project)
+        setProject({ ...project, ['id']: 0, ['nome_cliente']: '', ['procedimento']: '', ['id']: '', ['sala']: '' })
 
-        }
+        setCurrentName(1)
+        setCurrentProc(1)
+        setCurrentSala(1)
+        setOptions([])
+        //console.log(project)
+
+
         !x ? setIdC(0) : console.log('limpar')
 
     }
 
-    function editarSala(e) {
-        console.log(e.target.value)
-        fetch(`${process.env.REACT_APP_CALENDAR}/disp/${project.data.substr(0, 10)}/${project.hora}/${project.hora_fim}/${sala[e.target.value].id}/${unidade}`, {
-            method: "GET",
-            heders: {
-                'Content-type': 'application/json',
-            },
-        })
-            .then((resp) => resp.json())
-            .then((resp2) => {
-                console.log(resp2)
-                if ((!resp2 || resp2[0].sala == 0 || resp2[0].sala == 30 ||
-                    (resp2[0].sala > 25 && resp2[0].sala < 30 && resp2.length < 2)
-                )) {
 
-                    console.log(sala[e.target.value])
-                    setProject({ ...project, ['sala']: sala[e.target.value].id })
-                    setCurrentSala(0)
 
-                } else {
 
-                    if (resp2[0].atendente !== project.atendente) {
-                        window.alert(`Sala reservada para ${resp2[0].atendente}`)
-                    } else {
-                        setProject({ ...project, ['nome_procedimento']: options[e].nome, ['procedimento']: options[e].id_pacote, ['id_venda_sub']: options[e].id_vendas_sub, ['sala']: options[e].sala })
-                        options[e].sala ? setCurrentSala(0) : console.log('sala indefinida')
-                        console.log(options[e])
-                    }
-                }
-            })
-            .catch(err => console.log(err))
-    }
-
-    function confirmarAgenda(cadastro) {
-
-        var value2 = cadastro.confirm == 0 ? 1 : 0
-
-        fetch(`${process.env.REACT_APP_CALENDAR}/confirmarAgenda/${cadastro.id_cliente}/${cadastro.data.substr(0, 10)}/${value2}/${cadastro.id_venda_sub}`, {
-            method: "PUT",
-            headers: {
-                'Content-type': 'application/json',
-            },
-            body: JSON.stringify(),
-        })
-            .then((resp) => resp.json()).then((data) => {
-                // agendar(cadastro, value2)
-                window.alert(cadastro.confirm == 0 ? "Horário confirmado!" : "Confirmação pendente!")
-
-                window.location.replace(`/calendar/${unidade}/${project.data}/${user}`)
-                // history.push(`/prontuario/${id}/${idrecord}/1`)
-                //redirect
-            })
-            .catch(err => console.log(err))
-        //    }
-    }
 
     const labelName = (
         <div className='labelName labelN'>
             <p>Cliente: <label >{project.nome_cliente}
-                <button
-                    type='button'
-                    onClick={() => limpar(true)}
-                >
-                    Limpar
-                </button>
-            </label></p>
-            {project.id > 0 &&
-                (<p>Confirmado:  <div onClick={() => confirmarAgenda(project)}> {confirm == 1 && <GiCheckMark />}</div> </p>)
-            }
+                {project.id < 1 &&
+                    <button
+                        type='button'
+                        onClick={() => limpar(true)}
+                    >
+                        Limpar
+                    </button>
+                }</label></p>
+
 
         </div>
     )
@@ -163,13 +76,16 @@ function InputDay({ setIsEdit, unidade, setCurrentFormat, dataCard, clients, use
             <p>Procedimento: <label> {project.nome_procedimento}</label></p>
         </div>
     )
-
+    function setThisSala(){
+        setCurrentSala(1)
+        buscarSalas()
+    }
     const labelSala = (
         <div className='labelName'>
             <p>Aparelho: <label> {project.sala ? project.sala : ''}
                 <button
                     type='button'
-                    onClick={() => setCurrentSala(1)}
+                    onClick={() => setThisSala()}
                 >
                     Alterar
                 </button>
@@ -196,16 +112,16 @@ function InputDay({ setIsEdit, unidade, setCurrentFormat, dataCard, clients, use
 
     function setProc(e) {
         // console.log('sala:' + e)
-        setSala(e)
+        editSala(e)
         currentSala === 1 && currentProc == 1 && setProject({ ...project, ['nome_procedimento']: options[e].nome, ['procedimento']: options[e].id_pacote, ['id_venda_sub']: options[e].id_vendas_sub })
 
         setCurrentProc(0)
 
 
     }
-    function setSala(e) {
+    function editSala(e) {
         // const sala = e.target.value
-        fetch(`${process.env.REACT_APP_CALENDAR}/disp/${project.data.substr(0, 10)}/${project.hora}/${project.hora_fim}/${options[e].sala}/${unidade}`, {
+        fetch(`${process.env.REACT_APP_CALENDAR}/disp/${project.data.substr(0, 10)}/${project.hora}/${project.hora_fim}/${options[e].sala}/${unidade}/${project.atendente}`, {
             method: "GET",
             heders: {
                 'Content-type': 'application/json',
@@ -213,23 +129,18 @@ function InputDay({ setIsEdit, unidade, setCurrentFormat, dataCard, clients, use
         })
             .then((resp) => resp.json())
             .then((resp2) => {
-                var resp = resp2
-                if (!resp2 || resp2[0].sala == 0 || resp2[0].sala == 30 ||
-                    (resp2[0].sala > 25 && resp2[0].sala < 30 && resp2.length < 2)
-                ) {
-
+                console.log(resp2)
+                if (!resp2) {
 
                     setProject({ ...project, ['nome_procedimento']: options[e].nome, ['procedimento']: options[e].id_pacote, ['id_venda_sub']: options[e].id_vendas_sub, ['sala']: options[e].sala })
-                    options[e].sala ? setCurrentSala(0) : console.log('sala indefinida')
-                    console.log(options[e])
+                    options[e].sala ? setCurrentSala(0) : buscarSalas()
+                  
                 } else {
-
-                    if (resp2[0].atendente !== project.atendente) {
-                        window.alert(`Sala reservada para ${resp2[0].atendente}`)
-                    } else {
+                    let resp3 = window.confirm(`Sala reservada , confirma o agendamento nesse horário?`)
+                    if (resp3) {
                         setProject({ ...project, ['nome_procedimento']: options[e].nome, ['procedimento']: options[e].id_pacote, ['id_venda_sub']: options[e].id_vendas_sub, ['sala']: options[e].sala })
-                        options[e].sala ? setCurrentSala(0) : console.log('sala indefinida')
-                        console.log(options[e])
+                        options[e].sala ? setCurrentSala(0) : buscarSalas()
+
                     }
                 }
             })
@@ -238,11 +149,53 @@ function InputDay({ setIsEdit, unidade, setCurrentFormat, dataCard, clients, use
 
     }
 
+    function buscarSalas(){
+        fetch(`${process.env.REACT_APP_CALENDAR}/buscarSalas/${unidade}`, {
+            method: "GET",
+            heders: {
+                'Content-type': 'application/json',
+            },
+        })
+            .then((resp) => resp.json())
+            .then((resp2) => {
+
+                setSala(resp2)
+                console.log(resp2)
+            })
+            .catch(err => console.log(err))
+    }
+
+    function editarSala(e) {
+        //console.log(e.target.value)
+        fetch(`${process.env.REACT_APP_CALENDAR}/disp/${project.data.substr(0, 10)}/${project.hora}/${project.hora_fim}/${sala[e].indice}/${unidade}/${project.atendente}`, {
+            method: "GET",
+            heders: {
+                'Content-type': 'application/json',
+            },
+        })
+            .then((resp) => resp.json())
+            .then((resp2) => {
+                if (!resp2) {
+
+                    setProject({ ...project,  ['sala']: sala[e].indice })
+                     setCurrentSala(0)
+                  
+                } else {
+                    let resp3 = window.confirm(`Sala reservada para ${resp2[0].atendente}, confirma o agendamento nesse horário?`)
+                    if (resp3) {
+                        setProject({ ...project,  ['sala']: sala[e].indice })
+                        setCurrentSala(0)
+
+                    }
+                }
+            })
+            .catch(err => console.log(err))
+    }
 
     const nameBar = (
         <div className='inline'>
             <RBar
-            unidade={unidade}
+                unidade={unidade}
                 handleChange={handleChange}
                 setName={setName}
                 setName2={setName2}
@@ -250,7 +203,7 @@ function InputDay({ setIsEdit, unidade, setCurrentFormat, dataCard, clients, use
                 clients={clients}
                 setOptions={setOptions}
                 users={dataCard} />
-            
+
 
         </div>
     )
@@ -273,19 +226,14 @@ function InputDay({ setIsEdit, unidade, setCurrentFormat, dataCard, clients, use
 
     const salaStates = [
         labelSala,
-        <Select
-            flex='column'
-            width='15em'
-            options={sala}
-            value={project.sala}
-            name='sala'
-            text='Aparelho'
-            handleOnChange={editarSala}
+        <SalaList
+            salas={sala}
+            editarSala={editarSala}
         />
 
 
     ]
-    function transferir(){
+    function transferir() {
         setCurrentFormat(1)
         setIsEdit(project)
     }
@@ -298,12 +246,16 @@ function InputDay({ setIsEdit, unidade, setCurrentFormat, dataCard, clients, use
 
             <div className='inputForm'>
                 <h1>Agendamento</h1>
+                {project.id > 0 &&
+                    <div className='labelConfirm'
+                        onClick={() => confirmarAgenda(project, user)}> Confirmado:<div> {confirm == 1 && <GiCheckMark />} </div></div>
+                }
                 <div className='labelName'>
-                {nameStates[currentName]}
+                    {nameStates[currentName]}
                 </div>
                 {procStates[currentProc]}
                 {salaStates[currentSala]}
-                
+
                 <div className='inline2'>
                     <InputTime
                         flex='column'
@@ -324,6 +276,7 @@ function InputDay({ setIsEdit, unidade, setCurrentFormat, dataCard, clients, use
                     <InputText
                         flex='column'
                         title='Duração'
+                        value={project.duracao}
                         width='50px'
                         handleOnChange={duracaoChange}
                     />
@@ -331,16 +284,17 @@ function InputDay({ setIsEdit, unidade, setCurrentFormat, dataCard, clients, use
                 </div>
                 <p>Data:<label> {project.data && project.data.substr(0, 10).split('-').reverse().join('/')}</label></p>
                 <p>Atendente: <label>{project.atendente}</label></p>
-                {!project.id_cliente &&
+              
 
                     <InputText
-                        value={nota}
-                        handleOnChange={(e) => setNota(e.target.value)}
+                        value={project.nota}
+                        handleOnChange={(e) => handleChange2(e)}
+                        name='nota'
                         width='500px'
                         flex='column'
                         title='Anotação'
                     />
-                }
+                
 
 
 
@@ -354,12 +308,18 @@ function InputDay({ setIsEdit, unidade, setCurrentFormat, dataCard, clients, use
                         click={() => limpar(false)}
                     />
                 }
-
-                <Button
-                    color="#447461"
-                    value='Cadastrar'
-                    click={() => insertA(idC, dataCard, project, unidade, user,)}
-                />
+                {project.id < 1 ?
+                    <Button
+                        color="#447461"
+                        value='Cadastrar'
+                        click={() => insertA(idC, dataCard, project, unidade, user,)}
+                    />
+                    : <Button
+                        color="#447461"
+                        value='Salvar'
+                        click={() => editarA(project, user)}
+                    />
+                }
 
                 <Button
                     color="#474747"
@@ -377,7 +337,7 @@ function InputDay({ setIsEdit, unidade, setCurrentFormat, dataCard, clients, use
                     <Button
                         color="#6c388f"
                         value='Bloquear'
-                        click={() => fecharA(project, unidade, user, nota)}
+                        click={() => fecharA(project, unidade, user)}
                     />
                 }
                 {project.id > 0 &&

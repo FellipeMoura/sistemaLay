@@ -1,0 +1,220 @@
+.form{
+    background-color:#e2e2e2 ;   
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: 0;
+    padding: 20px;
+    height: 100vh;
+    width: 100%;
+}
+
+.inputForm p{
+    margin: 10px 0;
+}
+
+.inputForm label{
+    font-size: 1.2em;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+}
+.form div{
+    margin: 1px;
+}
+.form h1{
+    color: #5d5d5d;
+    padding-top: 2vh;
+    text-align: center;
+    width: 100%;
+    font-weight: normal;
+}
+
+.cPanel{   
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-bottom: .5em;
+    width: 100%;
+    align-items: center;
+   
+    
+}
+
+.inputPanel{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+    justify-content: space-around;
+    min-width: 42em;
+    width: 60%;
+    background-color:#e7e7e7 ;
+    display: flex;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+    flex-direction: row;
+    padding: 1em .5em .5em.5em;
+    align-items: center;
+
+}
+
+
+.inputPanel >* {
+   
+    margin: auto 0;
+    height: 2em;
+
+}
+
+
+.tdConfirm svg{
+    font-size: 1.8em;
+    fill: #03ba4c;
+}
+.tdConfirm {
+    display: flex;
+    justify-content: center;
+}
+.tableContainer3 button svg{
+    font-size: 1.5em;
+    
+    transition: 0.2s;
+}
+
+.tableContainer3 button{
+    border: 0;
+    cursor: pointer;
+}
+
+.btnControl{
+    
+    margin-top: -7px;
+}
+
+.tableContainer3{  
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+    min-width: 42em;
+    width: 60%;
+    background-color: #f7f7f7;
+    position: relative; 
+    flex-wrap: wrap;
+    overflow:auto;
+    padding: 0;
+    max-height: 65vh;
+    
+}
+.tableContainer3 th{
+    padding-left: 5px;
+    background-color: #7c7171;
+    color: #fbfbfb;
+    height: 5vh;
+    position: sticky;
+    top: 2px;
+    font-weight: normal;
+    width: 2%;
+    
+
+}
+
+.btnconfirm{    
+    margin: 4px auto;
+    max-height: 2em;
+}
+
+.tbody3 td{
+    background-color: #dadada;
+    height: 2.5em;
+    text-align: center;    
+    padding-left: 5px;
+    
+}
+.add2 svg{
+    fill: #447461
+}
+.dele2 svg{
+    fill: #c73f3fbe;
+}
+
+
+
+/*
+
+
+
+
+
+
+
+
+
+.Bform1{
+    display: flex;
+    flex-direction: row;
+}
+.Bform1 > * > input{
+    margin: 10px 10px;
+    width: 80vh;
+}
+
+.radiosContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.radiosContainer > *{
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    background-color: #f1f1f1;
+
+}
+
+textarea {
+      
+    height: 120px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+}
+
+.radiosContainer input{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+}
+
+.formControl{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+}
+
+.formControl label{
+    margin-bottom: .6em;
+    font-weight: bold;
+}
+
+
+.step input:checked ~ svg{
+    fill:#c23939;
+}
+.radiosContainer input{
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: bold;
+    color: #c23939;
+    font-size: 0.9rem;
+}
+
+.form input,
+textarea {
+  
+    padding: .6rem;
+    border: none;
+    border-radius: 5px;
+    
+}
+*/

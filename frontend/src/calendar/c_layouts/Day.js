@@ -69,8 +69,8 @@ function Day(props) {
     }, [props.card, props.horario]);
 
 
-    function alterarAg(item){
-        alterarAgenda(props.isEdit.id,item)
+    function alterarAg(item) {
+        alterarAgenda(props.isEdit, item)
         props.setIsEdit(false)
         window.location.replace(`/calendar/${props.unidade}/${item.data}/${props.user}`)
     }
@@ -81,117 +81,121 @@ function Day(props) {
 
 
                 item.nome_cliente || (props.disp == '1' && (item.data == moment().format('YYYY-MM-DD') && item.hora > moment().format('HH:mm') || item.data > moment().format('YYYY-MM-DD'))) ?
-    
-                        item.nome_cliente === 'bloqueio' ?
-                            <div 
-                                className='card indisp' 
-                                key={item.atendente + props.index} 
-                                style={{ width: '100%' }} 
-                                onClick={() => deleteA(props.card[0], props.unidade, props.user)}
-                            >
-                                <p>{
-                                    item.nome_procedimento?
-                                        item.nome_procedimento 
-                                    :   'fechado'
-                                    }
-                                </p>
-                            
-                            </div>
+
+                    item.nome_cliente === 'bloqueio' ?
+                        <div
+                            className='card indisp'
+                            key={item.atendente + props.index}
+                            style={{ width: width }}
+                            onClick={() => deleteA(props.card[0], props.unidade, props.user)}
+                        >
+                            <p>
+                                {item.nota}
+
+                            </p>
+
+                        </div>
                         :
-                            <div key={props.horario + props.index + item.id}>
+                        <div key={props.horario + props.index + item.id}>
 
-                                <div 
-                                    className={`card ${setClass(item)}`} 
-                                    style={
-                                        { width: width, 
-                                          backgroundColor: `${
-                                            item.sala ?
-                                                parseInt(item.assinado) > 0 ?
-                                                    '#b2b6b9' 
-                                                :   getColor(item.sala) 
-                                            :   '#9fd2e6'
-                                            }`
-                                        }
-                                    } 
-                                    onClick={() => 
-                                        props.isEdit? 
-                                            alterarAg(item)
-                                        :   props.setInput(2,item)
-                                    }
-                                >
+                            <div
+                                className={`card ${setClass(item)}`}
+                                style={
                                     {
-                                        item.nome_cliente &&
-                                        <div 
-                                            className={
-                                                `bal ${props.isOne > 2 ?
-                                                        props.index > 1 ?
-                                                            `balao` 
-                                                        :   'firstBalao' 
-                                                    :   props.index > 1 ?
-                                                            'lastBalao' 
-                                                        :   'firstLastBalao'}`
-                                            }
-                                            >
-
-                                            <p><label >{item.nome_cliente}</label></p>
-                                            <p><label >{item.telefone}</label></p>
-                                            <p><label>{item.nome_procedimento}</label></p>
-                                            <p>Sala: <label>{item.sala}</label></p>
-                                            <p>Início: <label>{item && item.hora.substr(0, 5)}</label></p>
-                                            <p>Fim: <label>{item && item.hora_fim.substr(0, 5)}</label></p>
-                                            <p>Usuário: <label>{item && item.user}</label></p>
-                                            <p>ID: <label>{item &&`e${item.id}|v${item.id_venda_sub}|c${item.id_cliente}`}</label></p>
-
-                                        </div>
+                                        width: width,
+                                        backgroundColor: `${parseInt(item.id) > 0 ?
+                                                parseInt(item.assinado) > 0 ?
+                                                    '#b2b6b9'
+                                                    : getColor(item.sala)
+                                                : '#9fd2e6'
+                                            }`
                                     }
+                                }
+                                onClick={() =>
+                                    props.isEdit ?
+                                        alterarAg(item)
+                                        : props.setInput(2, item)
+                                }
+                            >
+                                {
+                                    item.nome_cliente &&
+                                    <div
+                                        className={
+                                            `bal ${props.isOne > 2 ?
+                                                props.index > 1 ?
+                                                    `balao`
+                                                    : 'firstBalao'
+                                                : props.index > 1 ?
+                                                    'lastBalao'
+                                                    : 'firstLastBalao'}`
+                                        }
+                                    >
 
-                                    <div>
-                                        <p style={{ 
-                                            borderRadius: '10px 10px 0 0',
-                                            backgroundColor:
-                                                item.nome_cliente ? 
-                                                    parseInt(item.assinado) > 1 ?
-                                                        '#348fda' 
-                                                    :parseInt(item.assinado) === 1 ? 
-                                                        '#cf5a5a' 
-                                                    :item.confirm == 1 ? 
-                                                        color 
-                                                    :'#ccc' 
-                                                : '' 
-                                                  }}
-                                        >
-                                            {
-                                            item.hora >= props.horario ?
-                                                item ? 
-                                                    item.nome_cliente || props.hora.substr(0, 5) 
-                                                : '' 
-                                            : ''
-                                            }
-                                        </p>                                        
-                                        <p>{
-                                            item.hora >= props.horario ?
-                                                parseInt(item.assinado) > 1 ?
-                                                    'Assinatura:' 
-                                                :parseInt(item.assinado) === 1 ?
-                                                    'Anulado' 
-                                                : item.nome_procedimento 
-                                            : ''
-                                            }
-                                        </p>
-                                        <p>{
-                                            item.hora >= props.horario ?
-                                                parseInt(item.assinado) > 1 ?
-                                                    item.assinado 
-                                                :item.nome_cliente == 'Aberto'? 
-                                                    item.hora 
-                                                :item.user 
-                                            : ''
-                                            }
-                                        </p>
+                                        <p><label >{item.nome_cliente}</label></p>
+                                        <p><label >{item.telefone}</label></p>
+                                        <p><label>{item.nome_procedimento}</label></p>
+                                        <p>Sala: <label>{item.sala}</label></p>
+                                        <p>Início: <label>{item && item.hora.substr(0, 5)}</label></p>
+                                        <p>Fim: <label>{item && item.hora_fim.substr(0, 5)}</label></p>
+                                        <p>Usuário: <label>{item && item.user}</label></p>
+                                        <p>ID: <label>{item && `e${item.id}|v${item.id_venda_sub}|c${item.id_cliente}`}</label></p>
+
                                     </div>
+                                }
 
+                                <div>
+                                    <p style={{
+                                        borderRadius: '10px 10px 0 0',
+                                        backgroundColor:
+                                            item.nome_cliente ?
+                                                parseInt(item.assinado) > 1 ?
+                                                    '#348fda'
+                                                    : parseInt(item.assinado) === 1 ?
+                                                        '#cf5a5a'
+                                                        : item.confirm == 1 ?
+                                                            color
+                                                            : '#ccc'
+                                                : ''
+                                    }}
+                                    >
+                                        {
+                                            item.hora >= props.horario ?
+                                                item ?
+                                                    item.nome_cliente || props.hora.substr(0, 5)
+                                                    : ''
+                                                : ''
+                                        }
+                                    </p>
+                                    <p>{
+                                        item.hora >= props.horario ?
+                                            parseInt(item.assinado) > 1 ?
+                                                'Assinatura:'
+                                                : parseInt(item.assinado) === 1 ?
+                                                    'Não assinado'
+                                                    : item.nome_procedimento
+                                            : ''
+                                    }
+                                    </p>
+                                    <p>{
+                                        item.hora >= props.horario ?
+                                            parseInt(item.assinado) > 1 ?
+                                                item.assinado
+                                                : item.nome_cliente == 'Aberto' ?
+                                                    item.hora
+                                                    : item.nota ? <label>{item.nota}</label> : item.user
+                                            : ''
+                                    }
+                                    </p>
                                 </div>
-                            </div> : <div className="card indisp" onClick={()=>insertC(props.disp, item, props.unidade, props.user)} key={item.atendente + props.index + item.id} style={{ width: width }}></div>
+
+                            </div>
+                        </div> : <div
+                                    className="card indisp" 
+                                    onClick={() => props.isEdit ?
+                                                    alterarAg(item)
+                                                   : insertC(item, props.unidade, props.user)} 
+                                    key={item.atendente + props.index + item.id} 
+                                    style={{ width: width }}></div>
 
 
             )}

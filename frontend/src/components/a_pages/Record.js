@@ -10,7 +10,7 @@ import ResumoForm from '../b_forms/Resumo';
 import logo from '../../img/logop.png'
 import { Link } from 'react-router-dom';
 import {TiArrowBackOutline} from 'react-icons/ti'
-import { LogoutButton } from '../d_inputs/LogoutButton';
+import { LogoutButton, HomeButton, LanButton } from '../d_inputs/LogoutButton';
 import SupervisaoForm from '../b_forms/Supervisao';
  
 
@@ -118,11 +118,13 @@ function Record() {
                     <div className="header">
                         <Link to="https://www.instagram.com/layaraoliveira.psi/" target="_blank"><img src={logo} className="logo" alt="Logo"/></Link>
                         <label> Paciente: {project.name} </label>
-                        <button onClick={()=>window.location.replace('/')}><TiArrowBackOutline/></button>
+                        <button onClick={()=>window.location.replace('/home')}><TiArrowBackOutline/></button>
                     </div>
                     <div>
 
                     <div className='logoutDiv'>
+                    <HomeButton />
+                        <LanButton />
                         <LogoutButton/>
                     </div>
 

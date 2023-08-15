@@ -52,44 +52,11 @@ export function Pdf({atendentes, handleCloseModal}) {
             atendentes.indexOf(atendente) > 0 ? setList((list) => [...list, { nome: atendente.nome, status: false }]) : setList([{ nome: atendente.nome, status: false }])
         )
         
-        /*   fetch(`${process.env.REACT_APP_CALENDAR}/atendentes/${unidade}`,{
-           method: "GET",
-           heders:{
-               'Content-type': 'application/json',
-           },
-           })
-           .then((resp) => resp.json())
-           .then((resp2) => console.log(resp2))
-               //if (atendentes.length > list.length){ 
-                 //  resp2.map((atendente) =>
-                      
-                    //  setList(list => [...list, {nome: atendente.nome, status: true}])
-                       
-                //   )
-              // }else{
-             /    // console.log(atendentes.length +'-'+ list.length)
-              // }
-              // setAtendentes(resp2)
-                
-             
-           .catch(err => console.log(err))*/
-
-        //setAtendentes(old => [...old, 'teste'] ) 
         
     }, [])
 
-     console.log(list)
+     
 
-    /*const handleSecondFriend = () => {
-    setFriends(
-        friends.map((friend) =>
-            // Here you accept a id argument to the function and replace it with hard coded 🤪 2, to make it dynamic.
-            friend.id === 2
-                ? { ...friend, name: "Changed Name" }
-                : { ...friend }
-        )
-    );
-};*/
     function checkStatus(nome) {
         if (nome) {
             setList(

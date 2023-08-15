@@ -4,6 +4,7 @@ import YearForm from '../b_forms/YearForm'
 import MonthForm from '../b_forms/MonthForm'
 import WeekForm from '../b_forms/WeekForm'
 import DayForm from '../b_forms/DayForm'
+import SalaForm from '../b_forms/SalaForm'
 import moment from "moment";
 import InputDay from "../c_layouts/InputDay";
 import InputAnes from "../c_layouts/InputAnes";
@@ -114,7 +115,8 @@ function Calendar() {
             setCurrentDay={setCurrentDay}
             unidade={unidade}
             atendentes={atendentes}
-            setCurrentFormat={setToMonth}
+            setToMonth={setToMonth}
+            setCurrentFormat={setCurrentFormat}
         />,
         <InputDay
             setIsEdit={setIsEdit}
@@ -131,7 +133,12 @@ function Calendar() {
             dataCard={dataCard}
             setCurrentFormat={setCurrentFormat}
             clients={clients}
-        />
+        />,
+        <SalaForm
+        user={user}
+            unidade={unidade}
+            setCurrentFormat={setCurrentFormat}
+    />
     ]
 
 

@@ -4,7 +4,7 @@ import pdfFonts from 'pdfmake/build/vfs_fonts'
 export function createPDF(project, one, download) {
     pdfMake.vfs = pdfFonts.pdfMake.vfs
 
-    console.log(project)
+    //console.log(project)
 
     const title = [
         {
@@ -19,7 +19,11 @@ export function createPDF(project, one, download) {
     const dados = project.map((item) => {
         return [
             { border: [false],text: `${item.hora.substr(0, 5)} ~ ${item.hora_fim.substr(0, 5)}`, fontSize: 11, margin: [0, 2, 0, 2] },
-            {border: [false], text: (item.nome_cliente.length> 21? item.nome_cliente.substr(0, 19)+'...   ': item.nome_cliente+'            ') + item.nome_procedimento.substr(0, item.nome_procedimento.indexOf('(')), fontSize: 11, margin: [0, 2, 0, 2] },
+            {border: [false], text: ( 
+                (item.nome_cliente == 'bloqueio'? item.nota:item.nome_cliente.length> 20? 
+                item.nome_cliente.substr(0, 18)+'...   '
+                : item.nome_cliente+'                     '))
+                + (item.nome_procedimento.substr(0, item.nome_procedimento.indexOf('('))), fontSize: 11, margin: [0, 2, 0, 2] },
            // {border: [false], text: item.nome_procedimento.substr(0, 21), fontSize: 11, margin: [0, 2, 0, 2] },
             {border: [false], text: item.confirm == 0 ? 'Não' : 'Sim', fontSize: 11, margin: [0, 2, 0, 2] },
 

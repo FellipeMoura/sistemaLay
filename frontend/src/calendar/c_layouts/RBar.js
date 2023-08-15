@@ -52,7 +52,6 @@ export default function RBar(props) {
         })
             .then((resp) => resp.json())
             .then((resp2) => {
-                console.log('teste')
                 props.setOptions(resp2)
                 console.log(resp2)
 

@@ -163,7 +163,7 @@ export function Select({ padrao, width, flex, text, name, options, handleOnChang
                 onChange={handleOnChange}
                 value={value || padrao || ''}
             >
-                <option> {padrao || 'Selecione uma opção'}</option>
+                <option value='' > {padrao || 'Selecione uma opção'}</option>
                 {options.map((option) => (
                     <option value={option.id} key={option.id}>{option.name}</option>
                 ))}

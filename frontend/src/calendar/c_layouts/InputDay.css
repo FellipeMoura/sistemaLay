@@ -64,7 +64,7 @@
 
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+  
 }
 
 .labelN p{
@@ -73,19 +73,22 @@
     flex-direction: row;
     align-items: center;
 }
-.labelN svg{
+.labelConfirm svg{
     fill: #0e7821;
     
 }
-.labelN div{
-    border: 2px solid #85965f;
-    cursor: pointer;
+.labelConfirm{
     display: inline-flex;
     align-items: center;
+}
+.labelConfirm div{
+    border: 2px solid #85965f;
+    cursor: pointer;
     height: 25px;
     width: 25px;
     padding:2px;
     background-color: #f1f1f1;
+    margin: 5px;
 }
 .labelName button{
 
@@ -94,9 +97,14 @@
     padding: 5px;
     text-decoration: none;
     transition: .5s;
+    height: 42px;
     cursor: pointer;
     border: none;
-    margin:0 1vh;
+    
+}
+
+.labelName *{
+    margin: 0 4px;
 }
 
 .btnC{
@@ -170,6 +178,10 @@
     padding: 0 5px;
 }
 
+.tableproc{
+    max-height: 200px;
+    overflow-y: auto;
+}
 .tableproc tr{
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
     height: 30px;
