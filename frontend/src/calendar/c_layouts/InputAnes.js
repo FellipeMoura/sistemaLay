@@ -1,51 +1,24 @@
 import { useState } from 'react'
-import { Select, InputText, InputDate, InputMasks, Button, InputTime } from '../d_inputs/Input'
+import { Select, InputText, InputDate, InputMasks, Button, InputTime, LabelText } from '../d_inputs/Input'
 import './InputDay.css'
 import RBar from './RBar'
-import { insertB, deleteA, fecharA } from '../f_aux/functions'
+import { insertB, deleteA, editarA } from '../f_aux/functions'
 import moment from 'moment'
 import { ProcList } from './ProcList'
 
 
-function InputDay({ unidade, setCurrentFormat,dataCard, clients, user, setIsEdit }) {
+function InputAnes({ setRefresh, setInput, unidade, setCurrentFormat, dataCard, clients, user, setIsEdit }) {
 
-    const [project, setProject] = useState(dataCard)
-    const [currentName, setCurrentName] = useState(dataCard.nome_cliente ? 0 : 1)
+    const [project, setProject] = useState(dataCard[0])
+    const [currentName, setCurrentName] = useState(dataCard[0].nome_cliente ? 0 : 1)
     const [currentProc, setCurrentProc] = useState(project.procedimento ? 0 : 1)
     const [currentSala, setCurrentSala] = useState(project.sala ? 0 : 1)
     const [options, setOptions] = useState([])
-    const [idC, setIdC] = useState(dataCard.id)
+    const [idC, setIdC] = useState(dataCard[0].id)
 
     // console.log(params)
 
 
-    const sala = [
-        { id: 0, nome: 'Camuflagem de estrias' },
-        { id: 1, nome: 'Endermo Glúteo' },
-        { id: 2, nome: 'Carboxterapia' },
-        { id: 3, nome: 'Criofrequência + Ultracavitação' },
-        { id: 4, nome: 'Criolipólise' },
-        { id: 5, nome: 'Dermapen' },
-        { id: 6, nome: 'Estimulação Russa' },
-        { id: 7, nome: 'Heccus' },
-        { id: 8, nome: 'Hidrolipoclasia' },
-        { id: 9, nome: 'Limpeza Completa + Limpeza Simples' },
-        { id: 10, nome: 'Lipocavitação + Lipocavity Wave' },
-        { id: 11, nome: 'Luz Pulsada' },
-        { id: 12, nome: 'Ladshape' },
-        { id: 13, nome: 'Mega Shape' },
-        { id: 14, nome: 'New Skin' },
-        { id: 15, nome: 'Power Shape + Eletroestimulação Total Sculptor' },
-        { id: 16, nome: 'Spa Detox' },
-        { id: 17, nome: 'Radiofrequência' },
-        { id: 18, nome: 'Radiofrequência Fracionada + Jato de Plasma ' },
-        { id: 19, nome: 'Laser Venus' },
-        { id: 20, nome: 'Vacum Laser + Striort' },
-        { id: 21, nome: 'Laser Black Peel + Remoção de Tatuagem + Despigmentação de sobrancelha' },
-        { id: 22, nome: 'Depilação a Laser' },
-        { id: 23, nome: ' Ultrasson Microfocado' },
-        { id: 24, nome: ' Laser Lavieen' }
-    ]
 
     function handleChange(e) {
         setProject({ ...project, [e.target.name]: e.target.value })
@@ -55,96 +28,96 @@ function InputDay({ unidade, setCurrentFormat,dataCard, clients, user, setIsEdit
         setProject({ ...project, [e.target.name]: e.target.value })
     }
 
-    function limpar(x){
+    function limpar(x) {
 
-        if(x && idC > 0){window.alert('Exclua este registro primeiro.')}else{
-        
-        setProject({ ...project, ['nome_cliente']: '' }) 
-        setCurrentName(1) 
-        setCurrentProc(1) 
+        setProject({
+            ...project, ['id']: 0,
+            ['nome_cliente']: '',
+            ['procedimento']: '',
+            ['id']: '',
+            ['sala']: '',
 
-        }
-        !x?setIdC(0):console.log('ok')
+        })
+
+        setCurrentName(1)
+        setCurrentProc(1)
+        setCurrentSala(1)
+        setOptions([])
+        //console.log(project)
+
+
+        !x ? setIdC(0) : console.log('limpar')
 
     }
 
     const labelName = (
-        <div className='labelName'>
+        <div className='labelName labelN'>
             <p>Cliente: <label >{project.nome_cliente}
-                <button
-                    type='button'
-                    onClick={() => limpar(true)}
-                >
-                    Limpar
-                </button>
-            </label></p>
+                {project.id < 1 &&
+                    <button
+                        className='buttonLabelDay'
+                        type='button'
+                        onClick={() => limpar(true)}
+                    >
+                        Limpar
+                    </button>
+                }</label></p>
+
+
         </div>
     )
     const labelProc = (
         <div>
             <p>Procedimento: <label> {project.nome_procedimento}</label></p>
         </div>
-    )
 
-    const labelSala = (
-        <div>
-            <p>Aparelho: <label> {sala[project.sala] ? sala[project.sala].nome : ''}</label></p>
-        </div>
 
     )
     function setName(e) {
-        setProject({ ...project, ['id_cliente']: e.id, ['nome_cliente']: e.nome, ['telefone']:e.telefone })
+        setProject({ ...project, ['id_cliente']: e.id, ['nome_cliente']: e.nome, ['telefone']: e.telefone })
         setCurrentName(0)
         console.log(e)
-        
+
 
     }
     function setProc(e) {
         setProject({ ...project, ['nome_procedimento']: options[e].nome, ['procedimento']: options[e].id_pacote })
-        
+
         setCurrentProc(0)
-      //console.log(options)
-
-    }
-    function setSala(e) {
-        const sala = e.target.value
-        fetch(`${process.env.REACT_APP_CALENDAR}/disp/${project.data.substr(0, 10)}/${project.hora}/${e.target.value}`, {
-            method: "GET",
-            heders: {
-                'Content-type': 'application/json',
-            },
-        })
-            .then((resp) => resp.json())
-            .then((resp2) => {
-                if (resp2) {
-                    window.alert(`Sala reservada para ${resp2[0].atendente}`)
-                } else {
-                    setProject({ ...project, [e.target.name]: sala })
-                    setCurrentSala(0)
-                   // console.log(project)
-                }
-            })
-            .catch(err => console.log(err))
-
+        //console.log(options)
 
     }
 
-    function transferir(){
-        setCurrentFormat(1)
+    function transferir() {
+        setInput(1, dataCard[0])
         setIsEdit(project)
+        // window.location.replace(`/calendar/${unidade}/${user}`)
     }
 
+    function inputClose() {
+        setInput(1, dataCard[0])
+        // setRefresh(dataCard[0])
+    }
+    function setName2(e) {
 
+        setProject({ ...project, ['id_cliente']: e.id_cliente, ['nome_cliente']: e.nome_cliente, ['telefone']: e.telefone })
+        setCurrentName(0)
+        // console.log(e)
+
+
+    }
 
     const nameStates = [
         labelName,
         <RBar
+            user={user}
+            setName2={setName2}
             handleChange={handleChange}
             setName={setName}
             setCurrentName={setCurrentName}
             clients={clients}
             setOptions={setOptions}
-            users={dataCard} />
+            users={dataCard[0]} />
     ]
 
     const procStates = [
@@ -155,36 +128,81 @@ function InputDay({ unidade, setCurrentFormat,dataCard, clients, user, setIsEdit
         />
     ]
 
-   
 
-   // console.log(project)
+
+    // console.log(project)
     return (
         <form className='form'>
 
 
 
             <div className='inputForm'>
-                <h1>Novo Agendamento</h1>
+                <div className='inline2'>
+
+                    <LabelText
+                        header='Data:'
+                    >
+                        {project.data && project.data.substr(0, 10).split('-').reverse().join('/')}
+                    </LabelText>
+
+
+                </div>
                 {nameStates[currentName]}
-                <p>Data:<label> {project.data && project.data.substr(0, 10).split('-').reverse().join('/')}</label></p>
-                <p>Atendente: <label>{project.atendente}</label></p>
-                {procStates[currentProc]}
-                
-                <div className='inline2'>               
-                <p>início:<label>{project.hora}</label></p>
-                    
-                <p>Fim:<label>{project.hora_fim || moment(`2020.05.05 ${project.hora}`).add(40,'minutes').format('HH:mm')}</label>
-                        </p>
-                    
+                <LabelText
+                    header="Procedimento:"
 
-                </div> 
+                >
+                    Anestésico
+                </LabelText>
+
+                <div className='inline2'>
+                <LabelText
+                    header="Início:"
+
+                >
+                    {project.hora}
+                </LabelText>
+                <LabelText
+                    header="Fim:"
+
+                >
+                    {project.hora_fim}
+                </LabelText>
+                   
+
+                </div>
+
+                <InputText
+                    value={project.nota}
+                    handleOnChange={(e) => handleChange2(e)}
+                    name='nota'
+                    width='500px'
+                    flex='column'
+                    title='Anotação'
+                />
+
+                {project.id ?
+                    <div className='inline2'>
+                        <LabelText
+                            header='Agendado:'
+                        >
+                            {project.data_agendamento && project.data_agendamento.substr(0, 10).split('-').reverse().join('/') + ' - ' + project.data_agendamento.substr(11, 5).split(':').join('h')}
+                        </LabelText>
 
 
+                        <LabelText
+                            header={'a' + project.id + ' |v' + project.id_venda_sub + ' |c' + project.id_cliente}
+                        />
+
+
+                    </div>
+                    : ''
+                }
 
             </div>
             <div className={'buttons'}>
 
-            {project.id > 0 &&
+                {project.id > 0 &&
                     <Button
                         color="#2d4492"
                         value='Novo'
@@ -192,25 +210,33 @@ function InputDay({ unidade, setCurrentFormat,dataCard, clients, user, setIsEdit
                     />
                 }
 
-                <Button
-                    color="#447461"
-                    value='Cadastrar'
-                    click={() => insertB(idC, project, unidade, user,)}
-                />
+                {project.id < 1 ?
+                    <Button
+                        color="#447461"
+                        value='Agendar'
+                        click={() => insertB(idC, project, unidade, user, inputClose)}
+                    />
+                    : <Button
+                        color="#447461"
+                        value='Salvar'
+                        click={() => editarA(project, inputClose)}
+                    />
+                }
+
 
                 <Button
                     color="#474747"
                     value='Voltar'
-                    click={() => setCurrentFormat(1)}
+                    click={() => setInput(1, dataCard[0])}
                 />
                 {project.id > 0 &&
                     <Button
                         color="#8f2828"
                         value='Excluir'
-                        click={() => deleteA(project, unidade, user)}
+                        click={() => deleteA(project, inputClose, user)}
                     />
                 }
-               
+
                 {project.id > 0 &&
                     <Button
                         color="#6c388f"
@@ -222,4 +248,4 @@ function InputDay({ unidade, setCurrentFormat,dataCard, clients, user, setIsEdit
             </div>
         </form>
     )
-} export default InputDay
+} export default InputAnes

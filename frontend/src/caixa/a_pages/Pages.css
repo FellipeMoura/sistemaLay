@@ -1,0 +1,82 @@
+.caixaPage{
+    display: inline-flex;
+    
+    height: 100%;
+    width: 100%;
+}
+
+.caixaPage > *{
+   
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+    background-color: #f1f1f1;
+    
+ 
+    padding: 10px;
+}
+.caixaPage th{
+    background-color: brown;
+    color: #f1f1f1;
+    padding: 0 5px;
+}
+
+.hover:hover{
+    cursor: pointer;
+    opacity: 0.5;
+}
+
+.hover1:hover{
+    cursor: pointer;
+
+}
+
+.caixaPage td{
+    min-width: 40px;
+    max-width: 220px;
+    padding: 0 7px;
+    height: 35px;
+    font-weight: unset;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.table{
+    overflow-y: auto;
+    min-width: 30vw;
+    width: 100%;
+    max-height: 70vh;
+   display: flex;
+    justify-content: center;
+
+
+}
+
+.table table{
+    width: 100%;
+    padding: 0 10px;
+}
+
+.table tr:nth-child(even) {
+    background: #CCC
+}
+.table tr:nth-child(odd) {
+    background: #FFF
+}
+
+
+.caixaHeader{
+    background-color: #f1f1f1;
+    margin-bottom: 5px;
+    width: 100vw;
+    display: flex;
+    
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+    
+}
+
+.center{
+
+    display: flex;
+    justify-content: center;
+}
+

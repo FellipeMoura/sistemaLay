@@ -1,0 +1,162 @@
+.vendasContainer{
+    width: 100vw;
+}
+
+.cliCard{
+   overflow-y: auto;
+    max-height: 86vh;
+    width: 50vw;
+    border: 1px solid #a5a3a3;
+    display: flex;
+    background-color: #e9e9e9;
+    padding: 8px;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-between;
+    box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.05);
+ 
+}
+.inputClients{
+    border: 1px solid #cccccc;
+    margin: 1em 0  0 1.5em;
+    background-color: #ffffff;
+    border-radius: 15px;
+    
+    height: 2.8em;
+    
+}
+.inputClients input{
+    border-radius: 15px;
+    padding: 5px;
+    width: 420px;
+    height: 2.6em;
+  background-color: #a5a3a300;
+    border: none;
+}
+
+.inputClients svg{
+    margin: .3em 0 ;
+    font-size: 1.6em;
+}
+.listClients{
+    position: absolute;
+    max-height: 50vh;
+    overflow: auto;
+ 
+    background-color:#cccccc;
+}
+.listClients tr{
+
+    background-color: #f1f1f1;
+}
+.listClients td{
+    padding: 0 10px;
+
+}
+
+.labelClients{
+    
+    margin: 1em 0  0 1.5em;
+}
+
+.vendaForm{
+    box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.05);
+    border-radius: 10px;
+    margin-bottom: 1vh;
+     padding: 1vh;
+    display: flex;
+    background-color: #cdd9e9;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #515253;
+
+}
+
+.vendaHeader{
+    border-radius: 10px;
+    background-color: #f1f1f1;
+    display: inline-flex;
+    justify-content: space-around;
+    width: 45vw;
+
+}
+
+.vendaHeader > div{
+    margin: 5px;
+
+}
+
+.table1 table{
+    border-radius: 5px;
+  background-color: #223f75;
+  margin-top: 5px;
+  
+  
+}
+
+
+.scrolltab {
+   overflow: auto;
+    height: 80vh;
+}
+
+.scrolltab th{
+    position: sticky;
+    top: 0;
+    background-color: #223f75;
+}
+.scrolltab button{
+    position: sticky;
+    bottom: 0;
+    background-color: #223f75;
+}
+.th1 th{
+    border-radius: 2px;
+    border: 1px solid #fff;
+    color: #f1f1f1;
+    padding: 0 10px;
+    font-weight: 400;
+}
+
+.table1 td{
+    border-radius: 2px;
+    margin: 0;
+    border: 1px solid #fff;
+    background-color: #f8f4d3;
+    text-align: center;
+    max-width: 300px;
+    padding: 0 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: unset;
+}
+
+
+.table1 tr{
+     height: 30px;
+
+    
+}
+
+.assButton{
+    cursor: pointer;
+color:#fff;
+font-weight:600;
+}
+.assForm {
+
+    overflow: auto;
+    max-height: 80vh;
+}
+
+.assForm table{
+    width: 100%;
+}
+.assButton:hover{
+    opacity: 0.5;
+}
+.dataCli{
+    display: inline-flex;
+    margin-top: 10px;
+}

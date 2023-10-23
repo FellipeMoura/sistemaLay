@@ -58,7 +58,7 @@ module.exports = {
         contato: req.body.contato
         
         }
-        console.log(user)
+       // console.log(user)
         let UserID = await UserService.insert
         (user);
         json.result ={

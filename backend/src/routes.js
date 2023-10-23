@@ -1,3 +1,5 @@
+
+
 const express = require('express')
 const router = express.Router()
 const authMiddleware = require('./auth');
@@ -14,9 +16,12 @@ const SupervisaoController = require('./controllers/SupervisaoController')
 
 router.get('/users', UserController.buscarTodos)
 router.get('/records', RecordController.buscarTodos)
+router.get('/recordsList', RecordController.buscarTudo)
 router.get('/sessions/:id', SessionsController.buscarTodos)
 router.get('/control/:id', ControlController.buscarTodos)
 router.get('/control', ControlController.buscarTudo)
+router.get('/temp', ControlController.temp)
+router.get('/control/:confirm/:data/:data_fim', ControlController.buscarTudo)
 router.get('/summarys/:id', SummarysController.buscarTodos)
 router.get('/supervisao/:id', SupervisaoController.buscarTodos)
 
@@ -36,7 +41,8 @@ router.post('/supervisao', SupervisaoController.inserir)
 
 router.put('/update/:id', UserController.alterar)
 router.put('/update2/:id', RecordController.alterar)
-router.put('/update3/:id', ControlController.alterar)
+router.put('/attRecord', RecordController.attRecord)
+router.put('/update3', ControlController.alterar)
 router.put('/update4/:id', SessionsController.alterar)
 router.put('/update5/:id', SummarysController.alterar)
 router.put('/update6/:id', SupervisaoController.alterar)

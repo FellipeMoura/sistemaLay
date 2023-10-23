@@ -1,0 +1,17 @@
+
+.label1 button{
+ 
+    border: none;
+    border-radius: 3px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+    background-color: #4d404e;
+    color:#fff;
+    margin-left: 3px;
+    padding: 5px;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.label1 span {
+    font-weight: 600;
+}

@@ -13,6 +13,7 @@ module.exports = {
                 idsuser: sessions[i].iduser,
                 session: sessions[i].session,
                 demanda: sessions[i].demanda,
+                estado: sessions[i].estado,
                 evolucao: sessions[i].evolucao,
                 proc: sessions[i].proc,
                 data: sessions[i].data,
@@ -30,20 +31,21 @@ module.exports = {
             idrecord: req.body.idrecord,
             session: req.body.session,
             demanda: req.body.demanda,
+            estado: req.body.estado,
             evolucao: req.body.evolucao,
             proc: req.body.proc,
             data: req.body.data,
             hora: req.body.hora
         }
-        console.log(session)
-        let SessionID = await SessionsService.insert
-        (session);
+       // console.log(session)
+        let SessionID = await SessionsService.insert(session);
         json.result ={
             id: SessionID,
             iduser: session.iduser,
             idrecord: session.idrecord,
             session: session.session,
             demanda: session.demanda,
+            estado: session.estado,
             evolucao: session.evolucao,
             proc: session.proc,
             data: session.data,
@@ -62,6 +64,7 @@ module.exports = {
         let session ={
         session: req.body.session,
         demanda: req.body.demanda,
+        estado: req.body.estado,
         evolucao: req.body.evolucao,
         proc: req.body.proc,      
         data: req.body.data,
@@ -73,6 +76,7 @@ module.exports = {
             id, 
             session: session.session,
             demanda: session.demanda,
+            estado: session.estado,
             evolucao: session.evolucao,
             proc: session.proc,     
             data: session.data,

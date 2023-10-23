@@ -1,0 +1,189 @@
+#dayPage {
+  width: 100%;
+}
+
+.headerPage {
+  position: sticky;
+  border-bottom: 1px solid #afafaf;
+  top: 0;
+  height: 1.7em;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 2em;
+  color: #d0d9da;
+ background-color: #f1f1f1;
+  font-weight: 300;
+
+
+
+}
+
+.pdfHeader {
+  color: #f1f1f1;
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+.headerPage svg {
+  fill:#4c95e2;
+
+ 
+}
+
+
+
+.headerMenu {
+  width: 100px;
+position: static;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+ 
+
+
+}
+
+.headerMenu svg {
+
+  
+  margin: 5px 0 -5px 9px;
+  font-size: 1.3em;
+  border: none;
+  cursor: pointer;
+}
+
+.headerMenu svg:hover {
+
+  opacity: 0.5;
+  transition: 0.4;
+  
+ 
+}
+
+.headerMenu ul {
+  box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.05);
+  position: absolute;
+  list-style: none;
+  padding: unset;
+  margin: unset;
+  background-color: #dbdbdb;
+  border-radius: 4px;
+
+}
+
+.headerMenu li {
+ 
+  position: sticky;
+  font-size: 0.6em;
+  padding: 8px 15px 8px 0;
+  transition: all linear 0.3s;
+}
+
+.headerMenu li:hover {
+  
+  cursor: pointer;
+  opacity: 0.4;
+}
+
+.dropdown-menu {
+
+  background: #fff;
+  box-shadow: 0px 10px 30px 0px rgba(82, 63, 105, 0.05);
+  transition: all linear 0.3s;
+}
+.data{
+  
+ display: flex;
+ justify-content: space-between;
+ width: 25vw;
+ height: 100%;
+
+ 
+ border-radius: 5px;
+}
+.subData{
+  
+  display:flex;
+  flex-direction: column;
+}
+.subData span {
+  font-weight: 400;
+  text-align: center;
+  color:#4c95e2;
+  font-size:.9em;
+
+  margin: -5px 0;
+  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.content {
+  margin-left: -3px;
+  display: flex;
+  width: 100%;
+  overflow-y: scroll;
+  height: 91vh;
+
+  background-color:  #fff;
+}
+
+
+
+
+#dayCard {
+  width: 100%;
+  height: 100%;
+ 
+}
+
+.inlineHours {
+
+  display: flex;
+  flex-direction: row;
+}
+
+.horas {
+  width: 3.5vw;
+  margin-top: 1.57em;
+  margin-right: 1px ;
+  display: inline-block;
+  height: 100%;
+  transition: all ease 0.2s;
+  font-size: 1em;
+
+
+}
+
+.horas>div {
+  background-color:#4c95e2;
+  text-align: center;
+  color: #f1f1f1;
+ justify-content: center;
+  margin-bottom: 1px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+}
+
+.atendList {
+  display: inline-block;
+  
+  height: 100%;
+}
+
+.atendente {
+  display: flex;
+ 
+  
+  justify-content: center;
+  background-color: #4c95e2;
+  font-size: 1.2em;
+  color: #f1f1f1;
+  font-weight: 500;
+  font-family: 'Assistant', sans-serif;
+}
+
+

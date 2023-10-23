@@ -1,0 +1,94 @@
+.cPanel{   
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding-bottom: .5em;
+    width: 100%;
+    align-items: center;
+   
+    
+}
+
+.inputPanel{
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+    justify-content: space-around;
+    min-width: 42em;
+    width: 60%;
+    background-color:#e7e7e7 ;
+    display: flex;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+    flex-direction: row;
+    padding: 1em .5em .5em.5em;
+    align-items: center;
+
+}
+
+
+
+
+.tdConfirm svg{
+    font-size: 1.8em;
+    fill: #03ba4c;
+}
+
+.tableContainer2 button svg{
+    font-size: 1.5em;
+
+    transition: 0.2s;
+}
+
+.tableContainer2 button{
+    border: 0;
+    cursor: pointer;
+}
+
+.btnControl{
+    
+    margin-top: -7px;
+}
+
+.tableContainer2{  
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+    min-width: 42em;
+    
+    background-color: #f7f7f7;
+    position: relative; 
+    flex-wrap: wrap;
+    overflow:auto;
+    padding: 0;
+    max-height: 75vh;
+    
+}
+.tableContainer2 th{
+    padding: 0 5px;
+    background-color: #7c7171;
+    color: #fbfbfb;
+    height: 5vh;
+    position: sticky;
+    top: 2px;
+    font-weight: normal;
+    width: 2%;
+    
+
+}
+.dashControl{
+    display: flex;
+    flex-direction: column;
+}
+.btnconfirm{    
+    margin: 4px auto;
+    max-height: 2em;
+}
+
+.tbody2 td{
+    
+    height: 2.5em;
+    text-align: center;    
+    padding-left: 5px;
+    
+}
+
+.dele{
+    width: 1px;
+}
+

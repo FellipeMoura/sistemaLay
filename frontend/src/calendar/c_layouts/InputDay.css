@@ -1,36 +1,37 @@
 .form{
-    background-color:#e2e2e2 ;   
+    background-color:#ebebeb ;   
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
     margin: 0;
-    padding: 20px;
-    height: 100vh;
-    width: 100%;
+    overflow-y: hidden;
+    padding: 8px;
+    height: 100%;
+    width: 600px;
+    border-radius: 5px;
 }
 
+.inputForm > div{
+   margin-bottom: 1.5em;
+}
 .inputForm p{
     margin: 10px 0;
 }
 
-.inputForm label{
-    font-size: 1.2em;
-}
 
 .buttons{
     display: flex;
     flex-direction: row;
 }
-.form div{
-    margin: 1px;
-}
+
 .form h1{
     color: #5d5d5d;
     padding-top: 2vh;
     text-align: center;
     width: 100%;
     font-weight: normal;
+    
 }
 
 .steps{
@@ -60,19 +61,7 @@
 .step radio {
     margin-bottom: 10px;
 }
-.labelN {
 
-    display: flex;
-    flex-direction: row;
-  
-}
-
-.labelN p{
-    
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
 .labelConfirm svg{
     fill: #0e7821;
     
@@ -90,35 +79,6 @@
     background-color: #f1f1f1;
     margin: 5px;
 }
-.labelName button{
-
-    background-color: #4d404e;
-    color:#fff;
-    padding: 5px;
-    text-decoration: none;
-    transition: .5s;
-    height: 42px;
-    cursor: pointer;
-    border: none;
-    
-}
-
-.labelName *{
-    margin: 0 4px;
-}
-
-.btnC{
-    background-color: #0e7821;
-}
-.btnB{
-    background-color:#1a1b1c;
-}
-.btnE{
-    background-color: #002887;
-}
-.btnD{
-    background-color: #902323;
-}
 
 .step svg {
     margin: auto;
@@ -130,45 +90,29 @@
     
 }
 
-
-
-.score1{
-    width: 70vh;
-}
-
-.radioContainer {
+.inline1{
     display: flex;
-    flex-direction: column;
-    margin: 0 8px;
-    text-align: center;
-    position: relative;
+    flex-direction: row;
 
 }
 
-.radioContainer input {
-    opacity: 0;
-    justify-content: center;
-
+.inline1 input{
+    margin-right: 10px;
 }
 
-.radioContainer p{
-    font-style: italic;
-    font-weight: 300;
-    font-size: 0.7rem;
-    margin-top:0.4rem;
-}
 
 .inline2{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 80%;
+    width: 90%;
 }
 
 .thproc th{
     background-color: #515253;
     color: #f1f1f1;
-    padding: 0 10px;
+    padding: 0 6px;
+    font-weight: 400;
 }
 
 .tdproc td{
@@ -195,84 +139,31 @@
     transition: 0.3s;
 }
 
-/*
-
-
-
-
-
-
-
-
-
-.Bform1{
-    display: flex;
-    flex-direction: row;
-}
-.Bform1 > * > input{
-    margin: 10px 10px;
-    width: 80vh;
-}
-
-.radiosContainer{
-    display: flex;
-    flex-direction: row;
-}
-
-.radiosContainer > *{
-    flex-direction: row;
-    gap: 2rem;
-    justify-content: center;
-    align-items: center;
-    background-color: #f1f1f1;
-
-}
-
-textarea {
-      
-    height: 120px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
-}
-
-.radiosContainer input{
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-}
-
-.formControl{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1em;
-}
-
-.formControl label{
-    margin-bottom: .6em;
-    font-weight: bold;
-}
-
-
-.step input:checked ~ svg{
-    fill:#c23939;
-}
-.radiosContainer input{
-    align-items: flex-start;
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    font-weight: bold;
-    color: #c23939;
-    font-size: 0.9rem;
-}
-
-.form input,
-textarea {
-  
-    padding: .6rem;
+.buttonInputDay{
+ 
     border: none;
-    border-radius: 5px;
-    
+    border-radius: 3px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+    background-color: #777777;
+    color:#fff;
+    padding: .6rem;
+    text-decoration: none;
+    transition: .5s;
+    height: 3.2em;
+    cursor: pointer;
+    border: none;
+    margin-top: .8em;
 }
-*/
+
+.buttonLabelDay{
+ 
+    border: none;
+    border-radius: 3px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+    background-color: #4d404e;
+    color:#fff;
+    margin-left: 3px;
+    padding: 5px;
+    transition: .5s;
+    cursor: pointer;
+}

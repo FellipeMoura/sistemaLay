@@ -7,10 +7,60 @@ import {VscSave} from 'react-icons/vsc'
 import {ImCancelCircle} from 'react-icons/im'
 import {FiEyeOff} from 'react-icons/fi'
 import moment from "moment";
+import { Button, Select } from "../d_inputs/Input";
 
 export function AtendForm(props) {
 
   const [project, setProject] = useState([])
+  const [atend, setAtend] = useState('')
+  const [atendentes, setAtendentes] = useState([])
+  useEffect(() => {
+
+    //console.log(moment('2023-01-01 08:00').format('HH:mm'))
+    
+    let x = moment('2023-01-01 08:00')
+    let y //= moment('2023-01-01 08:00')
+    
+    x.subtract(1, 'minutes')
+   
+    //console.log(x.format('HH:mm'))
+
+    fetch(`${process.env.REACT_APP_CALENDAR}/atendentes/${props.unidade}`, {
+      method: "GET",
+      heders: {
+          'Content-type': 'application/json',
+      },
+  })
+      .then((resp) => resp.json())
+      .then((resp2) => {
+          setAtendentes(resp2)
+      })
+      .catch(err => console.log(err))
+
+    
+    
+
+  }, [])
+
+  function setAtendente(e){
+   // console.log(`${process.env.REACT_APP_CALENDAR}/atendente/${atendentes[e.target.value].nome}`)
+    fetch(`${process.env.REACT_APP_CALENDAR}/atendente/${atendentes[e.target.value].nome}`, {
+      method: "GET",
+      heders: {
+        'Content-type': 'application/json',
+      },
+    })
+      .then((resp) => resp.json())
+      .then((resp2) => {
+       setAtend(atendentes[e.target.value].nome)
+        setProject(resp2[0])
+        console.log(resp2[0])
+
+
+      })
+      .catch(err => console.log(err))
+
+  }
   let horarios = [
 
     '08:00',
@@ -31,8 +81,11 @@ export function AtendForm(props) {
     '18:00',
     '18:40',
     '19:20',
-    '20:00'
+    '20:00',
+    '20:40',
+    '21:20',
   ]
+  
 
   function setTotal(e, projeto) {
     let temp = project
@@ -47,37 +100,10 @@ export function AtendForm(props) {
   }
 
   //console.log(props.currentDay.format('ddd'))
-  useEffect(() => {
-
-    //console.log(moment('2023-01-01 08:00').format('HH:mm'))
-    
-    let x = moment('2023-01-01 08:00')
-    let y //= moment('2023-01-01 08:00')
-    
-    x.subtract(1, 'minutes')
-   
-    console.log(x.format('HH:mm'))
-
-    fetch(`${process.env.REACT_APP_CALENDAR}/atendente/${props.atendente}`, {
-      method: "GET",
-      heders: {
-        'Content-type': 'application/json',
-      },
-    })
-      .then((resp) => resp.json())
-      .then((resp2) => {
-
-        setProject(resp2[0])
-
-
-      })
-      .catch(err => console.log(err))
-    
-
-  }, [])
+  
 
   function alterarA(atendente) {
-    let resp = window.confirm(`Deseja ocultar a ${props.atendente} atendente da agenda?`)
+    let resp = window.confirm(`Deseja ocultar a ${atend} atendente da agenda?`)
     if (resp) {
     fetch(`${process.env.REACT_APP_CALENDAR}/alterarA/${atendente}/${props.unidade + 90}`, {
       method: "PUT",
@@ -99,7 +125,7 @@ export function AtendForm(props) {
   }
 
   function alterarS() {
-    fetch(`${process.env.REACT_APP_CALENDAR}/alterarS/${props.atendente}`, {
+    fetch(`${process.env.REACT_APP_CALENDAR}/alterarS/${atend}`, {
       method: "PUT",
       headers: {
         'Content-type': 'application/json',
@@ -116,28 +142,45 @@ export function AtendForm(props) {
       })
       .catch(err => console.log(err))
   }
+  function handleChange(e) {
 
+      console.log(e.target.value)
+        //setProject({ ...project, [e.target.name]: e.target.value })
+    
+
+
+
+}
 
   return (
     <div className="atend">
       <div className="headerAtend">
-        <span>Atendente: {props.atendente}</span>
-        <button  style={{border:`1px solid #128f18`}}onClick={() => alterarS()}>
-          salvar <VscSave />
-        </button>
-        <button style={{border:`1px solid #222`}} onClick={() => window.location.replace(`/calendar/${props.unidade}/${props.user}`)}>
-          cancelar <ImCancelCircle/>
-        </button>
-        <button style={{border:`1px solid #8f1212`}} onClick={() => alterarA(props.atendente)}>
-          ocultar <FiEyeOff/>
-        </button>
+        
+          <Select
+            padrao='Atendente'
+            handleOnChange={setAtendente}
+            options={atendentes}
+          />
+          
+        <Button 
+          click={() => alterarS()}
+          value= 'Salvar'
+          color='#174fb6'
+        />
+        <Button 
+          click={() => alterarA(atend)}
+          value= 'Ocultar'
+          color='#333'
+        />
+         
+     
       </div>
 
       <div className="bodyAtend">
 
         <div className="atendHora" >
 
-          {
+          { project.length > 0 &&
             horarios.map((hora) => (
               <div className="atendHoras" key={horarios.indexOf(hora)} style={{ height: `${hora.size}` }}>
                 <span>{hora}</span>
@@ -201,12 +244,8 @@ function DayCard(props) {
   }
 
   useEffect(() => {
-
-
- 
-
-
-  }, [props.day, props.project]);
+ setCard(props.state.check)
+  }, [props.project]);
 
   return (
     <div className="daysAtend">
@@ -218,13 +257,13 @@ function DayCard(props) {
       </div>
 
       {
-        props.horarios.map((hora) => (
+        props.horarios.map((hora, index) => (
 
           <Open
 
             card={card[props.horarios.indexOf(hora)]}
             i={props.horarios.indexOf(hora)}
-            key={props.horarios.indexOf(hora)}
+            key={index}
             event={setDisp}
           >
             {card[props.horarios.indexOf(hora)] == 1 ? 'aberto' : 'fechado'}

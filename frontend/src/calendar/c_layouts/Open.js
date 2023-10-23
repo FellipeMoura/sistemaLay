@@ -6,7 +6,13 @@ import Modal from 'react-modal'
 import { getColor } from "./salaColor";
 
 function Open(props) {
+    useEffect(() => {
 
+
+        setCurrent(props.card)
+       
+      
+         }, [props.card]);
    const [current, setCurrent] = useState(props.card)
    //console.log(props.card)
 const open = (

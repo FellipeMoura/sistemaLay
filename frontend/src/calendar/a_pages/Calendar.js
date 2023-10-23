@@ -8,21 +8,23 @@ import SalaForm from '../b_forms/SalaForm'
 import moment from "moment";
 import InputDay from "../c_layouts/InputDay";
 import InputAnes from "../c_layouts/InputAnes";
-
+import Modal from 'react-modal'
+import './calendar.css'
 function Calendar() {
     const { data } = useParams()
     const { unidade } = useParams()
     const { user } = useParams()
     const [clients, setClients] = useState([])
     const [atendentes, setAtendentes] = useState([])
-    const [mes, setMes] = useState(0)
-    const [dataCard, setDataCard] = useState({})
-    const [isEdit, setIsEdit] = useState(false)
 
+    const [dataCard, setDataCard] = useState([{atendente:''}])
+    const [isEdit, setIsEdit] = useState(false)
+    const [refresh, setRefresh] = useState('')
+    const [next, setNextt] = useState(false)
     // console.log(user)
     //console.log()
     useEffect(() => {
-        //console.log(unidade)
+
         fetch(`${process.env.REACT_APP_CALENDAR}/clients`, {
             method: "GET",
             heders: {
@@ -37,6 +39,8 @@ function Calendar() {
             })
             .catch(err => console.log(err))
 
+
+
         fetch(`${process.env.REACT_APP_CALENDAR}/atendentes/${unidade}`, {
             method: "GET",
             heders: {
@@ -45,67 +49,71 @@ function Calendar() {
         })
             .then((resp) => resp.json())
             .then((resp2) => {
-
                 setAtendentes(resp2)
             })
             .catch(err => console.log(err))
 
-
-        fetch(`${process.env.REACT_APP_CALENDAR}/attAssinado/${moment().locale("pt-br").format('Y-MM-DD/HH:mm')}`, {
-            method: "PUT",
-            heders: {
-                'Content-type': 'application/json',
-            },
-        })
-            .then((resp) => resp.json())
-            .then((resp2) => {
-
-            })
-            .catch(err => console.log(err))
-
-
-
-    }, [])
+         
+    }, [next])
 
     const [currentDay, setCurrentDay] = useState(data ? moment(data.split('-')).clone().locale("pt-br").subtract(1, 'month') : moment().locale("pt-br"));
     const [currentFormat, setCurrentFormat] = useState(1)
-    function setToMonth(month) {
-        setMes(month - 1)
-        console.log(month - 1)
-        setCurrentFormat(0)
+
+
+
+    function setInput(page, dataCard, hrs) {
+        setDataCard([dataCard, hrs])
+        page == 1 ? handleCloseModal()
+            : handleOpenModal()
+
+        setRefresh(Math.random())
     }
-    const color = [
 
-        '#5dbda5',
-        '#5dbabd',
-        '#5da7bd',
-        '#5d97bd',
-        '#5d83bd',
-        '#5d73bd',
-        '#5d63bd',
-        '#725dbd',
-        '#8a5dbd',
-        '#a25dbd',
-        '#b55dbd',
-        '#bd5d98',
-        '#bd5d75',
+    function setNext() {
+        window.alert('foi')
+        setNextt(Math.random())
+        setRefresh(Math.random())
+        
+    }
 
-    ]
+    const customStyles = {
+        content: {
+            left: '50%',
+            top: '50%',
+            bottom: '-40%',
+            right: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
 
-    function setInput(page, dataCard) {
-        setDataCard(dataCard)
-        setCurrentFormat(page)
+            //height: '400px'
+
+        }
+    }
+
+    const [modalIsOpen, setIsOpen] = useState(false)
+
+    function handleCloseModal() {
+        setIsOpen(false)
 
     }
+
+    function handleOpenModal() {
+
+        setIsOpen(true)
+    }
+
 
 
     const pers = [
         <MonthForm
-            currentMonth={mes}
+            currentMonth={''}
             setCurrentDay={setCurrentDay}
             setCurrentFormat={setCurrentFormat}
         />,
         <DayForm
+            setNext={setNext}
+            refresh={refresh}
+            setRefresh={setRefresh}
             isEdit={isEdit}
             setIsEdit={setIsEdit}
             setInput={setInput}
@@ -115,14 +123,16 @@ function Calendar() {
             setCurrentDay={setCurrentDay}
             unidade={unidade}
             atendentes={atendentes}
-            setToMonth={setToMonth}
+
             setCurrentFormat={setCurrentFormat}
         />,
         <InputDay
+            setRefresh={setRefresh}
             setIsEdit={setIsEdit}
             user={user}
             unidade={unidade}
             dataCard={dataCard}
+            setInput={setInput}
             setCurrentFormat={setCurrentFormat}
             clients={clients}
         />,
@@ -135,16 +145,46 @@ function Calendar() {
             clients={clients}
         />,
         <SalaForm
-        user={user}
+
+            user={user}
             unidade={unidade}
             setCurrentFormat={setCurrentFormat}
-    />
+        />
     ]
 
 
 
     return (
-        pers[currentFormat]
+        <div className="container">
+            <Modal
+                ariaHideApp={false}
+                isOpen={modalIsOpen}
+                onRequestClose={handleCloseModal}
+                style={customStyles}
+            >{dataCard[0].atendente == 'Anestesico' ?
+                <InputAnes
+                    setIsEdit={setIsEdit}
+                    setRefresh={setRefresh}
+                    user={user}
+                    unidade={unidade}
+                    setInput={setInput}
+                    dataCard={dataCard}
+                    setCurrentFormat={setCurrentFormat}
+                    clients={clients}
+                /> :
+                <InputDay
+                    setRefresh={setRefresh}
+                    setIsEdit={setIsEdit}
+                    user={user}
+                    setInput={setInput}
+                    unidade={unidade}
+                    dataCard={dataCard}
+                    setCurrentFormat={setCurrentFormat}
+                    clients={clients}
+                />}
+            </Modal>
+            {pers[currentFormat]}
+        </div>
     )
 }
 

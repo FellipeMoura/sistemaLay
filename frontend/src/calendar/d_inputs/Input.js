@@ -2,13 +2,13 @@ import './Input.css'
 import { GiCheckMark } from 'react-icons/gi'
 import InputMask from 'react-input-mask'
 import { useState } from 'react'
+import { BiEdit } from 'react-icons/bi'
 
-
-const masks = ["99h99", "999.999.999-99", "(99)99999-9999"]
+const masks = ["99h99", "999.999.999-99", "99 (99) 99999-9999"]
 
 export function InputText({ width, flex, title, name, placeholder, handleOnChange, value }) {
     return (
-        <div className='inputContainer' style={flex ? { flexDirection: flex } : { alignItems: 'center' }}>
+        <div className='inputContainer2' style={flex ? { flexDirection: flex } : { alignItems: 'center' }}>
             <label htmlFor={name}>{title}</label>
             <input
                 style={{ width: width }}
@@ -23,13 +23,13 @@ export function InputText({ width, flex, title, name, placeholder, handleOnChang
     )
 }
 
-export function InputTime({ width, flex, title, name, placeholder, handleOnChange, value }) {
+export function InputNumber({ width, flex, title, name, placeholder, handleOnChange, value }) {
     return (
-        <div className='inputContainer' style={flex ? { flexDirection: flex } : { alignItems: 'center' }}>
+        <div className='inputContainer2' style={flex ? { flexDirection: flex } : { alignItems: 'center' }}>
             <label htmlFor={name}>{title}</label>
             <input
                 style={{ width: width }}
-                type='time'
+                type='number'
                 name={name}
                 id={name}
                 placeholder={placeholder}
@@ -40,9 +40,26 @@ export function InputTime({ width, flex, title, name, placeholder, handleOnChang
     )
 }
 
+export function InputTime({ disabled, width, flex, title, name, placeholder, handleOnChange, value }) {
+    return (
+        <div className='inputContainer2' style={flex ? { flexDirection: flex } : { alignItems: 'center' }}>
+            <label htmlFor={name}>{title}</label>
+            <input
+                style={{ width: width, padding: '.5em' }}
+                type='time'
+                name={name}
+                id={name}
+                placeholder={placeholder}
+                onChange={handleOnChange}
+                value={value}
+                disabled={disabled} />
+        </div>
+    )
+}
+
 export function InputPass({ width, flex, title, name, placeholder, handleOnChange, value }) {
     return (
-        <div className='inputContainer' style={flex ? { flexDirection: flex } : { alignItems: 'center' }}>
+        <div className='inputContainer2' style={flex ? { flexDirection: flex } : { alignItems: 'center' }}>
             <label htmlFor={name}>{title}</label>
             <input
                 style={{ width: width }}
@@ -59,7 +76,7 @@ export function InputPass({ width, flex, title, name, placeholder, handleOnChang
 
 export function InputDate({ flex, title, name, placeholder, handleOnChange, value }) {
     return (
-        <div className='inputContainer' style={flex ? { flexDirection: flex } : { alignItems: 'center' }}>
+        <div className='inputContainer2' style={flex ? { flexDirection: flex } : { alignItems: 'center' }}>
             <label htmlFor={name}>{title}</label>
             <input
                 style={{ width: '10em' }}
@@ -76,7 +93,7 @@ export function InputDate({ flex, title, name, placeholder, handleOnChange, valu
 
 export function InputMasks({ flex, placeholder, title, name, handleOnChange, value, mask }) {
     return (
-        <div className='inputContainer' style={flex ? { flexDirection: flex } : { alignItems: 'center' }}>
+        <div className='inputContainer2' style={flex ? { flexDirection: flex } : { alignItems: 'center' }}>
             <label htmlFor={name}>{title}</label>
             <InputMask
 
@@ -151,17 +168,17 @@ export const Radio = ({ handleOnChange, title, name, data, values }) => {
 }
 
 
-export function Button({ className, click, value, color, width }) {
+export function Button(props) {
     return (
-        <div className='botao'>
+        <div className='botao2'>
 
             <button
-                style={{ backgroundColor: `${color}`, width: width? width : '' }}
+                style={{ backgroundColor: `${props.color}`, width: props.width ? props.width : '' }}
                 type='button'
-                className={className}
-                onClick={click}
+                className={props.className}
+                onClick={props.click}
 
-            >{value}
+            >{props.children}{props.value}
             </button>
         </div>
     )
@@ -170,7 +187,7 @@ export function Button({ className, click, value, color, width }) {
 export function Select({ padrao, width, flex, text, name, options, handleOnChange, value }) {
 
     return (
-        <div className='inputContainer' style={flex ? { flexDirection: flex } : { alignItems: 'center' }}>
+        <div className='inputContainer2' style={flex ? { flexDirection: flex } : { alignItems: 'center' }}>
             <label htmlFor={name}>{text}</label>
             <select
                 className='selectInput'
@@ -178,11 +195,11 @@ export function Select({ padrao, width, flex, text, name, options, handleOnChang
                 name={name}
                 id={name}
                 onChange={handleOnChange}
-                //value={value || padrao || ''}
+            //value={value || padrao || ''}
             >
                 <option> {padrao || 'Selecione uma opção'}</option>
                 {options.map((option) => (
-               option.id && <option value={options.indexOf(option)} name={option.nome} key={option.id}>{option.id +(option.nome ? '-' + option.nome: '')}</option>
+                    option.id && <option value={options.indexOf(option)} name={option.nome} key={option.id}>{option.id + (option.nome ? '-' + option.nome : '')}</option>
                 ))}
             </select>
         </div>
@@ -203,4 +220,50 @@ export function TextArea({ width, height, flex, title, name, placeholder, handle
             />
         </div>
     )
+}
+
+export function LabelText(props) {
+    return (
+        <div className='labelContainer' style={props.flex ? { flexDirection: props.flex } : { alignItems: 'end' }}>
+            <label >{props.header}</label>
+
+            <span>{props.children}</span>
+            {props.onClick &&
+                <div onClick={props.onClick} > <BiEdit /> </div>}
+        </div>
+
+
+    )
+
+}
+
+export function LabelText2(props) {
+    return (
+        <div className='labelContainer' id='labelContainer2' style={props.flex ? { flexDirection: props.flex } : { alignItems: 'end' }}>
+            <label >{props.header}</label>
+
+            <span>{props.children}</span>
+            {props.onClick &&
+                <div onClick={props.onClick} > <BiEdit /> </div>}
+        </div>
+
+
+    )
+
+}
+
+export function ConfirmButton(props) {
+    return (
+
+        <button
+            style={{ border: `1px solid ${props.color}`, color: props.color }}
+            className='confirmButton'
+            type='button'
+            onClick={props.onClick}
+        >
+            {props.value}
+        </button>
+
+    )
+
 }

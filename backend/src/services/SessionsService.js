@@ -1,4 +1,4 @@
-const db = require('../db')
+const db = require('../db2')
 
 module.exports = {
     
@@ -25,8 +25,8 @@ module.exports = {
     },
     insert: (session) => {
         return new Promise((aceito,rejeitado) =>{
-            db.query('INSERT INTO sessions(idrecord, session, demanda, evolucao, proc, data, hora) VALUES (?,?,?,?,?,?,?)',
-            [session.idrecord, session.session, session.demanda, session.evolucao, session.proc, session.data, session.hora] ,
+            db.query('INSERT INTO sessions(idrecord, session, demanda, estado, evolucao, proc, data, hora) VALUES (?,?,?,?,?,?,?,?)',
+            [session.idrecord, session.session, session.demanda, session.estado, session.evolucao, session.proc, session.data, session.hora] ,
             (error, results)=>{
                 if(error) { rejeitado(error); return; }                
                 aceito(results.insertId)
@@ -36,8 +36,8 @@ module.exports = {
     alterar: (id, sessions) => {
         return new Promise((aceito,rejeitado) =>{
             
-            db.query('UPDATE sessions SET session= ?, demanda= ?, evolucao= ?, proc= ?, data= ?, hora = ? WHERE id = ?',
-            [sessions.session, sessions.demanda, sessions.evolucao, sessions.proc, sessions.data, sessions.hora, id] ,
+            db.query('UPDATE sessions SET session= ?, demanda= ?, estado= ?, evolucao= ?, proc= ?, data= ?, hora = ? WHERE id = ?',
+            [sessions.session, sessions.demanda, sessions.estado, sessions.evolucao, sessions.proc, sessions.data, sessions.hora, id] ,
             (error, results)=>{
                 if(error) { rejeitado(error); return; }                
                 aceito(results.insertId)

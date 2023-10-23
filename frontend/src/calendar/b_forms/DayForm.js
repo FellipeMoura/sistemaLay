@@ -1,34 +1,40 @@
 import { useEffect, useState } from "react";
-import moment from "moment";
 import 'moment/locale/pt-br'
-import "./DayForm.scss";
-
+import "./DayForm.css";
 import { IconButton, Input } from "@mui/material";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import Day from "../c_layouts/Day";
 import Anestesic from "../c_layouts/Anestesic";
-import { AiOutlineFilePdf, AiFillSetting } from 'react-icons/ai'
-import { MdPersonAdd  } from 'react-icons/md'
-import { SlRefresh} from 'react-icons/sl'
-
+import { AiOutlineMenu } from 'react-icons/ai'
+import { RiRefreshLine } from 'react-icons/ri'
+import { VscChevronRight, VscChevronLeft } from 'react-icons/vsc'
+import MonthForm from "./MonthForm";
 import Modal from 'react-modal'
 import { Pdf } from "../c_layouts/Pdf";
 import { NewAten } from "../c_layouts/NewAten";
-
+import { DisabledForm } from "./DisabledForm";
+import SalaDay from "../c_layouts/SalaDay";
+import { BiPrinter, BiHomeHeart, BiUser } from 'react-icons/bi'
+import { MdOutlineMeetingRoom } from 'react-icons/md'
+import { BsCalendarX, BsTrash } from 'react-icons/bs'
+import { GiLabCoat } from 'react-icons/gi'
+import { getColor2 } from "../c_layouts/salaColor";
 
 export default function DayForm(props) {
 
   const [project, setProject] = useState([])
-
   const [modalIsOpen, setIsOpen] = useState(false)
+  const [currentModal, setCurrentModal] = useState(0)
+  const [mes, setMes] = useState(0)
 
   function handleCloseModal() {
     setIsOpen(false)
 
   }
 
-  function handleOpenModal(value) {
+  function handleOpenModal(value, month) {
+    if (value === 2) {
+      setMes(month)
+    }
     setCurrentModal(value)
     setIsOpen(true)
   }
@@ -40,11 +46,19 @@ export default function DayForm(props) {
     />,
     <NewAten
       user={props.user}
-      unidade={props.unidade}
+      empresa={props.empresa} unidade={props.unidade}
+      handleCloseModal={handleCloseModal}
+    />,
+    <MonthForm
+      currentMonth={mes}
+      setCurrentDay={props.setCurrentDay}
+      setCurrentFormat={handleCloseModal}
+    />,
+    <DisabledForm
+      empresa={props.empresa} unidade={props.unidade}
       handleCloseModal={handleCloseModal}
     />
   ]
-  const [currentModal, setCurrentModal] = useState(0)
 
 
   const customStyles = {
@@ -55,10 +69,53 @@ export default function DayForm(props) {
       right: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
+      overflowY: 'hidden'
 
       //height: '400px'
 
     }
+  }
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+  function HoverDropdown() {
+
+
+    const handleMouseEnter = () => {
+      setDropdownVisible(true);
+    };
+
+    const handleMouseLeave = () => {
+      setDropdownVisible(false);
+    };
+    return (
+      <div className="menu">
+        <header className="headerMenu">
+          <div
+            className="menu"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            <AiOutlineMenu />
+
+            {isDropdownVisible &&
+
+              <div className="dropdown-menu">
+
+                <ul onClick={() => setDropdownVisible(false)}>
+                  <li onClick={() => window.location.replace(`/clientes/${props.unidade}/${props.user}`)}><BiUser /> <span> Clientes</span></li>
+                  <li onClick={() => handleOpenModal(0)}> <BiPrinter /> Imprimir</li>
+                  <li onClick={() => window.location.replace(`/editA/${props.unidade}/${props.user}`)}><GiLabCoat /><span>Atendentes</span></li>
+                  <li onClick={() => props.setCurrentFormat(4, {})}><MdOutlineMeetingRoom /><span>Salas</span></li>
+                  <li onClick={() => handleOpenModal(3)}><BsTrash /><span> Desativados</span></li>
+                </ul>
+
+              </div>
+
+
+            }
+          </div>
+        </header>
+      </div>
+    );
   }
 
 
@@ -79,12 +136,7 @@ export default function DayForm(props) {
 
       <div className="headerPage">
 
-        <IconButton
-          size="small"
-          onClick={() => mudar(props.currentDay.clone().subtract(1, "day"))}
-        >
-          <KeyboardArrowLeftIcon style={{ color: "#143296", fontSize: 40 }} />
-        </IconButton>
+
         <Modal
           ariaHideApp={false}
           isOpen={modalIsOpen}
@@ -93,58 +145,49 @@ export default function DayForm(props) {
         >
           {modals[currentModal]}
         </Modal>
-        <div className="pdfHeader" onClick={() => handleOpenModal(0)}>
-          <AiOutlineFilePdf />
-        </div>
-        <div className="pdfHeader" onClick={() => handleOpenModal(1)}>
-          <MdPersonAdd />
-        </div>
-  
+
+
+        <HoverDropdown />
+
         <div className="data">
-          <button
-            type="button"
-            onClick={() => ''}
+          <IconButton
+            size="small"
+            onClick={() => mudar(props.currentDay.clone().subtract(1, "day"))}
           >
-            {props.currentDay.format('DD') + ' /'}
-          </button>
+            <VscChevronLeft style={{ color: "#143296", fontSize: 40 }} />
 
-          <button
-            type="button"
-            onClick={() => props.setToMonth(props.currentDay.format('M'))}
+          </IconButton>
+          <div className="subData" onClick={() => handleOpenModal(2, parseInt(props.currentDay.format('M') - 1))}>
+            <span> {props.currentDay.format('DD') + '/' + props.currentDay.format('MMMM')}</span>
+            <span style={{ fontSize: '.8em' }}> {props.currentDay.format('dddd')}</span>
+          </div>
+          <IconButton
+            size="small"
+            onClick={() => mudar(props.currentDay.clone().add(1, "day"))}
           >
-            {props.currentDay.format('MMM') + ' /'}
-          </button>
+            <VscChevronRight style={{ color: "#143296", fontSize: 40 }} />
+          </IconButton>
+        </div>
 
-          <button
-            type="button"
-            onClick={() => ''}
-          >
-            {props.currentDay.format('YY')}
-          </button>
+
+        <div className="headerMenu" onClick={() => window.location.replace(`/calendar/${props.unidade}/${props.user}`)}>
+          <RiRefreshLine />
         </div>
-        <div className="pdfHeader" onClick={() => window.location.replace(`/calendar/${props.unidade}/${props.user}`)}>
-          <SlRefresh />
-        </div>
-        <div className="pdfHeader" onClick={() => props.setCurrentFormat(4, {})}>
-          <AiFillSetting />
-        </div>
-        <IconButton
-          size="small"
-          onClick={() => mudar(props.currentDay.clone().add(1, "day"))}
-        >
-          <KeyboardArrowRightIcon style={{ color: "#143296", fontSize: 40 }} />
-        </IconButton>
+
 
       </div>
 
       <div className="content">
 
         <WeekCard
+          isDropdownVisible={isDropdownVisible}
+          refresh={props.refresh}
+          setRefresh={props.setRefresh}
           isEdit={props.isEdit}
           setIsEdit={props.setIsEdit}
           setInput={props.setInput}
           user={props.user}
-          unidade={props.unidade}
+          empresa={props.empresa} unidade={props.unidade}
           clients={props.clients}
           atendentes={props.atendentes}
           day={props.currentDay}
@@ -183,6 +226,11 @@ function WeekCard(props) {
     '18:00',
     '18:40',
     '19:20',
+    '20:00',
+    '20:40',
+    '21:20',
+
+
   ]
   let horarios = [
     '08:00',
@@ -203,7 +251,10 @@ function WeekCard(props) {
     '18:00',
     '18:40',
     '19:20',
-    '20:00'
+    '20:00',
+    '20:40',
+    '21:20',
+    '22:00'
   ]
 
   const color = [
@@ -232,48 +283,62 @@ function WeekCard(props) {
         <div className="horas">
 
           {
-            horarioss.map((hora) => (
-              <div key={horarios.indexOf(hora)}>
-                <span>{hora}</span>
+            horarioss.map((hora, index) => (
+              <div key={index}>
+                {hora}
               </div>
             ))
           }
         </div>
 
-
-        <Anestesico
-         
-          isEdit={props.isEdit}
-          setIsEdit={props.setIsEdit}
-          setInput={props.setInput}
-          user={props.user}
-          day={props.day}
-          unidade={props.unidade}
-          countAten={94 / (props.atendentes.length + 1)}
-        />
-
-        {props.atendentes ? props.atendentes.map((day) => (
-          //hora.color = (hora.color+opacity[props.atendentes.indexOf(day)]),
-          //console.log(day.color+opacity[props.atendentes.indexOf(day)]),
+        {props.atendentes ? props.atendentes.map((day, index) => (
 
           <DayCard
+            isDropdownVisible={props.isDropdownVisible}
             isEdit={props.isEdit}
             setIsEdit={props.setIsEdit}
             setInput={props.setInput}
             user={props.user}
             color={color[props.atendentes.indexOf(day)]}
             horarios={horarios}
-
+            refresh={props.refresh}
+            setRefresh={props.setRefresh}
             countAten={94 / (props.atendentes.length + 1)}
             atendente={day}
             isOne={props.atendentes.length - props.atendentes.indexOf(day)}
-            key={day.nome}
+            index={index}
             day={props.day}
-            unidade={props.unidade}
+            empresa={props.empresa} unidade={props.unidade}
 
           />
-        )) : () => props.mapCalendar()}
+        ))
 
+          : () => props.mapCalendar()}
+
+        <Anestesico
+          isEdit={props.isEdit}
+          horarios={horarios}
+          setIsEdit={props.setIsEdit}
+          setInput={props.setInput}
+          user={props.user}
+          day={props.day}
+          unidade={props.unidade}
+          countAten={94 / (props.atendentes.length + 1)}
+          refresh={props.refresh}
+          setRefresh={props.setRefresh}
+        />
+
+        <Sala
+          refresh={props.refresh}
+          setRefresh={props.setRefresh}
+          isEdit={props.isEdit}
+          setIsEdit={props.setIsEdit}
+          setInput={props.setInput}
+          user={props.user}
+          day={props.day}
+          empresa={props.empresa} unidade={props.unidade}
+
+        />
 
 
       </div>
@@ -287,7 +352,7 @@ function WeekCard(props) {
 
 
 function DayCard(props) {
-  const [states, setStates] = useState();
+
   const [card, setCard] = useState([]);
   //const sem = `props.day.${sem}.substr(card.indexOf(hora), 1)`
 
@@ -326,50 +391,48 @@ function DayCard(props) {
       .then((resp) => resp.json())
       .then((resp2) => {
         setCard(resp2)
-        //  console.log(resp2)
 
       })
       .catch(err => console.log(err))
-    // console.log(card)
-  }, [props.day, props.card]);
+
+  }, [props.day, props.refresh]);
 
   return (
     <div className="atendList" >
-      <div className='atendente' style={{ width: (props.countAten) + 'vw' }}>
-        <button className="atendButton"
-          onClick={() => window.location.replace(`/EditA/${props.unidade}/${props.atendente.nome}/${props.user}`)}>
-          {props.atendente.nome}
+      <div className='atendente' style={{ width: (props.countAten) + 'vw' }} >
 
-        </button>
+        {props.atendente.nome}
 
       </div>
 
       {
-        card.map((hora) => (
+        card.map((hora, index) => (
 
           // console.log(card[card.indexOf(hora)][0]),
           <div
             style={{ backgroundColor: `` }}
 
-            key={card.indexOf(hora)}
+            key={index}
 
           >
 
             <Day
+              refresh={props.refresh}
+              setRefresh={props.setRefresh}
               isEdit={props.isEdit}
               setIsEdit={props.setIsEdit}
               setInput={props.setInput}
               user={props.user}
               isOne={props.isOne}
-              horario={props.horarios[card.indexOf(hora)]}
-              horario_fim={props.horarios[card.indexOf(hora) + 1]}
-              index={card.indexOf(hora)}
+              horario={props.horarios[index]}
+              horario_fim={props.horarios[index + 1]}
+              index={index}
               countAten={props.countAten}
-              unidade={props.unidade}
+              empresa={props.empresa} unidade={props.unidade}
               hora={hora[0].hora}
-              color={props.color}
-              card={card[card.indexOf(hora)]}
-              disp={semana(props.day.format('d'), card.indexOf(hora))}
+              color={getColor2(props.index)}
+              card={hora}
+              disp={semana(props.day.format('d'), index)}
             />
 
 
@@ -382,7 +445,6 @@ function DayCard(props) {
 }
 
 function Anestesico(props) {
-
   const [card, setCard] = useState([]);
   //const sem = `props.day.${sem}.substr(card.indexOf(hora), 1)`
 
@@ -391,7 +453,7 @@ function Anestesico(props) {
 
 
   useEffect(() => {
-
+    // console.log(props.refresh)
     fetch(`${process.env.REACT_APP_CALENDAR}/maestrins/${props.day.format('YYYY-MM-DD')}/Anestesico/${props.unidade}`, {
       method: "GET",
       heders: {
@@ -406,38 +468,39 @@ function Anestesico(props) {
       .catch(err => console.log(err))
 
 
-
-  }, [props.day]);
+  }, [props.day, props.refresh]);
 
   return (
-    <div className="atendList">
-      <div className='atendente' style={{ width: (props.countAten) + 'vw' }}>
-        <button className="atendButton"
-        >
-          Anestésico
+    <div className="atendList" >
+      <div className='atendente' style={{ width: (props.countAten) + 'vw' }} >
 
-        </button>
+        Anestésico
 
       </div>
 
       {
-        card.map((hora) => (
+        card.map((hora, index) => (
 
           //console.log(hora.hora+props.day.format('L')+props.atendente.nome),
           <div
             style={{ backgroundColor: `` }}
 
-            key={hora[0].hora}
+            key={index}
 
           >
 
             <Anestesic
+              refresh={props.refresh}
+              setRefresh={props.setRefresh}
               user={props.user}
+              horario={props.horarios[index]}
+              horario_fim={props.horarios[index + 1]}
+              index={index}
               isEdit={props.isEdit}
               setIsEdit={props.setIsEdit}
               setInput={props.setInput}
               countAten={props.countAten}
-              unidade={props.unidade}
+              empresa={props.empresa} unidade={props.unidade}
               hora={hora[0].hora}
               color={props.color}
               card={card[card.indexOf(hora)]}
@@ -453,6 +516,80 @@ function Anestesico(props) {
 
 
   );
+}
+
+function Sala(props) {
+  const [card, setCard] = useState([]);
+  //const sem = `props.day.${sem}.substr(card.indexOf(hora), 1)`
+
+
+
+
+
+  useEffect(() => {
+    // console.log(props.refresh)
+    fetch(`${process.env.REACT_APP_CALENDAR}/buscarBloqueio/${props.day.format('YYYY-MM-DD')}/${props.unidade}`, {
+      method: "GET",
+      heders: {
+        'Content-type': 'application/json',
+      },
+    })
+      .then((resp) => resp.json())
+      .then((resp2) => {
+        setCard(resp2)
+
+      })
+      .catch(err => console.log(err))
+
+
+
+  }, [props.day, props.refresh]);
+
+  return (
+    card.map((item, index) =>
+      <div key={index} className="atendList" >
+
+
+        <div className='atendente' style={{ width: '20px' }} >
+
+          {item[0].sala}
+
+        </div>
+
+        {
+          item.map((hora, index) =>
+
+            //console.log(hora.hora+props.day.format('L')+props.atendente.nome),
+            <div
+              style={{ backgroundColor: `` }}
+
+              key={index}
+
+            >
+
+              <SalaDay
+                refresh={props.refresh}
+                setRefresh={props.setRefresh}
+                user={props.user}
+                isEdit={props.isEdit}
+                setIsEdit={props.setIsEdit}
+                setInput={props.setInput}
+                countAten={props.countAten}
+                empresa={props.empresa} unidade={props.unidade}
+                hora={item.hora}
+                color={props.color}
+                card={hora}
+
+              />
+
+
+            </div>
+          )}
+
+      </div>
+
+
+    ));
 }
 
 /* 

@@ -1,0 +1,93 @@
+.reviewForm{
+    border-radius: 10px;
+    border: 1px solid #b1b0b0;
+    background-color: #f1f1f1;
+    margin-bottom: 5px;
+}
+.form-control.score-container2{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.Bform1{
+    justify-content: space-around;
+    display: flex;
+    
+    margin-right: 5em;
+}
+.Bform1 > * > input{
+    margin: 10px 10px;
+    width: 18em;
+}
+
+.bformt{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.bformt input{
+    margin: 1em 1em 0 0 ;
+    flex-wrap: wrap;
+
+}
+
+.bformt label{
+    flex-wrap: wrap;
+    margin-left: 5em;
+
+}
+
+
+.score-container2 svg {
+    margin: auto;
+    cursor:pointer;
+    transition:0.5s;
+    font-size:1.5rem;
+    border: solid black 1px;
+    fill: antiquewhite ;
+    
+}
+
+.score-container2 svg:hover{
+    fill:#7f7f7f;
+}
+
+.score-container2 input:checked ~ svg{
+    fill:#c23939;
+}
+.radioContainer {
+    margin: 0 8px;
+    text-align: center;
+    position: relative;
+    
+}
+
+.radios{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.radioContainer input {
+    opacity: 0;
+    justify-content: center;
+    flex-direction: row;
+    display: flex;
+
+}
+
+.radioContainer svg {
+    fill: rgba(250, 235, 215, 0) ;
+}
+
+.radioContainer p{
+    font-style: italic;
+    font-weight: 300;
+    font-size: 0.7rem;
+}
+
+.obsB{
+    width: 30em;
+}
+

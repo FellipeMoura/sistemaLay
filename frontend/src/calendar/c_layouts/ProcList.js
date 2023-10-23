@@ -8,7 +8,7 @@ export function ProcList({ procs, setProc }) {
       <th className=''>Restante</th>
       <th className=''>Valor</th>
       <th className=''>Pacote</th>
-      <th className=''>Venda sub</th>
+      <th className=''>id</th>
     </tr> : '')
 
 
@@ -66,7 +66,7 @@ export function SalaList({ salas, editarSala }) {
             <tr 
               id="idproc"
               value={salas[salas.indexOf(sala)]}
-              onClick={() => editarSala(sala.indice)}
+              onClick={() => editarSala(sala.id)}
               key={sala.id_vendas_sub}
               className='tdproc'
             >

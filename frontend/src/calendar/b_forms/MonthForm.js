@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import moment from "moment";
 import "./MonthForm.scss";
-import { Days } from "../f_aux/MonthStyled";
+import 'moment/locale/pt-br'
 import calendarBuild from "../f_aux/CalendarBuild";
 import { IconButton } from "@mui/material";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
@@ -11,8 +11,6 @@ export default function MonthForm(props) {
   const [currentYear, setCurrentYear] = useState(2023);
   const [currentMonth, setCurrentMonth] = useState(props.currentMonth);
   const [dateSelected, setDateSelected] = useState([]);
-
-  console.log(props.currentMonth);
 
   const month = [
     "January",
@@ -27,6 +25,20 @@ export default function MonthForm(props) {
     "October",
     "November",
     "December",
+  ];
+  const monthPT = [
+    "Janeiro",
+      "Fevereiro",
+      "Março",
+      "Abril",
+      "Maio",
+      "Junho",
+      "Julho",
+      "Agosto",
+      "Setembro",
+      "Outubro",
+      "Novembro",
+      "Dezembro",
   ];
   moment.updateLocale("pt", {
     months: [
@@ -48,10 +60,18 @@ export default function MonthForm(props) {
   var monthTemp = []
   const [monthList, setMontList] = useState([])
 
+  function toDay(day, month){
+    props.setCurrentDay(moment(day).locale("pt-br"))
+    props.setCurrentFormat()
+    setCurrentMonth(month)
+  }
+
   useEffect(() => {
     month.map((value) => (
       monthTemp.push(
       <MonthCard
+      toDay={toDay}
+        currentMonth={currentMonth}
         setCurrentFormat={props.setCurrentFormat}
         setCurrentDay={props.setCurrentDay}
         key={value}
@@ -66,9 +86,11 @@ export default function MonthForm(props) {
   }, []);
 
 
+
+
   return (
     <div id="calendarPage">
-
+      <div className='mouthPage'>
       <div className="headerPage">
 
         <IconButton
@@ -77,7 +99,7 @@ export default function MonthForm(props) {
         >
           <KeyboardArrowLeftIcon style={{ color: "#143296", fontSize: 40 }} />
         </IconButton>
-        {month[currentMonth]}
+        {monthPT[currentMonth]}
         <IconButton
           size="small"
           onClick={() => setCurrentMonth(currentMonth + 1)}
@@ -92,7 +114,7 @@ export default function MonthForm(props) {
         {monthList[currentMonth]}
 
       </div>
-
+      </div>
     </div>
   );
 }
@@ -109,6 +131,7 @@ function MonthCard(props) {
   useEffect(() => {
     setValue(value.year(props.currentYear));
     setCalendar(calendarBuild(value));
+   
   }, [value, props.currentYear]);
 
   return (
@@ -123,75 +146,16 @@ function MonthCard(props) {
       {calendar.map((week) => (
         <div className="week" key={week}>
           {week.map((day) => (
-            <DayCard
-            setCurrentFormat={props.setCurrentFormat}
-            setCurrentDay={props.setCurrentDay}
-              key={day._d.getTime() + props.month}
-              day={day}
-              month={props.month}
-              year={props.currentYear}
-              dateSelected={props.dateSelected}
-              setDateSelected={props.setDateSelected}
-            />
-          ))}
+            
+            <div key ={day.format('DD')}className="Days" onClick={()=> props.toDay(day, parseInt(day.format('M'))-1)}>
+              <div style={{color: parseInt(day.format('M'))-1== props.currentMonth? '#0f2879' : '#555353'}}>
+            {day.format("DD").toString()}
+            </div>
+        
+      </div>
+         ))}
         </div>
       ))}
     </div>
-  );
-}
-
-function DayCard(props) {
-  const [state, setState] = useState("");
-
-  const day = props.day._d;
-
-  useEffect(() => {
-    const currentMonth = new Date(props.month + ",01," + props.year);
-
-    if (day.getMonth() !== currentMonth.getMonth()) {
-      setState("nonPertenceMonth");
-      return;
-    }
-
-    if (props.dateSelected.find((value) => value.getTime() === day.getTime())) {
-      setState("selected");
-    } else {
-      setState("");
-    }
-  }, [day, props.month, props.year, props.dateSelected]);
-
-  const handleClickDate = () => {
-    if (state !== "nonPertenceMonth")
-      if (
-        props.dateSelected.find((value) => value.getTime() === day.getTime())
-      ) {
-        setState("");
-        props.setDateSelected(
-          props.dateSelected.filter(
-            (value) => value.getTime() !== day.getTime()
-          )
-        );
-      } else {
-        setState("selected");
-        props.setDateSelected([...props.dateSelected, day]);
-      }
-  };
-
-  function toDay(){
-    props.setCurrentDay(moment(props.day).locale("pt"))
-    props.setCurrentFormat(1)
-  }
-
-  return (
-    <Days state={state} onClick={handleClickDate}>
-      <button
-        className="buttonMonth"
-          type='button'
-          onClick={()=> toDay()}
-        >
-          {props.day.format("DD").toString()}
-        </button>
-      
-    </Days>
   );
 }

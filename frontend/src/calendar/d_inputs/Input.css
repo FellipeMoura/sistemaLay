@@ -6,87 +6,108 @@
 .inputContainer label{
     padding-right: 4px;
     font-weight: bold;
-    
+  
 }
 
-.inputContainer input, select {
+.inputContainer2 input, select {
     padding: .6rem;
     border: none;
     border-radius: 3px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
-    margin-bottom: .6em;
-    margin-right: .6em;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 4px 8px 0;
+    margin: .4em .1em .4em .1em;
+    
+}
+
+.inputContainer2{
+    display: flex;
+}
+
+.inputContainer2 label{
+    font-family: 'Assistant', sans-serif; 
+    font-weight: 500;
+    color: #797979;
+    
+}
+.labelContainer {
+    display: flex;
+}
+.labelContainer label{
+    margin-right: 3px;
+    font-family: 'Assistant', sans-serif; 
+    font-weight: 500;
+    color: #797979;
+}
+.labelContainer span{
+    font-size: 1.2em;
+    margin-right: 3px;
+}
+
+#labelContainer2 span{
+    font-size: 1em;
+    font-weight: 500;
+    color: rgb(78, 78, 116);
+    margin: 0;
 }
 
 
+.labelContainer svg{
+    font-size: 1.3em;
+    cursor: pointer;
+    margin-bottom: -3px;
+}
 .radios{
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.botao button{
-    font-family: 'Titillium Web', sans-serif;
-    font-size: 1em;
+.botao2 button{
+  
+   
     border: none;
-    padding: 0 1em;
+    padding:  .58rem;
+    font-weight: 400;
+    font-size: 1.01em;
+
+    font-family: 'Assistant', sans-serif;    
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 40px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
     text-decoration: none;
     transition: 0.2s;
-    border-radius: 20px;
-    color: #f1f1f1;
-    margin-left: 2px;
+    border-radius: 5px;
+    color: #ffffff;
+    margin: .4em .1em .1em .1em;
     
 }    
-.botao button:hover{
+.botao2 button:hover{
+opacity: 0.8;
+transition: 0.3;
 cursor: pointer;
 background-color: #cdcdcd; 
 }
-.form-control.score-container{
-    flex-direction: row;
-    gap: 2rem;
-    justify-content:left;
-    margin-top: 20px;
-    border: 0;
-    margin-left: -4px;    
+
+.botao2 svg{
+    margin-right: 2px;
+    fill: #cdcdcd; 
 }
 
-.form-control{
-    flex-direction: row;
+.confirmButton{
+    font-family: 'Assistant', sans-serif;  
+    padding: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin-bottom: -10px;
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+.confirmButton:hover{
     
-    
+    opacity: 0.7;
+    transition: 0.5;
 }
-.score-container svg {
-    margin-left: 2rem;
-    cursor:pointer;
-    transition:0.5s;
-    font-size:3rem;
-}
-
-.score-container svg:hover{
-    fill:#5961f0;
-}
-
-
-
-
-
-
-.radioContainer input::placeholder{
-    color:#7b7b7b
-}
-
-.radioContainer svg:hover{
-    fill:#7f7f7f;
-}
-
-.radioContainer input:checked ~ svg{
-    fill:#c23939;
-}
-
 
 .logoutButton{
     font-family: 'Titillium Web', sans-serif;

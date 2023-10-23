@@ -6,7 +6,7 @@ import { Button, InputText } from '../d_inputs/Input';
 
 
 export default function PdfBar(props) {
-    const [search, setSearch] = useState('');
+    const [search, setSearch] = useState('a');
 
     function setSearch2(e) {
        // console.log(results)
@@ -15,9 +15,21 @@ export default function PdfBar(props) {
 
 
     const results = useMemo(() => {
-        const lowerBusca = search.toLowerCase()
-        return props.clients.filter(user => (user.nome_cliente.toLowerCase().includes(lowerBusca) || user.telefone.includes(lowerBusca)));
-    }, [search, props.clients])
+
+       const lowerBusca = search || ''
+      
+      
+       return props.clients.filter(user =>
+       
+       
+       
+            props.clients[0].nome_cliente.length > 0 ?
+            user.nome_cliente.toLowerCase().includes(lowerBusca) || user.telefone.includes(lowerBusca)
+            && console.log(user)
+            : ''
+            )
+
+          }, [search, props.clients])
     return (
         <div className={styles.formContainer22}>
             <div className={styles.header2}>

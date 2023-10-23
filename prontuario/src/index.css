@@ -1,0 +1,33 @@
+*{
+  padding:0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Titillium Web', sans-serif;
+  color: #444444;
+  
+}
+
+html,body, #root{
+  background-color: #f2f2f2;
+  
+  width: 100%;
+  
+}
+
+.value{
+  font-family: 'Titillium Web', sans-serif;
+  
+  font-weight: 300;
+  margin-bottom: 1em;
+  color: #000000;
+}
+
+h1, h2, label{
+  font-weight: 600;
+}
+
+input {
+  font-size:1em;
+}
+
+

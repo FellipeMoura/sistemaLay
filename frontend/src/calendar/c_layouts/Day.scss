@@ -1,19 +1,24 @@
 .bal{
-  width: 210px;
-  min-height: 185px;
+  width: 225px;
+  min-height: 220px;
   display: none;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
-  border: 2px solid #dddd;
+  border: 2px solid #dddddd;
   background-color: #f1f1f1;
-  padding: 10px;
+  padding: 5px;
   border-radius: 4px;
   position: relative;
+  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .lastBalao{
   top: -120px;
   right: 210px;
 }
+
+
 
 .firstBalao{
   top: 0px;
@@ -30,109 +35,161 @@
   left: 125px;
 }
 
+
+
+
 .cards{
+ 
  display: flex;
  flex-direction: row; 
-  border-bottom: 1px solid #c3dfeb;
- border-right: 1px solid #c3dfeb;
+ height: 63px;
+ border-right: 1px solid #d1d1d1;
+ border-bottom: 1px solid #d1d1d1;
 
 
-.card{
-    //border-radius: 20px; 
-    display: flex;
-    flex-direction: column;
-    height: 60px;
-    //background-color: '';
-    //border: 1px solid #ecc9c9;
-    cursor: pointer;
-    
-  }
 
- 
-
-.empCard{
-  //border-radius: 20px; 
-  display: flex;
-  flex-direction: column;
-  height: 60px;
-  background-color: '';
-  //border: 1px solid #ecc9c9;
+ .card:hover {
   cursor: pointer;
+  opacity: 0.9;
+  transition: 0.3s;
+
+ }
+
+
+ .card p{
+   padding-left: 5px;
+   font-weight: 300;
+   white-space: nowrap;
+   overflow: hidden;
+   text-overflow: ellipsis;
+ }
+ .card span{
   
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9em;
 }
+ .card div{
+
+   overflow: hidden;
+   text-overflow: ellipsis;
+
+   
+ }
+
+ .aberto{
+  border-radius: 1;
+  height: 62px;
+
+  
+ }
+
+ .aberto p{
+  font-weight: 400;
+ }
+
+ .disp0{
+  height: 62px;
+  background-color:  #e7e8e3;
+  opacity: 0.7;
+ }
+
+ .bloqueio{
+    background-image: url(../../img/linhas3.jpg);
+    
+    background-repeat: no-repeat;
+    background-size: 300% 750%;
+    opacity: 0.7;
+    
+ }
+
+ .bloqueio p{
+  font-family: 'Assistant', sans-serif;
+  font-size: 1.05em;
+  font-weight: 600;
+  padding: 0 3px;
+  color: #111;
+
+ }
+
+ .check{
+  margin-top: 4px;
+  border: 1px solid #444;
+  width: .8em;
+  height: .8em;
+  background-color: #fff;
+  position: absolute;
+  right:4px;
+ }
+
+ .check:hover{
+  transition: 0.3s;
+  background-color:  #0aa825;
+
+ }
+
+
+
+ .check svg{
+  position: absolute;
+  margin-top: -3px;
+  fill: #0aa825;
+  font-size:0.9em;
+ }
+
+
+
 
   .fullBorder{
-    border-radius: 10px;
+    height: 62px;
+    transform: scale(0.95);
+    border-radius: 8px;
   //  border-top: 1px solid #818181;
    // border-right: 1px solid #818181;
   }
   .topBorder{
-    border-radius: 10px 10px 0 0;
+    transform: scale(0.95);
+    margin-top: 2px;
+    height: 62px;
+    border-radius: 8px 8px 0 0;
    // border: 1px solid #818181;
  //   border-bottom: 1px solid #818181;
   }
+  .mediumBorder{
+    transform: scale(0.95);
+    margin-top: -3px;
+    height: 67px;
+    
+    //border-top: 1px solid #818181;
+  }
   .bottomBorder{
-    border-radius: 0 0 10px 10px ;
+    transform: scale(0.95);
+    margin-top: -3px;
+    height: 63px;
+    border-radius: 0 0 8px 8px ;
     //border-top: 1px solid #818181;
   }
 
-  .indisp{
-   background-color: #acc4ce;
-    // border-radius: 10px;
-  //  border: 1px solid #818181;
-
+  .fullBorder p, span{
+    color: #fff;
+    font-family: 'Assistant', sans-serif;
   }
-
-  .indisp p{
-    font-size: 12px;
- 
-   }
   
- 
-
-  .card:hover > p{
-   font-weight:bold;
-
+  .topBorder p, span{
+    color: #fff;
+    font-family: 'Assistant', sans-serif;
   }
-
-  .card:hover .balao{
-    display: block;
-    opacity: 1;
    
+  .labelA{
+    font-family: 'Dosis', sans-serif;
+    font-style: italic;
+    color: #ffffff;
+  
   }
 
-  .card:hover .lastBalao{
-    display: block;
-    opacity: 1;
-   
-  }
 
-  .card:hover .firstBalao{
-    display: block;
-    opacity: 1;
-   
-  }
-
-  .card:hover .firstLastBalao{
-    display: block;
-    opacity: 1;
-   
-  }
-
-  .card > div p{
-    //color: aliceblue;
-    padding-left: 2px;
-    font-weight: unset;
-    font-size: 14px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .card div{
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+  
 
 }
 

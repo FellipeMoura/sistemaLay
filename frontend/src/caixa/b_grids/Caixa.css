@@ -1,0 +1,47 @@
+.headerSub{
+    width: 100%;
+}
+
+
+.bodyVenda{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.bodyVenda svg{
+    font-size: 20px;
+}
+
+.bodyPg{
+    background-color: #bbbbbb;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
+}
+.bodyTotal{
+    width: 100%;
+}
+
+
+.modalProcs{
+    width: 100%;
+    height: 100%;
+    
+}
+
+.pgGrid{
+    
+    margin: 2px;
+}
+
+.modalProcs input{
+    border: 1px solid black;
+}
+
+
+.trEdit{
+  
+      background-color: #bfd7eb;
+}

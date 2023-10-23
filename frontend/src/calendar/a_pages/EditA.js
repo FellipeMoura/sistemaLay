@@ -3,6 +3,8 @@ import { useParams } from 'react-router';
 import moment from "moment";
 import {AtendForm} from '../b_forms/AtendForm'
 import {ReturnForm} from '../b_forms/ReturnForm'
+import { NewAten } from "../c_layouts/NewAten";
+import { ReturnButton } from "../d_inputs/LogoutButton";
 
 function EditA() {
     const {atendente} = useParams()
@@ -32,18 +34,28 @@ function EditA() {
 
     return (
         <div className="editA">
+            
         <AtendForm
             unidade = {unidade}
             atendente={atendente}
             user={user}
 
         />
+
+        <NewAten
+        unidade = {unidade}
+        
+        user={user}
+        />
+
         <ReturnForm 
             unidade = {unidade}
             atendentes = {atendentes}
             user={user}
         />
-
+        <ReturnButton
+            event={()=>window.location.replace(`/calendar/${unidade}/${user}`)}
+        />
         </div>
     )
 }

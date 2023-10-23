@@ -11,7 +11,7 @@ export default function RBar(props) {
 
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_CALENDAR}/buscarUltimo/${props.unidade}`, {
+        fetch(`${process.env.REACT_APP_CALENDAR}/buscarUltimo/${props.user}`, {
             method: "GET",
             heders: {
                 'Content-type': 'application/json',
@@ -35,9 +35,9 @@ export default function RBar(props) {
 
     }
 
-    function setSearch2(e){
-           // console.log(results)
-            setSearch(e)
+    function setSearch2(e) {
+        // console.log(results)
+        setSearch(e)
     }
 
     function getProcs(id) {
@@ -53,7 +53,7 @@ export default function RBar(props) {
             .then((resp) => resp.json())
             .then((resp2) => {
                 props.setOptions(resp2)
-                console.log(resp2)
+         //       console.log(resp2)
 
             })
             .catch(err => console.log(err))
@@ -61,23 +61,29 @@ export default function RBar(props) {
 
 
     const results = useMemo(() => {
+       
         const lowerBusca = search.toLowerCase()
-        return props.clients.filter(user => (user.nome.toLowerCase().includes(lowerBusca)|| user.telefone.includes(lowerBusca)));
-    }, [search,props.clients])
+        return props.clients.filter(user => (user.nome.toLowerCase().includes(lowerBusca) || user.telefone.includes(lowerBusca)));
+  
+        
+    }, [search, props.clients])
     return (
-        <div className={styles.formContainer2}>
-            <div className={styles.header}>
-                <AiOutlineSearch />
+        <div className={styles.formContainer3}>
+            <div className={styles.header3}>
+
                 <InputText
                     flex='column'
                     width='28em'
                     placeholder="Pesquisar cliente..."
                     handleOnChange={(e) => setSearch2(e.target.value)}
                 />
-                <button                
-                    onClick={()=>lastName(last)}
-                >Último</button>
-               
+                <Button
+                color='#585858'
+                value="Último"
+                click={() => lastName(last)}
+                />
+                
+
             </div>
 
             <ListItem
@@ -99,7 +105,7 @@ function ListItem({ users, search, setOptions, getProcs, handleChange, setName }
 
     //const [id, setId] = useState('');
 
-    
+
 
     function clickName(index) {
         setName(users[index])
@@ -110,18 +116,18 @@ function ListItem({ users, search, setOptions, getProcs, handleChange, setName }
 
 
 
-   // document.querySelectorAll("#idUser").forEach(function (td) {
+    // document.querySelectorAll("#idUser").forEach(function (td) {
 
-  //      td.addEventListener("click", function (e) {
- //           let teste = e.target
- //           getProcs(e.target.className)
-  //          setName(e)
+    //      td.addEventListener("click", function (e) {
+    //           let teste = e.target
+    //           getProcs(e.target.className)
+    //          setName(e)
 
 
 
-  //      });
+    //      });
 
- //   });
+    //   });
 
 
     return (
@@ -130,37 +136,37 @@ function ListItem({ users, search, setOptions, getProcs, handleChange, setName }
         search.length > 1 ?
             <div className={styles.ulContainer}>
 
-     <table >
-                            
-                   
+                <table >
+
+
                     {users.map(user => (
-                        
-                                <tr
-                                key={user.id} onClick={() => clickName(users.indexOf(user))}
-                                    id="idUser"
-                                    className={styles.trClient}
-                                   // type='button'
-                                    name={user.telefone}
-                                    //value={users.indexOf(user)}
-                                    
-                                >
-                                    <td style={{ marginLeft:'20px',width: `300px` }}>
-                                        {user.nome || '-'}
 
-                                    </td>
+                        <tr
+                            key={user.id} onClick={() => clickName(users.indexOf(user))}
+                            id="idUser"
+                            className={styles.trClient}
+                            // type='button'
+                            name={user.telefone}
+                        //value={users.indexOf(user)}
 
-                                    <td style={{ width: `200px` }}>
+                        >
+                            <td style={{ marginLeft: '20px', width: `300px` }}>
+                                {user.nome || '-'}
 
-                                        {user.telefone || '-'}
+                            </td>
 
-                                    </td>
-                                </tr>
-                                
-                           
-                        
+                            <td style={{ width: `200px` }}>
+
+                                {" ("+user.telefone.substr(2,2)+") "+user.telefone.substr(4,(user.telefone.length-8))+"-"+user.telefone.substr(-4,user.telefone.length) || '-'}
+
+                            </td>
+                        </tr>
+
+
+
                     ))}
-                    
-                    </table>
+
+                </table>
             </div>
             : ''
 

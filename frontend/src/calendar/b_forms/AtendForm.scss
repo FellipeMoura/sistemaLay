@@ -1,29 +1,20 @@
 .atend {
     padding: 0 10px;
+    width: 430px;
 
 
 
 
     .headerAtend {
         display: flex;
+        align-items: center;
         justify-content: space-around;
         padding: 2px 0;
 
     }
 
-    .headerAtend button {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        width: 70px;
-        cursor: pointer;
-        border-radius: 5px;
 
-    }
 
-    .headerAtend svg {
-        font-size: 15px;
-    }
 
     .aHour {
         display: flex;

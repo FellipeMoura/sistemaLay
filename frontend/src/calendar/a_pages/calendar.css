@@ -1,0 +1,16 @@
+
+.editA{
+    
+    display: flex;
+  justify-content: space-between;
+    min-width: 100%;
+}
+
+.atendCard{
+    background-color: #eceaea;
+    height: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #bbb;
+    margin-top: 5px;
+}

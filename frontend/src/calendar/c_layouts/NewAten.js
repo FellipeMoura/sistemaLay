@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router';
 import { InputDate, Button, Select, InputText } from "../d_inputs/Input";
-import moment from "moment";
-import { createPDF } from "../f_aux/createPDF";
-import { GiCheckMark } from 'react-icons/gi'
 import './Pdf.css'
-
-import PdfBar from "./PdfBar";
 
 export function NewAten({unidade, user, handleCloseModal}) {
     const [project, setProject] = useState({unidade: unidade})
@@ -72,7 +66,7 @@ function cadastrar(){
 
    
     const labelName = (
-        <div className='labelName labelN'>
+       
             <p>Cliente: <label >{project.nome_cliente}
                 <button
                     type='button'
@@ -81,20 +75,23 @@ function cadastrar(){
                     Limpar
                 </button>
             </label></p>
-        </div>
+      
     )
 
 
 
     const [currentUnidade, setCurrentUnidade] = useState(0)
     const unit = [
-        <p> <label>Unidade {unidades[project.unidade].id+ ' - '+unidades[project.unidade].nome}
+        
+        <p style={{margin:'10px'}}> <label>Unidade {unidades[project.unidade].id+ ' - '+unidades[project.unidade].nome}
         <button
+        className='buttonLabelDay'
             type='button'
             onClick={() => setCurrentUnidade(1)}
         >
             Alterar
         </button></label></p>
+        
         ,<Select
         text='Unidade'
         name='unidade'
@@ -103,14 +100,13 @@ function cadastrar(){
         />]
 
     return (
-        <div className="pdfForm">
-          <div className="pdfAtend">
-                <div className="cliCard">
+        
+         
+                <div className="atendCard">
                 <div >
-                    <h2>Ficha Clientes</h2>
+                    <h2>Nova atendente</h2>
                     
-                   {project.nome_cliente? 
-                   labelName:
+                  
                    <div>
                     <InputText
                     name='nome'
@@ -130,27 +126,20 @@ function cadastrar(){
                    </div>
                    
 
-
-
-                }
                     </div>
                     <div className="inlineButton">
-                        <Button
-                            color='#111111'
-                            value='Voltar'
-                            click={handleCloseModal}
-                        />
-                  
-                        <Button
+                    <Button
                             color='#174fb6'
                             click={cadastrar}
                             value='Cadastrar'
                         />
+                       
+                       
                     </div>
                     </div>
-                    </div>
+               
        
-        </div>
+      
     )
 
 }

@@ -33,15 +33,6 @@
 }
 
 
-.cliCard{
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items:center;
-    justify-content: space-between;
-  
-}
-
 
 .pdfOpt{
     display: flex;
@@ -53,10 +44,7 @@
 .pdfOpt svg{
     fill: #3f9e43;
 }
-.dataCli{
-    height: 50px;
-    margin-top: 10px;
-}
+
 .inlineButton{
     display: flex;
     flex-direction: row;

@@ -48,7 +48,30 @@ module.exports = {
         }
         res.json(json)
     },
+    buscarTudo: async(req,res)=> {
+        let json = []
 
+        let record = await RecordService.buscarTudo()
+
+        for(let i in record){
+
+            let count = await RecordService.buscarCountControl(record[i].iduser)
+
+            json.push({
+                id: record[i].id,
+                iduser: record[i].iduser,
+                num: record[i].num,
+                name: record[i].name,
+                ultimo: record[i].ultimo,
+                inicio: record[i].inicio,
+                count: count,
+                status: record[i].status
+               
+            })
+        }
+        //console.log(json.length)
+        res.json(json)
+    },
     buscarUm: async(req,res)=> {
         let json = {error:'',result:{}}
 
@@ -58,7 +81,7 @@ module.exports = {
         if(record){
             json.result = record
         }
-        console.log(record)
+        //console.log(record)
         
         res.json(json)
     },
@@ -98,7 +121,7 @@ module.exports = {
             ca:req.body.ca,
             obs:req.body.obs
         }
-       // console.log(record)
+       // //console.log(record)
         let RecordID = await RecordService.insert(record);
         json.result ={
             id: RecordID, 
@@ -211,7 +234,21 @@ module.exports = {
             obs:record.obs
             
         };
-     //   console.log(json)
+     //   //console.log(json)
+        res.json(json)
+    },
+    attRecord: async(req,res)=> {
+        let json = {error:'',result:{}}
+
+        let record = req.body
+        //console.log(req.body)
+        let result = await RecordService.attRecord(record)
+
+        if(result){
+            json.result = result
+        }
+       // //console.log(record)
+        
         res.json(json)
     },
     excluir: async(req,res) =>{

@@ -1,11 +1,11 @@
-.form{
+.salaForm{
     background-color:#e2e2e2 ;   
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
     margin: 0;
-    padding: 20px;
+    padding: 15px;
     height: 100vh;
     width: 100%;
 }
@@ -14,20 +14,17 @@
     margin: 10px 0;
 }
 
-.inputForm label{
-    font-size: 1.2em;
-}
 
 .buttons{
     display: flex;
     flex-direction: row;
 }
-.form div{
+.salaForm div{
     margin: 1px;
 }
-.form h1{
+.salaForm h1{
     color: #5d5d5d;
-    padding-top: 2vh;
+    padding-top: 1vh;
     text-align: center;
     width: 100%;
     font-weight: normal;
@@ -53,7 +50,7 @@
     display: flex;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0;
     flex-direction: row;
-    padding: 1em .5em .5em.5em;
+
     align-items: center;
 
 }
@@ -100,7 +97,7 @@
     flex-wrap: wrap;
     overflow:auto;
     padding: 0;
-    max-height: 65vh;
+    max-height: 75vh;
     
 }
 .tableContainer3 th{
@@ -125,16 +122,22 @@
     background-color: #dadada;
     height: 2.5em;
     text-align: center;    
-    padding-left: 5px;
+    
     
 }
 .add2 svg{
-    fill: #447461
+    fill: #447461;
+    cursor: pointer;
 }
 .dele2 svg{
-    fill: #c73f3fbe;
+    fill: #0445f8be;
+    font-size: 1.5em;
+    cursor: pointer;
 }
-
+.offSala{
+    font-size: 1.5em;
+    cursor: pointer;
+}
 
 
 /*
